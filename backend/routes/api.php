@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Article;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\PostController;
 use App\Http\Resources\ArticleResource;
+use App\Http\Resources\PostResource;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +39,18 @@ Route::put('/article/{id}', [ArticleController::class, 'update']);
 Route::delete('/article/{id}', [ArticleController::class, 'destroy']);
 
 Route::post('/articles', [ArticleController::class, 'store']);
+
+//Posts
+Route::get('/posts', function () {
+    return PostResource::collection(Post::all());
+});
+
+Route::post('/posts', [PostController::class, 'store']);
+
+Route::get('/post/{id}', function ($id) {
+    return new PostResource(Post::findOrFail($id));
+});
+
+Route::put('/post/{id}', [PostController::class, 'update']);
+
+Route::delete('/post/{id}', [PostController::class, 'destroy']);
