@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_followings', function (Blueprint $table) {
+        Schema::create('follows', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_source');
             $table->foreign("id_source")->references('id')->on('users');
             $table->unsignedBigInteger('id_target');
             $table->foreign("id_target")->references('id')->on('users');
-            $table->enum('status', ['new', 'rejected', 'active'])->default('new');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_followings');
+        Schema::dropIfExists('follows');
     }
 };

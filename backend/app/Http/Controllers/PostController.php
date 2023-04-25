@@ -101,10 +101,10 @@ class PostController extends Controller
                 }
             }
 
-            // return response()->json([
-            //     "message" => "El post se ha encontrado",
-            //     "post" => $post,
-            // ], 202);
+            return response()->json([
+                "message" => "El post no contiene ningún fichero",
+                "post" => $post,
+            ], 404);
         }
         else {
             return response()->json([

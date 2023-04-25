@@ -10,6 +10,7 @@ use App\Http\Resources\ArticleResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FollowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group( function(){
 
+    //PostController
     Route::get('/posts', function () {
         return PostResource::collection(Post::all());
     });
@@ -56,7 +58,16 @@ Route::middleware('auth:api')->group( function(){
     Route::put('/post/{id}', [PostController::class, 'update']);
     Route::delete('/post/{id}', [PostController::class, 'destroy']);
 
+    Route::get('/post/descargar/{id}', [PostController::class, 'downloadFile']);
+
+    //AuthController
     Route::get('logout', [AuthController::class, 'logout']);
 
-    Route::get('/post/descargar/{id}', [PostController::class, 'downloadFile']);
+    //FollowController
+    Route::get('/follow/{id}', [FollowController::class, 'store']);
+    Route::get('/unfollow/{id}', [FollowController::class, 'destroy']);
+    Route::get('/followings', [FollowController::class, 'show_followings']);
+    Route::get('/followers', [FollowController::class, 'show_followers']);
+
+    //NotificationController
 });

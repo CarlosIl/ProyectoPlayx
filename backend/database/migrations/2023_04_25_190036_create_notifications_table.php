@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_followers', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_source');
-            $table->foreign("id_source")->references('id')->on('users');
-            $table->unsignedBigInteger('id_target');
-            $table->foreign("id_target")->references('id')->on('users');
+            $table->unsignedBigInteger('id_user');
+            $table->foreign("id_user")->references('id')->on('users');
+            $table->text('message');
+            $table->text('action')->nullable();
+            $table->enum('status', ['new', 'saw'])->default('new'); 
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_followers');
+        Schema::dropIfExists('notifications');
     }
 };
