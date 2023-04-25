@@ -52,12 +52,11 @@ Route::middleware('auth:api')->group( function(){
         return PostResource::collection(Post::all());
     });
     Route::post('/posts', [PostController::class, 'store']);
-    Route::get('/post/{id}', function ($id) {
-        return new PostResource(Post::findOrFail($id));
-    });
+    Route::get('/post/{id}', [PostController::class, 'show']);
     Route::put('/post/{id}', [PostController::class, 'update']);
     Route::delete('/post/{id}', [PostController::class, 'destroy']);
 
     Route::get('logout', [AuthController::class, 'logout']);
 
+    Route::get('/post/descargar/{id}', [PostController::class, 'downloadFile']);
 });

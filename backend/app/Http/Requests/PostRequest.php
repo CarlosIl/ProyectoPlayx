@@ -24,6 +24,7 @@ class PostRequest extends FormRequest
         return [
             'id_source' => 'required',
             'post' => 'required',
+            'post_file' => 'nullable|file'
         ];
     }
 }

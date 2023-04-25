@@ -56,6 +56,24 @@ return [
             'throw' => false,
         ],
 
+        'sftp' => [
+
+            'driver'        => 'sftp',
+            'host'          => env('SFTP_HOST'),
+            'port'          => 22,
+            'username'      => env('SFTP_USERNAME'),
+            'password'      => env('SFTP_PASSWORD'),
+            // 'privateKey'    => storage_path().'/app/'.ENV('TEST_FEED_SFTP_PRIVATE_KEY_FILE'),
+            // 'timeout'       => env('TEST_FEED_SFTP_TIMEOUT')
+
+            // Optional FTP Settings...
+            // 'ssl'        => true,
+            // 'passphrase' => '',
+            // 'root'       => '/',
+            // 'passive'    => true,
+            // 'timeout'    => 30,
+        ],
+
     ],
 
     /*
