@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Resources\ArticleResource;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,31 +27,37 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/article/{id}', function ($id) {
-    return new ArticleResource(Article::findOrFail($id));
-});
+// Route::get('/article/{id}', function ($id) {
+//     return new ArticleResource(Article::findOrFail($id));
+// });
 
-Route::get('/articles', function () {
-    return ArticleResource::collection(Article::all());
-});
+// Route::get('/articles', function () {
+//     return ArticleResource::collection(Article::all());
+// });
 
-Route::put('/article/{id}', [ArticleController::class, 'update']);
+// Route::put('/article/{id}', [ArticleController::class, 'update']);
 
-Route::delete('/article/{id}', [ArticleController::class, 'destroy']);
+// Route::delete('/article/{id}', [ArticleController::class, 'destroy']);
 
-Route::post('/articles', [ArticleController::class, 'store']);
+// Route::post('/articles', [ArticleController::class, 'store']);
 
 //Posts
-Route::get('/posts', function () {
-    return PostResource::collection(Post::all());
+
+Route::post('register', [AuthController::class, 'register']);
+Route::post('login', [AuthController::class, 'login']);
+
+Route::middleware('auth:api')->group( function(){
+
+    Route::get('/posts', function () {
+        return PostResource::collection(Post::all());
+    });
+    Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/post/{id}', function ($id) {
+        return new PostResource(Post::findOrFail($id));
+    });
+    Route::put('/post/{id}', [PostController::class, 'update']);
+    Route::delete('/post/{id}', [PostController::class, 'destroy']);
+
+    Route::get('logout', [AuthController::class, 'logout']);
+
 });
-
-Route::post('/posts', [PostController::class, 'store']);
-
-Route::get('/post/{id}', function ($id) {
-    return new PostResource(Post::findOrFail($id));
-});
-
-Route::put('/post/{id}', [PostController::class, 'update']);
-
-Route::delete('/post/{id}', [PostController::class, 'destroy']);

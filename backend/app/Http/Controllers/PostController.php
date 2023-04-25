@@ -83,7 +83,7 @@ class PostController extends Controller
             ], 202);
         }else{
             return response()->json([
-                "message" => "Article not found"
+                "message" => "Post not found"
             ], 404);
         }
     }
