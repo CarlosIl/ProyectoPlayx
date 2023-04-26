@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Follow;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -15,10 +16,30 @@ class FollowController extends Controller
         $new_follow = User::find($id);
         $user = Auth::user();
 
+        if($id == $user->id){
+            return response()->json([
+                "message" => "No puedes seguirte a ti mismo",
+            ], 404);
+        }
+
         $follow = new Follow();
         $follow->id_source = $user->id;
         $follow->id_target = $id;
         $follow->save();
+
+        $mailData = [
+            'receiver' => $new_follow->email,
+            'subject' => 'New Follow in Playx',
+            'title' => 'New Follow',
+            'body' => "$user->username ha empezado ha seguirte",
+            'action' => "http://www.google.com",
+        ];
+        (new NotificationController)->sendMail($mailData);
+
+        $noti = new Notification();
+        $noti->id_user = $id;
+        $noti->message = "$user->username ha empezado ha seguirte";
+        $noti->save();
 
         return response()->json([
             "message" => "$user->username ha empezado ha seguir a $new_follow->username",

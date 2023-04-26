@@ -11,6 +11,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +71,6 @@ Route::middleware('auth:api')->group( function(){
     Route::get('/followers', [FollowController::class, 'show_followers']);
 
     //NotificationController
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notify/{id}', [NotificationController::class, 'saw']);
 });
