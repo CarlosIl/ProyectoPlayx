@@ -4,58 +4,65 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use App\Models\UserVerify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\DemoMail;
+
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
         $user = User::create($request->validated());
-        $token = Str::random(64);
-
-        UserVerify::create([
-            'id_user' => $user->id,
-            'token' => $token,
-        ]);
-
-        $mailData = [
-            'receiver' => $user->email,
-            'subject' => 'Email Verification Mail',
-            'title' => 'Email Verification Mail',
-            'body' => "Please verify your email with bellow link",
-            'token' => $token,
-        ];
-        (new NotificationController)->sendVerificationMail($mailData);
-
-        return response()->json([
-            "message" => "Se ha enviado un correo de verificación",
-        ], 200);
         
-        // $path = $user->email;
-        // Storage::disk('sftp')->makeDirectory($path);
+        //PARA VERIFICACIÓN DE EMAIL
+        // $token = Str::random(64);
 
-        // $success['username'] =  $user->username;
+        // UserVerify::create([
+        //     'id_user' => $user->id,
+        //     'token' => $token,
+        // ]);
+
+        // $mailData = [
+        //     'receiver' => $user->email,
+        //     'subject' => 'Email Verification Mail',
+        //     'title' => 'Email Verification Mail',
+        //     'body' => "Please verify your email with bellow link",
+        //     'token' => $token,
+        // ];
+        // (new NotificationController)->sendVerificationMail($mailData);
 
         // return response()->json([
-        //     "message" => "El usuario ha sido registrado",
-        //     "username" => $success['username'],
+        //     "message" => "Se ha enviado un correo de verificación",
         // ], 200);
+
+        $user->is_email_verified = 1;
+        $user->save();
+
+        $path = $user->email;
+        Storage::disk('sftp')->makeDirectory($path);
+
+        $success['username'] =  $user->username;
+
+        return response()->json([
+            "message" => "El usuario ha sido registrado",
+            "username" => $success['username'],
+        ], 200);
     }
 
     public function login(LoginRequest $request): JsonResponse
     {
         $user = Auth::getProvider()->retrieveByCredentials($request->validated());
-        if($user->is_email_verified == 0){
+        if(!$user){
+            return response()->json([
+                "message" => "No se encuentra su cuenta en la base de datos",
+            ], 404);            
+        }
+        else if($user->is_email_verified == 0){
             return response()->json([
                 "message" => "Debe activar la cuenta antes de poder loguearse",
             ], 404);

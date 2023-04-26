@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('lastName')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('profile_picture')->nullable();
-            $table->string('banner')->nullable();
-            $table->string('profile_message')->nullable();
+            // $table->string('profile_picture')->nullable();
+            // $table->string('banner')->nullable();
+            // $table->string('profile_message')->nullable();
             $table->boolean('is_email_verified')->default(0);
             $table->timestamps();
         });

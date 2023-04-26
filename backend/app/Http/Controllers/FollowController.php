@@ -27,14 +27,14 @@ class FollowController extends Controller
         $follow->id_target = $id;
         $follow->save();
 
-        $mailData = [
-            'receiver' => $new_follow->email,
-            'subject' => 'New Follow in Playx',
-            'title' => 'New Follow',
-            'body' => "$user->username ha empezado ha seguirte",
-            'action' => "http://www.google.com",
-        ];
-        (new NotificationController)->sendMail($mailData);
+        // $mailData = [
+        //     'receiver' => $new_follow->email,
+        //     'subject' => 'New Follow in Playx',
+        //     'title' => 'New Follow',
+        //     'body' => "$user->username ha empezado ha seguirte",
+        //     'action' => "http://www.google.com",
+        // ];
+        // (new NotificationController)->sendMail($mailData);
 
         $noti = new Notification();
         $noti->id_user = $id;

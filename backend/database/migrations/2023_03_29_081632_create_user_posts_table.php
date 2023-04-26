@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_source');
             $table->foreign("id_source")->references('id')->on('users');
             $table->text('post');
+            $table->text('file_name')->nullable();
             $table->timestamps();
         });
     }

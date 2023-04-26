@@ -33,7 +33,9 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $post = Post::create($request->validated());
+        $post = new Post();
+        $post->id_source = $request->id_source;
+        $post->post = $request->post;
 
         $path = Auth::user()->email;
         
@@ -41,13 +43,10 @@ class PostController extends Controller
             $file_name = time() . '_' . request()->post_file->getClientOriginalName();
             Storage::disk('sftp')->put("$path/$file_name", fopen($request->file('post_file'), 'r+'));
 
-            $file = new PostFiles();
-
-            $file->file_name = $file_name;
-            $file->id_post = $post->id;
-    
-            $file->save();
+            $post->file_name = $file_name;
         }
+
+        $post->save();
 
         return response()->json([
             "message" => "Post creado",
@@ -62,19 +61,6 @@ class PostController extends Controller
     public function show(string $id)
     {
         if ($post = Post::find($id)) {
-
-            // $ficherosStd = DB::select('SELECT id,file_name FROM post_files WHERE id_post = ?',[$id]);
-            // $ficheros_post = json_decode(json_encode($ficherosStd), true);
-
-            // if(count($ficheros_post) >= 1){
-            //     $path = Auth::user()->email;
-                
-            //     foreach ($ficheros_post as $fichero) {
-            //         $file_name = $fichero["file_name"];
-            //         return Storage::disk('sftp')->download("$path/$file_name");
-            //     }
-            // }
-
             return response()->json([
                 "message" => "El post se ha encontrado",
                 "post" => $post,
@@ -89,16 +75,10 @@ class PostController extends Controller
     public function downloadFile(string $id)
     {
         if ($post = Post::find($id)) {
-            $ficherosStd = DB::select('SELECT id,file_name FROM post_files WHERE id_post = ?',[$id]);
-            $ficheros_post = json_decode(json_encode($ficherosStd), true);
-
-            if(count($ficheros_post) >= 1){
+            $fichero = $post->file_name;
+            if ($fichero) {
                 $path = Auth::user()->email;
-                
-                foreach ($ficheros_post as $fichero) {
-                    $file_name = $fichero["file_name"];
-                    return Storage::disk('sftp')->download("$path/$file_name");
-                }
+                return Storage::disk('sftp')->download("$path/$fichero");
             }
 
             return response()->json([
@@ -147,26 +127,12 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        if (Post::where('id', $id)->exists()) {
-            $ficherosStd = DB::select('SELECT id FROM post_files WHERE id_post = ?',[$id]);
-            $ficheros_post = json_decode(json_encode($ficherosStd), true);
-
-            // return $ficheros_post;
-
-            if(count($ficheros_post) >= 1){
+        if ($post = Post::find($id)) {
+            $fichero = $post->file_name;
+            if ($fichero) {
                 $path = Auth::user()->email;
-                
-                foreach ($ficheros_post as $fichero) {
-                    $file = PostFiles::find($fichero["id"]);
-                    $file_name = $file->file_name;
-            
-                    Storage::disk("sftp")->delete("$path/$file_name");
-            
-                    $file->delete();
-                }
+                Storage::disk('sftp')->delete("$path/$fichero");
             }
-
-            $post = Post::find($id);
             $post->delete();
 
             return response()->json([

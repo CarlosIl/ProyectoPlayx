@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->foreign("id_user")->references('id')->on('users');
             $table->text('message');
-            $table->enum('status', ['new', 'saw'])->default('new'); 
+            $table->boolean('status')->default(0); 
             $table->timestamps();
         });
     }

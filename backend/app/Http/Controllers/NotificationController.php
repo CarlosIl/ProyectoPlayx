@@ -25,7 +25,7 @@ class NotificationController extends Controller
     public function saw(int $id)
     {
         $notify = Notification::find($id);
-        $notify->status = "saw";
+        $notify->status = 1;
         $notify->save();
 
         return response()->json([
