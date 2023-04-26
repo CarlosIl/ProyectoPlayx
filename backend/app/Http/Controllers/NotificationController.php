@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DemoMail;
+use App\Mail\VerificationMail;
 
 class NotificationController extends Controller
 {
@@ -35,5 +36,10 @@ class NotificationController extends Controller
     public function sendMail(array $mailData)
     {
         Mail::to($mailData["receiver"])->send(new DemoMail($mailData));
+    }
+
+    public function sendVerificationMail(array $mailData)
+    {
+        Mail::to($mailData["receiver"])->send(new VerificationMail($mailData));
     }
 }

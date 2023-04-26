@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
+        Schema::create('users_verify', function (Blueprint $table) {
             $table->unsignedBigInteger('id_user');
             $table->foreign("id_user")->references('id')->on('users');
-            $table->text('message');
-            $table->enum('status', ['new', 'saw'])->default('new'); 
+            $table->string('token');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('users_verify');
     }
 };
