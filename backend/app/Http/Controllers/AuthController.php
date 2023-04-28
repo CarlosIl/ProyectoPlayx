@@ -7,6 +7,7 @@ use App\Http\Requests\RegisterRequest;
 use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use App\Models\UserVerify;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
@@ -21,10 +22,14 @@ class AuthController extends Controller
         
         //PARA VERIFICACIÓN DE EMAIL
         // $token = Str::random(64);
+        // Con PHP
+        // $time = now();
+        // $expired = Date("Y-m-d H:i:s", strtotime("30 minutes", strtotime($time)));
 
         // UserVerify::create([
-        //     'id_user' => $user->id,
+        //     'user_id' => $user->id,
         //     'token' => $token,
+        //     'expires_at' => Carbon::now()->addMinutes(30),
         // ]);
 
         // $mailData = [
@@ -50,7 +55,7 @@ class AuthController extends Controller
 
         return response()->json([
             "message" => "El usuario ha sido registrado",
-            "username" => $success['username'],
+            "username" => $user,
         ], 200);
     }
 
@@ -97,24 +102,26 @@ class AuthController extends Controller
         $verifyUser = UserVerify::where('token', $token)->first();
   
         $message = 'Sorry your email cannot be identified.';
+        $status = 404;
   
         if(!is_null($verifyUser) ){
-            $id = $verifyUser->id_user;
+            $id = $verifyUser->user_id;
             $user = User::find($id);
             // return dd($user);
               
             if($user->is_email_verified == 0) {
                 $user->is_email_verified = 1;
                 $user->save();
-                $verifyUser->where('id_user', $id)->delete();
+                $verifyUser->where('user_id', $id)->delete();
                 $message = "Your e-mail is verified. You can now login.";
             } else {
                 $message = "Your e-mail is already verified. You can now login.";
             }
+            $status = 200;
         }
   
         return response()->json([
             "message" => $message,
-        ], 200);
+        ], $status);
     }
 }

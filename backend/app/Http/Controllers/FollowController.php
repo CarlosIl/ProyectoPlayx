@@ -23,8 +23,8 @@ class FollowController extends Controller
         }
 
         $follow = new Follow();
-        $follow->id_source = $user->id;
-        $follow->id_target = $id;
+        $follow->source_id = $user->id;
+        $follow->target_id = $id;
         $follow->save();
 
         // $mailData = [
@@ -37,7 +37,7 @@ class FollowController extends Controller
         // (new NotificationController)->sendMail($mailData);
 
         $noti = new Notification();
-        $noti->id_user = $id;
+        $noti->user_id = $id;
         $noti->message = "$user->username ha empezado ha seguirte";
         $noti->save();
 
@@ -52,9 +52,9 @@ class FollowController extends Controller
         $old_follow = User::find($id);
         $user = Auth::user();
 
-        // $response = DB::statement('DELETE FROM follows WHERE id_source = ? AND id_target = ?',[$user->id, $id]);
+        // $response = DB::statement('DELETE FROM follows WHERE source_id = ? AND target_id = ?',[$user->id, $id]);
 
-        Follow::where('id_source', $user->id)->where('id_target', $id)->delete();
+        Follow::where('source_id', $user->id)->where('target_id', $id)->delete();
 
         return response()->json([
             "message" => "$user->username ha dejado de seguir a $old_follow->username",
@@ -64,11 +64,11 @@ class FollowController extends Controller
     public function show_followings()
     {
         $user = Auth::user();
-        $followings = Follow::where('id_source', $user->id)->get();
+        $followings = Follow::where('source_id', $user->id)->get();
         $data = [];
         foreach ($followings as $key => $user_following) {
             // return $user_following;
-            array_push($data, User::find($user_following->id_target));
+            array_push($data, User::find($user_following->target_id));
         }
         return $data;
     }
@@ -76,11 +76,11 @@ class FollowController extends Controller
     public function show_followers()
     {
         $user = Auth::user();
-        $followers = Follow::where('id_target', $user->id)->get();
+        $followers = Follow::where('target_id', $user->id)->get();
         $data = [];
         foreach ($followers as $key => $user_followers) {
             // return $user_following;
-            array_push($data, User::find($user_followers->id_source));
+            array_push($data, User::find($user_followers->source_id));
         }
         return $data;
     }

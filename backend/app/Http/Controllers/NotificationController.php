@@ -14,12 +14,7 @@ class NotificationController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        return Notification::where('id_user', $id)->get();
-    }
-
-    public function store(array $data)
-    {
-        # code...
+        return Notification::where('user_id', $id)->get();
     }
 
     public function saw(int $id)

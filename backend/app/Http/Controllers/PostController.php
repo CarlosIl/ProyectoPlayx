@@ -34,7 +34,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = new Post();
-        $post->id_source = $request->id_source;
+        $post->user_id = $request->user_id;
         $post->post = $request->post;
 
         $path = Auth::user()->email;
@@ -108,7 +108,7 @@ class PostController extends Controller
     {
         if (Post::where('id', $id)->exists()) {
             $post = Post::find($id);
-            $post->id_source = $request->id_source;
+            $post->user_id = $request->user_id;
             $post->post = $request->post;
 
             $post->save();

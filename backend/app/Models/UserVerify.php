@@ -10,17 +10,20 @@ class UserVerify extends Model
     use HasFactory;
 
     public $table = "users_verify";
-  
+    public $timestamps = false;
+
     /**
      * Write code on Method
      *
      * @return response()
      */
     protected $fillable = [
-        'id_user',
+        'user_id',
         'token',
+        'created_at',
+        'expires_at',
     ];
-  
+
     /**
      * Write code on Method
      *

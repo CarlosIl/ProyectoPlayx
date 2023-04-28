@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users_verify', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_user');
-            $table->foreign("id_user")->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign("user_id")->references('id')->on('users');
             $table->string('token');
-            $table->timestamps();
+            $table->timestamp('created_at');
+            $table->timestamp('expires_at')->nullable();
         });
     }
 
