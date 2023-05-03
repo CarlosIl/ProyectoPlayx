@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Register</h1>
+    <form (ngSubmit)="submit()" [formGroup]="formRegister">
+        <div class="grid1">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" formControlName="username" required>
+        </div>
+        <div class="grid2">
+            <label for="firstName">First name</label>
+            <label for="lastName">Last name</label>
+            <input type="text"  class="form-control" formControlName="firstName">
+            <input type="text"  class="form-control" formControlName="lastName">
+        </div>
+        <div class="grid1">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" formControlName="email" required>
+        </div>
+        <div class="grid2">
+            <label for="password">Password</label>
+            <label for="c_password">Repeat password</label>
+            <input type="password" class="form-control" formControlName="password" required>
+            <input type="password" class="form-control" formControlName="c_password" required>
+        </div>
+        <div class="grid1">
+            <button type="submit">Create account</button>
+            <br>
+            <p>Already have an account?</p>
+            <button>Sign in</button>
+        </div>
+    </form>
+</div>

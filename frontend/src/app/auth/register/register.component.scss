@@ -1,0 +1,37 @@
+@import '../../../styles.scss';
+@import '../../../fonts.scss';
+
+.container{
+    background-color: white;
+    align-content: center;
+    margin: auto;
+    width: 20%;
+    border-radius: 10px;
+
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    .grid1{
+        display: grid;
+        grid-template-columns: auto;
+        button{
+            width: 60%;
+        }
+    }
+    .grid2{
+        display: grid;
+        grid-template-columns: auto auto;
+    }
+}
+
+input{
+    width: 90%;
+    border: 2px solid $primaryColor;
+    border-radius: 5px;
+    background-color: $secondaryLigthColor;
+    margin: 8px 0;
+}

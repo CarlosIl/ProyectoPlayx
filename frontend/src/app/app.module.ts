@@ -11,12 +11,17 @@ import { EditArticleComponent } from './edit-article/edit-article.component';
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { RegisterComponent } from './auth/register/register.component';
+import { ModalComponent } from './modal/modal.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     ArticlesComponent,
     NewArticleComponent,
-    EditArticleComponent
+    EditArticleComponent,
+    RegisterComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

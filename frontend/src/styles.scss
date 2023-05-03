@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+$primaryColor: #7E8AE0;
+$primaryLigthColor: #BBC3FF;
+$primaryDarkColor: #4B57A9;
+
+$secondaryColor: #8E8FA6;
+$secondaryLigthColor: #C4C5DD;
+$secondaryDarkColor: #5B5D72;
+
+$errorColor: #FF5449;
+$errorLigthColor: #FFB4AB;
+$errorDarkColor: #BA1A1A;
+
+$textColor: #000000;
+$bgColor: #FFFFFF;
+
+html{ background-color: $primaryLigthColor;}

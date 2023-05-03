@@ -54,6 +54,7 @@ class AuthController extends Controller
         $success['username'] =  $user->username;
 
         return response()->json([
+            "success" => true,
             "message" => "El usuario ha sido registrado",
             "username" => $user,
         ], 200);
