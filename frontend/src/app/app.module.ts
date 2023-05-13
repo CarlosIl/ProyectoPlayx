@@ -13,6 +13,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { RegisterComponent } from './auth/register/register.component';
 import { ModalComponent } from './modal/modal.component';
+import { LoginComponent } from './auth/login/login.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { PostCardComponent } from './post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +26,12 @@ import { ModalComponent } from './modal/modal.component';
     NewArticleComponent,
     EditArticleComponent,
     RegisterComponent,
-    ModalComponent
+    ModalComponent,
+    LoginComponent,
+    HomeComponent,
+    NavbarComponent,
+    SidenavComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,

@@ -18,9 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
         'username',
+        'firstName',
+        'lastName',
+        'email',
         'password',
         'type',
         'is_email_verified'
@@ -43,6 +44,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'date:d-m-Y'
     ];
 
     // Para encriptar la contraseña

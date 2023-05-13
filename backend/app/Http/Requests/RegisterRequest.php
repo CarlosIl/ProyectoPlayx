@@ -23,6 +23,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'username' => 'required|unique:users,username',
+            'firstName' => 'nullable',
+            'lastName' => 'nullable',
+            'profile_picture' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
             'email' => 'required|unique:users,email',
             'password' => 'required|min:8',
             'c_password' => 'required|same:password',

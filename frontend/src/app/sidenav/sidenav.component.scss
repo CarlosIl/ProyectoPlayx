@@ -1,0 +1,23 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+.enlaces{
+    background-color: $primaryColor;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 200px;
+    left: 0;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    a{
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+    }
+}

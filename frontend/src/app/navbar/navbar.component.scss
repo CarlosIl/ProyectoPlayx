@@ -1,0 +1,26 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+nav {
+    background-color: $primaryDarkColor;
+    display: flex;
+    flex-direction: col;
+
+    img{
+        width: 100px;
+        height: 100%;
+    }
+
+    h1 {
+        @include titleFont(40px);
+        padding-right: 80px;
+    }
+
+    .user{
+        img{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    }
+}

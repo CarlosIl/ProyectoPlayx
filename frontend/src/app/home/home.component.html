@@ -1,0 +1,7 @@
+<app-navbar></app-navbar>
+<!-- <app-sidenav></app-sidenav> -->
+<div class="container">
+    <div *ngFor="let possit of posts">
+        <app-post-card [id]="possit.id" [user_id]="possit.user_id" [post]="possit.post" [created_at]="possit.created_at"></app-post-card>        
+    </div>
+</div>

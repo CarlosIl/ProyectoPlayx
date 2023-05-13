@@ -3,3 +3,13 @@
 
 $titleFont: 'Lora', serif;
 $contentFont: 'Andika', sans-serif;
+
+@mixin titleFont($size){
+    font-family: 'Lora', serif;
+    font-size: $size;
+}
+
+@mixin contentFont($size){
+    font-family: 'Andika', sans-serif;
+    font-size: $size;
+}

@@ -4,45 +4,41 @@ import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/f
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class RegisterComponent {
-
-  formRegister!: FormGroup;
+export class LoginComponent {
+  
+  formLogin!: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(){
-    this.formRegister = this.fb.group({
-      username: ['', [Validators.required]],
-      firstName: ['', [Validators.nullValidator]],
-      lastName: ['', [Validators.nullValidator]],
-      // profile_picture: ['', [Validators.nullValidator]],
+    this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      c_password: ['', [Validators.required]]
     })
   }
 
   submit(){
-    if(this.formRegister.invalid){
+    if(this.formLogin.invalid){
       return;
     }
 
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
-    this.authService.sendRegister(this.formRegister.value)
+    this.authService.sendLogin(this.formLogin.value)
     .subscribe((datos: any) => {
       if (datos['success'] == true) {
-        this.router.navigate(['/login']);
+        this.authService.setToken(datos['token']);
+        this.router.navigate(['/home']);
       } else {
         return console.log(datos);
       }
     });
   }
 
-  redirectLogin(){
-    this.router.navigate(['/login']);
+  redirectRegister(){
+    this.router.navigate(['/register']);
   }
 }

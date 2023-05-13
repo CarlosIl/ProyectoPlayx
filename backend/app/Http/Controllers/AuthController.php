@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserVerify;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -75,11 +76,12 @@ class AuthController extends Controller
         }
         Auth::login($user);
         $success['token'] =  $user->createToken('tokenLogin')->accessToken;
-        $success['username'] =  $user->username;
+        // $success['username'] =  $user->username;
 
         return response()->json([
+            "success" => true,
             "message" => "El usuario ha iniciado sesión",
-            "username" => $success['username'],
+            // "username" => $success['username'],
             "token" => $success['token'],
         ], 200);
     }
@@ -124,5 +126,32 @@ class AuthController extends Controller
         return response()->json([
             "message" => $message,
         ], $status);
+    }
+
+    public function getUser()
+    {
+        $user = Auth::user();
+        return response()->json([
+            "success" => true,
+            "user" => $user,
+        ], 200);
+    }
+
+    // public function sendProfilePicture(Request $request)
+    // {
+    //     $path = $user->email;
+        
+    //     if ($request->hasFile('profile_picture')) {
+    //         $file_name = time() . '_' . request()->profile_picture->getClientOriginalName();
+    //         Storage::disk('sftp')->put("$path/$file_name", fopen($request->file('profile_picture'), 'r+'));
+
+    //         $user->profile_picture = $file_name;
+    //     }
+    // }
+
+    public function getProfilePicture()
+    {
+        $user = Auth::user();
+        return Storage::disk('sftp')->download("$user->email/$user->profile_picture");
     }
 }

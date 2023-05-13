@@ -22,10 +22,12 @@
             <input type="password" class="form-control" formControlName="c_password" required>
         </div>
         <div class="grid1">
+            <!-- <label for="profile_picture">Profile picture</label>
+            <input type="file" class="form-control" formControlName="profile_picture"> -->
             <button type="submit">Create account</button>
             <br>
             <p>Already have an account?</p>
-            <button>Sign in</button>
+            <button (click)="redirectLogin()">Sign in</button>
         </div>
     </form>
 </div>

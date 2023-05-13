@@ -24,9 +24,9 @@ use App\Http\Controllers\NotificationController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 
 // Route::get('/article/{id}', function ($id) {
@@ -65,6 +65,8 @@ Route::middleware('auth:api')->group( function(){
 
     //AuthController
     Route::get('logout', [AuthController::class, 'logout']);
+    Route::get('/user', [AuthController::class, 'getUser']);
+    Route::get('/profile', [AuthController::class, 'getProfilePicture']);
 
     //FollowController
     Route::get('/follow/{id}', [FollowController::class, 'store']);
