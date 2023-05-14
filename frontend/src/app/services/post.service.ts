@@ -29,7 +29,11 @@ export class PostService {
     return this.http.get(this.url+`/api/logout`, this.httpOptions);
   }
 
-  getProfilePicture(){
-    return this.http.get(this.url+`/api/profile`, this.httpOptions);
+  getProfilePicture(username: any){
+    return this.http.get(this.url+`/api/profile/`+username, this.httpOptions);
+  }
+
+  retrieveImagePost(post_id: any){
+    return this.http.get(this.url+`/api/post/descargar/`+post_id, this.httpOptions);
   }
 }

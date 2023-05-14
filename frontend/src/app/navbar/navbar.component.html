@@ -1,10 +1,17 @@
 <nav>
-    <div class="logo">
-        <img src="../../assets/imgs/PlayxLogo.png">
-    </div>
-    <h1>Playx</h1>
-    <div class="user">
-        <img [src]="profile">
-        <p>{{username}}</p>
-    </div>
+    <mat-toolbar>
+        <span>
+            <img src="../../assets/imgs/PlayxLogo.png">
+        </span>
+        <span>
+            <h1>Playx</h1>
+        </span>
+        <span class="example-spacer"></span>
+            <span>
+                <img id="user_profile" [src]="profile">
+            </span>
+            <span>
+                <p>{{username}}</p>
+            </span>
+    </mat-toolbar>
 </nav>

@@ -11,8 +11,8 @@ class Post extends Model
 
     protected $fillable = ['id', 'user_id', 'post', 'file_name', 'created_at', 'updated_at'];
 
-    protected function asDateTime($value)
-    {
-        return parent::asDateTime($value)->format('d/m/y H:m');
-    }
+    // protected function asDateTime($value)
+    // {
+    //     return parent::asDateTime($value)->format('d/m/y H:m');
+    // }
 }

@@ -18,6 +18,9 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { PostCardComponent } from './post-card/post-card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModuleModule } from './material-module/material-module.module';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,17 @@ import { PostCardComponent } from './post-card/post-card.component';
     HomeComponent,
     NavbarComponent,
     SidenavComponent,
-    PostCardComponent
+    PostCardComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MaterialModuleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

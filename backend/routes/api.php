@@ -53,9 +53,7 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 Route::middleware('auth:api')->group( function(){
 
     //PostController
-    Route::get('/posts', function () {
-        return PostResource::collection(Post::all());
-    });
+    Route::get('/posts', [PostController::class, 'index']);
     Route::post('/posts', [PostController::class, 'store']);
     Route::get('/post/{id}', [PostController::class, 'show']);
     Route::put('/post/{id}', [PostController::class, 'update']);
@@ -66,7 +64,7 @@ Route::middleware('auth:api')->group( function(){
     //AuthController
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'getUser']);
-    Route::get('/profile', [AuthController::class, 'getProfilePicture']);
+    Route::get('/profile/{username}', [AuthController::class, 'getProfilePicture']);
 
     //FollowController
     Route::get('/follow/{id}', [FollowController::class, 'store']);

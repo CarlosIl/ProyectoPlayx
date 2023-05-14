@@ -1,0 +1,29 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+mat-card{
+    border-radius: 3%;
+    mat-card-header{
+        border-top-left-radius: 3%;
+        border-top-right-radius: 3%;
+        background-color: $primaryColor;
+        mat-card-title{
+            @include titleFont(25px);
+        }
+        mat-card-subtitle{
+            @include contentFont(12px);
+        }
+    }
+    mat-card-content{
+        background-color: $secondaryLigthColor;
+        @include contentFont(16px);
+        border-bottom-left-radius: 3%;
+        border-bottom-right-radius: 3%;
+    }
+}
+
+#user_profile{
+    width: 110%;
+    height: 110%;
+    border-radius: 50%;
+}

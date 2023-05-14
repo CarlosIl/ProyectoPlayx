@@ -50,7 +50,7 @@ class AuthController extends Controller
         $user->save();
 
         $path = $user->email;
-        Storage::disk('sftp')->makeDirectory($path);
+        Storage::disk('public')->makeDirectory($path);
 
         $success['username'] =  $user->username;
 
@@ -149,9 +149,16 @@ class AuthController extends Controller
     //     }
     // }
 
-    public function getProfilePicture()
+    public function getProfilePicture(string $username)
     {
-        $user = Auth::user();
-        return Storage::disk('sftp')->download("$user->email/$user->profile_picture");
+        $user = User::where('username',$username)->get();
+        $path = $user[0]["email"];
+        $profile_picture = $user[0]["profile_picture"];
+        return response()->json([
+            "success" => true,
+            "url" => asset("$path/$profile_picture"),
+        ], 200);
+        // return asset("$user->email/$user->profile_picture");
+        // return Storage::disk('sftp')->download("$user->email/$user->profile_picture");
     }
 }
