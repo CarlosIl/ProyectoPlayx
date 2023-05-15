@@ -22,7 +22,7 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required',
+            // 'user_id' => 'required',
             'post' => 'required',
             'post_file' => 'nullable|file'
         ];

@@ -1,6 +1,10 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <div *ngFor="let possit of posts">
-        <app-post-card [id]="possit.id" [username]="possit.username" [email]="possit.email" [profile_picture]="possit.profile_picture" [post]="possit.post" [file_name]="possit.file_name" [created_at]="possit.created_at"></app-post-card>        
+    <div></div>
+    <div>
+        <div *ngFor="let possit of posts">
+            <app-post-card [id]="possit.id" [username]="possit.username" [email]="possit.email" [profile_picture]="possit.profile_picture" [post]="possit.post" [file_name]="possit.file_name" [created_at]="possit.created_at"></app-post-card>        
+        </div>
     </div>
+    <app-create-post></app-create-post>
 </div>

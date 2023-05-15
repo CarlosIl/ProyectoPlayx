@@ -36,7 +36,7 @@ class PostController extends Controller
     public function store(PostRequest $request)
     {
         $post = new Post();
-        $post->user_id = $request->user_id;
+        $post->user_id = Auth::user()->id;
         $post->post = $request->post;
 
         $path = Auth::user()->email;

@@ -1,0 +1,11 @@
+<div>
+    <h2>Create new post</h2>
+    <form (ngSubmit)="submit()" [formGroup]="formPost">
+        <textarea placeholder="Write something here" class="form-control" formControlName="post" required></textarea>
+        <br>
+        <input type="file" class="form-control" formControlName="post_file">
+        <br>
+        <button type="submit">Send</button>
+    </form>
+</div>
+

@@ -2,8 +2,10 @@
 @import '../../fonts.scss';
 
 .container{
-    margin: auto;
-    width: 40%;
+    // margin: auto;
+    // width: 40%;
+    display: grid;
+    grid-template-columns: auto 50% auto;
 }
 
 app-post-card{

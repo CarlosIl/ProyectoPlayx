@@ -36,4 +36,10 @@ export class PostService {
   retrieveImagePost(post_id: any){
     return this.http.get(this.url+`/api/post/descargar/`+post_id, this.httpOptions);
   }
+
+  sendPost(data: any){
+    const formData = new FormData();
+    formData.append("post_file", data.file_name);
+    return this.http.post(this.url+`/api/posts`, formData, this.httpOptions);
+  }
 }

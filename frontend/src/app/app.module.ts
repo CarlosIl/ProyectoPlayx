@@ -21,6 +21,7 @@ import { PostCardComponent } from './post-card/post-card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModuleModule } from './material-module/material-module.module';
 import { ProfileComponent } from './profile/profile.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProfileComponent } from './profile/profile.component';
     NavbarComponent,
     SidenavComponent,
     PostCardComponent,
-    ProfileComponent
+    ProfileComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,
