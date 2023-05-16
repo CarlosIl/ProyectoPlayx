@@ -1,4 +1,4 @@
-<div class="tab">
+<div infinite-scroll (scrolled)="reloadPosts()" class="tab">
     <mat-card>
         <mat-card-content>New Stuff</mat-card-content>
     </mat-card>
@@ -7,9 +7,9 @@
     <app-post-card [id]="possit.id" [username]="possit.username" [profile_picture]="possit.profile_picture"
         [post]="possit.post" [file_name]="possit.file_name" [created_at]="possit.created_at"></app-post-card>
 </div>
-<div>
+<!-- <div>
     <button (click)="reloadPosts()">Show more</button>
-</div>
+</div> -->
 <div class="create_post">
     <app-create-post></app-create-post>
 </div>

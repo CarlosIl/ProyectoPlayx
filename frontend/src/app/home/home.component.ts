@@ -20,11 +20,15 @@ export class HomeComponent {
   }
 
   reloadPosts() {
-    this.postService.reloadPosts(this.last_post_id).subscribe((posts: any) => {
-      for (let index = 0; index < posts.length; index++) {
-        this.posts.push(posts[index]);
-      }
-      this.last_post_id = posts[posts.length-1]["id"];
-    })
+    if(this.last_post_id == 0){
+      return console.log("No se puede avanzar más");
+    }else{
+      this.postService.reloadPosts(this.last_post_id).subscribe((posts: any) => {
+        for (let index = 0; index < posts.length; index++) {
+          this.posts.push(posts[index]);
+        }
+        this.last_post_id = posts[posts.length-1]["id"];
+      })
+    }
   }
 }

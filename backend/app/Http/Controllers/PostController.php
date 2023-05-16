@@ -18,13 +18,13 @@ class PostController extends Controller
      */
     public function index()
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 5");
+        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 7");
         return $posts = json_decode(json_encode($postsStd), true);
     }
 
     public function reload(string $id)
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$id]);
+        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 7",[$id]);
         return $posts = json_decode(json_encode($postsStd), true);
     }
 

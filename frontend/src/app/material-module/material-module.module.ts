@@ -11,6 +11,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [],
@@ -26,7 +28,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     MatSidenavModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    InfiniteScrollModule
   ]
 })
 export class MaterialModuleModule { }
