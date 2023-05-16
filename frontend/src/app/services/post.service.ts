@@ -29,6 +29,10 @@ export class PostService {
     return this.http.get(this.url + `/api/posts`, this.httpOptions);
   }
 
+  reloadPosts(last_post_id:any){
+    return this.http.get(this.url + `/api/posts/` + last_post_id, this.httpOptions);
+  }
+
   getUser() {
     return this.http.get(this.url + `/api/user`, this.httpOptions);
   }
