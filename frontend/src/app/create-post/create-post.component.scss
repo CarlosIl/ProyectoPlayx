@@ -1,0 +1,49 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+
+.post{
+    margin: auto;
+    width: 90%;
+}
+mat-card{
+    background-color: $secondaryLigthColor;
+    mat-card-header{
+        h2{
+            @include titleFont(25px);
+        }
+    }
+    mat-card-content{
+        textarea{
+            @include contentFont(16px);
+            width: 100%;
+            resize: vertical;
+            border: 2px solid;
+            border-color: $primaryLigthColor;
+            border-radius: 5px;
+        }
+
+        .label_file{
+            @include contentFont(16px);
+            background-color: $secondaryDarkColor;
+            cursor: pointer;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .send_button{
+            margin: auto;
+            width: 30%;
+            button{
+                @include titleFont(20px);
+                background-color: $primaryDarkColor;
+                width: 100%;
+                border: none;
+                border-radius: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+}

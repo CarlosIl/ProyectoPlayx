@@ -3,25 +3,31 @@
 
 .mat-toolbar {
     background-color: $primaryDarkColor;
-    height: 7%;
+    height: 90px;
 
-    img{
-        width: 100px;
+    img {
+        padding-left: 10px;
+        width: 80px;
         height: 100%;
+        padding-right: 10px;
     }
 
     h1 {
-        @include titleFont(40px);
+        @include logoFont();
         padding-right: 80px;
     }
 
     .example-spacer {
         flex: 1 1 auto;
-      }
+    }
 
-    #user_profile{
-        width: 90px;
-        height: 90px;
+    #user_profile {
+        width: 80px;
+        height: 100%;
         border-radius: 50%;
+    }
+
+    p{
+        @include titleFont(20px);
     }
 }

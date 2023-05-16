@@ -9,7 +9,6 @@ import { PostService } from '../services/post.service';
 export class PostCardComponent {
   @Input() id:string=""
   @Input() username:string=""
-  @Input() email:string=""
   @Input() profile_picture:any
   @Input() post:string=""
   @Input() file_name:string=""

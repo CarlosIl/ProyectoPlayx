@@ -10,30 +10,35 @@ import { PostService } from '../services/post.service';
 export class CreatePostComponent {
 
   formPost!: FormGroup;
+  filedata: any;
 
-  constructor(private fb: FormBuilder, private postService: PostService) {}
+  constructor(private fb: FormBuilder, private postService: PostService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.formPost = this.fb.group({
       post: ['', [Validators.required]],
       post_file: ['', [Validators.nullValidator]],
     })
   }
 
-  submit(){
-    if(this.formPost.invalid){
+  fileEvent(e: any) {
+    this.filedata = e.target.files[0];
+  }
+
+  submit() {
+    if (this.formPost.invalid) {
       return;
     }
 
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
-    this.postService.sendPost(this.formPost.value)
-    .subscribe((datos: any) => {
-      if (datos['message'] == "Post creado") {
-        window.location.reload();
-      } else {
-        return console.log(datos);
-      }
-    });
+    this.postService.sendPost(this.formPost.value, this.filedata);
+      // .subscribe((datos: any) => {
+      //   if (datos['message'] == "Post creado") {
+      //     window.location.reload();
+      //   } else {
+      //     return console.log(datos);
+      //   }
+      // });
   }
 
 }

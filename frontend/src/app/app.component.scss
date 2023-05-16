@@ -1,0 +1,22 @@
+@import '../styles.scss';
+@import '../fonts.scss';
+
+app-navbar{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+.space{
+    height: 12%;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: auto 50% auto;
+}
+
+roulet-outlet{
+    z-index: 1;
+}

@@ -18,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.email, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id  ORDER BY posts.created_at DESC");
+        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id  ORDER BY posts.created_at DESC");
         return $posts = json_decode(json_encode($postsStd), true);
     }
 
@@ -51,10 +51,33 @@ class PostController extends Controller
         $post->save();
 
         return response()->json([
-            "message" => "Post creado",
-            "post" => $post,
+            "post" => $post->id,
         ], 200);
         
+    }
+
+    public function storeImage(Request $request, string $id){
+
+        $request->validate([
+            'post_file' =>  'required|file'
+        ]);
+
+        $post = Post::find($id);
+        $path = Auth::user()->email;
+
+        if ($request->hasFile('post_file')) {
+            $file_name = time() . '_' . request()->post_file->getClientOriginalName();
+            Storage::disk('public')->put("$path/$file_name", fopen($request->file('post_file'), 'r+'));
+
+            $post->file_name = $file_name;
+        }
+
+        $post->save();
+
+        return response()->json([
+            "message" => "Post actualizado",
+            "post" => $post,
+        ], 200);
     }
 
     /**

@@ -1,13 +1,21 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
-.container{
-    // margin: auto;
-    // width: 40%;
-    display: grid;
-    grid-template-columns: auto 50% auto;
+.tab {
+    @include titleFont(25px);
+
+    mat-card-content {
+        background-color: $secondaryColor;
+    }
 }
 
-app-post-card{
-    border-radius: 20%;
+.post_card {
+    padding-top: 15px;
+}
+
+.create_post {
+    width: 25%;
+    position: fixed;
+    left: 75%;
+    top: 45%;
 }

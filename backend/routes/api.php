@@ -55,6 +55,7 @@ Route::middleware('auth:api')->group( function(){
     //PostController
     Route::get('/posts', [PostController::class, 'index']);
     Route::post('/posts', [PostController::class, 'store']);
+    Route::post('/posts/image/{id}', [PostController::class, 'storeImage']);
     Route::get('/post/{id}', [PostController::class, 'show']);
     Route::put('/post/{id}', [PostController::class, 'update']);
     Route::delete('/post/{id}', [PostController::class, 'destroy']);
