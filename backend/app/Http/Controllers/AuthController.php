@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -137,13 +138,10 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function getOtherUser(string $username)
+    public function getUserInfo(string $username)
     {
-        $user = User::where("username",$username)->get();
-        return response()->json([
-            "success" => true,
-            "user" => $user,
-        ], 200);
+        $userStd = DB::select("SELECT users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings FROM `users` WHERE username = ?",[$username]);
+        return $user = json_decode(json_encode($userStd), true);
     }
 
     // public function sendProfilePicture(Request $request)

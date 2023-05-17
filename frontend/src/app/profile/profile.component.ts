@@ -19,7 +19,7 @@ export class ProfileComponent {
     })
 
     this.postService.getOtherUser(this.username).subscribe((datos:any) => {
-      this.user = datos["user"][0];
+      this.user = datos[0];
       console.log(this.user);
     })
   }

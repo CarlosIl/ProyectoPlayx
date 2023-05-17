@@ -1,33 +1,44 @@
-<div class="container">
-    <h1>Register</h1>
-    <form (ngSubmit)="submit()" [formGroup]="formRegister">
-        <div class="grid1">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" formControlName="username" required>
-        </div>
-        <div class="grid2">
-            <label for="firstName">First name</label>
-            <label for="lastName">Last name</label>
-            <input type="text"  class="form-control" formControlName="firstName">
-            <input type="text"  class="form-control" formControlName="lastName">
-        </div>
-        <div class="grid1">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" formControlName="email" required>
-        </div>
-        <div class="grid2">
-            <label for="password">Password</label>
-            <label for="c_password">Repeat password</label>
-            <input type="password" class="form-control" formControlName="password" required>
-            <input type="password" class="form-control" formControlName="c_password" required>
-        </div>
-        <div class="grid1">
-            <!-- <label for="profile_picture">Profile picture</label>
+<div class="register">
+    <mat-card class="example-card">
+        <mat-card-content>
+            <form (ngSubmit)="submit()" [formGroup]="formRegister">
+                <h2>Register</h2>
+                <div class="grid1">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" formControlName="username" required>
+                </div>
+                <div class="grid2">
+                    <div>
+                        <label for="firstName">First name</label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                    </div>
+                    <div>
+                        <label for="lastName">Last name</label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                    </div>
+                </div>
+                <div class="grid1">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" formControlName="email" required>
+                </div>
+                <div class="grid2">
+                    <div>
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" formControlName="password" required>
+                    </div>
+                    <div>
+                        <label for="c_password">Repeat password</label>
+                        <input type="password" class="form-control" formControlName="c_password" required>
+                    </div>
+                </div>
+                <div class="grid1">
+                    <!-- <label for="profile_picture">Profile picture</label>
             <input type="file" class="form-control" formControlName="profile_picture"> -->
-            <button type="submit">Create account</button>
-            <br>
-            <p>Already have an account?</p>
-            <button (click)="redirectLogin()">Sign in</button>
-        </div>
-    </form>
+                    <button class="button1" type="submit">Create account</button>
+                    <p>Already have an account?</p>
+                    <button class="button2" (click)="redirectLogin()">Sign in</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
 </div>
