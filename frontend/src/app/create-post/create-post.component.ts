@@ -31,14 +31,14 @@ export class CreatePostComponent {
     }
 
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
-    this.postService.sendPost(this.formPost.value, this.filedata);
-      // .subscribe((datos: any) => {
-      //   if (datos['message'] == "Post creado") {
-      //     window.location.reload();
-      //   } else {
-      //     return console.log(datos);
-      //   }
-      // });
+    this.postService.sendPost(this.formPost.value)
+      .subscribe((datos: any) => {
+        if (datos['message'] == "Post creado") {
+          window.location.reload();
+        } else {
+          return console.log(datos);
+        }
+      });
   }
 
 }

@@ -128,9 +128,18 @@ class AuthController extends Controller
         ], $status);
     }
 
-    public function getUser()
+    public function getMyUser()
     {
         $user = Auth::user();
+        return response()->json([
+            "success" => true,
+            "user" => $user,
+        ], 200);
+    }
+
+    public function getOtherUser(string $username)
+    {
+        $user = User::where("username",$username)->get();
         return response()->json([
             "success" => true,
             "user" => $user,

@@ -53,8 +53,11 @@ Route::get('account/verify/{token}', [AuthController::class, 'verifyAccount'])->
 Route::middleware('auth:api')->group( function(){
 
     //PostController
-    Route::get('/posts', [PostController::class, 'index']);
-    Route::get('/posts/{id}', [PostController::class, 'reload']);
+    Route::get('/posts/home', [PostController::class, 'index']);
+    Route::get('/posts/home/{id}', [PostController::class, 'reload']);
+    Route::get('/posts/profile/{username}', [PostController::class, 'getPostsX']);
+    Route::get('/posts/profile/{username}/{id}', [PostController::class, 'reloadPostsX']);
+
     Route::post('/posts', [PostController::class, 'store']);
     Route::post('/posts/image/{id}', [PostController::class, 'storeImage']);
     Route::get('/post/{id}', [PostController::class, 'show']);
@@ -65,7 +68,8 @@ Route::middleware('auth:api')->group( function(){
 
     //AuthController
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('/user', [AuthController::class, 'getUser']);
+    Route::get('/user', [AuthController::class, 'getMyUser']);
+    Route::get('/user/{username}', [AuthController::class, 'getOtherUser']);
     Route::get('/profile/{username}', [AuthController::class, 'getProfilePicture']);
 
     //FollowController

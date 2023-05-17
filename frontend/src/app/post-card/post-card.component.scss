@@ -11,7 +11,8 @@ mat-card{
             @include titleFont(25px);
         }
         mat-card-subtitle{
-            @include contentFont(12px);
+            color: black;
+            @include contentFont(16px);
         }
     }
     mat-card-content{
@@ -27,6 +28,7 @@ mat-card{
     width: 110%;
     height: 110%;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 #post_image{

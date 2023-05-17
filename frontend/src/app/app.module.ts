@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModuleModule } from './material-module/material-module.module';
 import { ProfileComponent } from './profile/profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreatePostComponent } from './create-post/create-post.component';
     SidenavComponent,
     PostCardComponent,
     ProfileComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,

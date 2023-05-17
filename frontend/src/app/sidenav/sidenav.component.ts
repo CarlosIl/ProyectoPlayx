@@ -8,9 +8,9 @@ import { PostService } from '../services/post.service';
   styleUrls: ['./sidenav.component.scss']
 })
 export class SidenavComponent {
-  constructor(private postService: PostService, private router: Router) {}
+  constructor(private postService: PostService, private router: Router) { }
 
-  logOut(){
+  logOut() {
     this.postService.logOut().subscribe();
     this.router.navigate(['/login']);
   }

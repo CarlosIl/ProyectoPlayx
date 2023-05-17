@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Andika&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carlito&display=swap');
 
 $titleFont: 'Lora', serif;
-$contentFont: 'Andika', sans-serif;
 
 @mixin logoFont(){
     font-family: 'Sigmar One', cursive;
@@ -16,6 +15,6 @@ $contentFont: 'Andika', sans-serif;
 }
 
 @mixin contentFont($size){
-    font-family: 'Andika', sans-serif;
+    font-family: 'Carlito', sans-serif;
     font-size: $size;
 }

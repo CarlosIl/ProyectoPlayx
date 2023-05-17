@@ -13,7 +13,7 @@ export class NavbarComponent {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    this.postService.getUser().subscribe((datos: any) => {
+    this.postService.getMyUser().subscribe((datos: any) => {
       var user = datos['user']
       this.username = user['username'];
       if (user['profile_picture'] == null) {

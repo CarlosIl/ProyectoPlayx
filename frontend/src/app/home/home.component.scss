@@ -2,7 +2,7 @@
 @import '../../fonts.scss';
 
 .tab {
-    @include titleFont(25px);
+    @include contentFont(25px);
 
     mat-card-content {
         background-color: $secondaryColor;

@@ -1,7 +1,11 @@
-<app-navbar></app-navbar>
+<div *ngIf="inForm == false">
+  <app-navbar></app-navbar>
+</div>
 <div class="space"></div>
 <div class="grid">
   <router-outlet></router-outlet>
   <div></div>
 </div>
-<app-sidenav></app-sidenav>
+<div *ngIf="inForm == false">
+  <app-sidenav></app-sidenav>
+</div>

@@ -9,6 +9,7 @@ import { PostService } from '../services/post.service';
 export class HomeComponent {
   posts!: any;
   last_post_id!: any;
+  array_profile_pictures!:any;
 
   constructor(private postService: PostService) { }
 
@@ -16,6 +17,15 @@ export class HomeComponent {
     this.postService.retrievePosts().subscribe((posts: any) => {
       this.last_post_id = posts[posts.length-1]["id"];
       this.posts = posts;
+      // console.log(posts);
+      // for (let index = 0; index < posts.length; index++) {
+      //   let profile_picture = posts[index]["profile_picture"];
+      //   if (profile_picture == null) {
+      //     posts[index]["profile_picture"] = posts[index]["profile_picture"];
+      //   }else(){
+          
+      //   }
+      // }
     })
   }
 

@@ -1,6 +1,6 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <div mat-card-avatar>
+    <div (click)="goProfile()" mat-card-avatar>
       <img id="user_profile" [src]="profile_picture">
     </div>
     <mat-card-title>{{username}}</mat-card-title>
