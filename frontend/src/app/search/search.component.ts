@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { PostService } from '../services/post.service';
+import { Router } from '@angular/router';
 
-// export interface User {
-//   username: string;
-//   profile_picture: string;
-// }
-
-export interface State {
+export interface User {
   profile_picture: string;
   username: string;
 }
@@ -20,34 +16,36 @@ export interface State {
 })
 
 export class SearchComponent {
-  // myControl = new FormControl('');
-  // options: string[] = ['One', 'Two', 'Three'];
-  // filteredOptions: any;
-  users: State[] = [];
-
+  users: User[] = [];
   myControl = new FormControl('');
   filteredOptions: any;
 
-  constructor(private postService: PostService) {
+  username!:string;
+
+  constructor(private postService: PostService, private router: Router) {
     this.postService.getAllUsers().subscribe((users: any) => {
       for (let i = 0; i < users.length; i++) {
+        if (users[i]["profile_picture"] == null) {
+          users[i]["profile_picture"] = "../../assets/imgs/profile.jpg"
+        }
         this.users.push(users[i]);
       }
     })
-
-    console.log(this.users);
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(user => (user ? this._filterStates(user) : this.users.slice())),
     );
-
   }
 
-  private _filterStates(value: string): State[] {
+  private _filterStates(value: string): User[] {
     const filterValue = value.toLowerCase();
-
     return this.users.filter(user => user.username.toLowerCase().includes(filterValue));
+  }
+
+  goProfile() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/profile/'+this.username]));
   }
 
 }

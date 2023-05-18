@@ -16,12 +16,16 @@ const routes: Routes = [
   // {
   //   path: 'edit/:articleId', component: EditArticleComponent
   // },
-  {path: '', component:RegisterComponent},
-  {path: 'register', component:RegisterComponent},
-  {path: 'login', component:LoginComponent},
-  {path: 'home', component:HomeComponent},
-  {path: 'profile/:username', component:ProfileComponent},
-  {path: 'search', component:SearchComponent},
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'profile/:username', component: ProfileComponent },
+  { path: 'search', component: SearchComponent },
 ];
 
 @NgModule({

@@ -3,7 +3,7 @@
 </div>
 <div class="space"></div>
 <div class="grid">
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
   <div></div>
 </div>
 <div *ngIf="inForm == false">

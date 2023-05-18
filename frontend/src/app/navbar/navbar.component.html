@@ -8,8 +8,19 @@
             <h1>Playx</h1>
         </span>
         <span class="example-spacer"></span>
-        <span (click)="goProfile()">
-            <img id="user_profile" [src]="profile">
+        <span>
+            <form class="example-form">
+                <input aria-label="State" (keyup.enter)="goToProfile()" [(ngModel)]="search_value" [matAutocomplete]="auto" [formControl]="myControl">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let user of filteredOptions | async" [value]="user.username">
+                        <img id="user_profile" [src]="user.profile_picture">
+                        <span>{{user.username}}</span>
+                    </mat-option>
+                </mat-autocomplete>
+            </form>
+        </span>
+        <span (click)="goMyProfile()">
+            <img id="my_user_profile" [src]="profile">
         </span>
         <span>
             <p>{{username}}</p>

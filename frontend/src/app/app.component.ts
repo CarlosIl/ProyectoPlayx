@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
+// import { Router, Event, NavigationStart, NavigationEnd, NavigationError} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,28 @@ export class AppComponent {
   title = 'frontend';
   inForm!:boolean;
 
-  constructor(private router: Router) {
-    this.router.events.subscribe((event: Event) => {
-      if(event instanceof NavigationStart){
-        let path = event.url;
-        if(path.match("/login")  || path.match("/register") ){
-          this.inForm = true;
-        }else{
-          this.inForm = false;
-        }
-      }
-    })
+  // Para buscar a través de la ruta
+  // constructor(private router: Router) {
+  //   this.router.events.subscribe((event: Event) => {
+  //     if(event instanceof NavigationStart){
+  //       let path = event.url;
+  //       console.log(event);
+  //       if(path.match("/login") || path.match("/register")){
+  //         this.inForm = true;
+  //       }else{
+  //         this.inForm = false;
+  //       }
+  //     }
+  //   })
+  // }
+
+  //Buscar a través del componente
+  onActivate(event: any): void {
+    let component = event.constructor.name;
+    if(component == "LoginComponent" || component == "RegisterComponent"){
+      this.inForm = true;
+    }else{
+      this.inForm = false;
+    }
   }
 }
