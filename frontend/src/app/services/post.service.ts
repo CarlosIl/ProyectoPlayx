@@ -41,6 +41,10 @@ export class PostService {
     return this.http.get(this.url + `/api/user/` + username, this.httpOptions);
   }
 
+  getAllUsers(){
+    return this.http.get(this.url + `/api/users/`, this.httpOptions);
+  }
+
   logOut() {
     return this.http.get(this.url + `/api/logout`, this.httpOptions);
   }

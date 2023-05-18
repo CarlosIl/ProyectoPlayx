@@ -70,6 +70,7 @@ Route::middleware('auth:api')->group( function(){
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'getMyUser']);
     Route::get('/user/{username}', [AuthController::class, 'getUserInfo']);
+    Route::get('/users', [AuthController::class, 'getAllUsers']);
     Route::get('/profile/{username}', [AuthController::class, 'getProfilePicture']);
 
     //FollowController

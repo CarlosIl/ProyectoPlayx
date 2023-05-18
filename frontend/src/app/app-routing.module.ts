@@ -7,6 +7,7 @@ import { NewArticleComponent } from './new-article/new-article.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   // {
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'home', component:HomeComponent},
   {path: 'profile/:username', component:ProfileComponent},
+  {path: 'search', component:SearchComponent},
 ];
 
 @NgModule({

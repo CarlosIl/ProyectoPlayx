@@ -144,6 +144,21 @@ class AuthController extends Controller
         return $user = json_decode(json_encode($userStd), true);
     }
 
+    public function getAllUsers()
+    {
+        $usersStd = DB::select("SELECT users.username, users.email, users.profile_picture FROM `users`");
+        $users = json_decode(json_encode($usersStd), true);
+        for ($i=0; $i < count($users); $i++) { 
+            $profile_picture = $users[$i]["profile_picture"];
+            $email = $users[$i]["email"];
+            unset($users[$i]["email"]);
+            if($profile_picture!=null){
+                $users[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }
+        }
+        return $users;
+    }
+
     // public function sendProfilePicture(Request $request)
     // {
     //     $path = $user->email;

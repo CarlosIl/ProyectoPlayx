@@ -23,6 +23,7 @@ import { MaterialModuleModule } from './material-module/material-module.module';
 import { ProfileComponent } from './profile/profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { UserCardComponent } from './user-card/user-card.component';
     PostCardComponent,
     ProfileComponent,
     CreatePostComponent,
-    UserCardComponent
+    UserCardComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
