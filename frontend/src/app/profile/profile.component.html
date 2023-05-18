@@ -1,9 +1,17 @@
-<div class="tab">
+<div [alwaysCallback]="true" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" infinite-scroll (scrolled)="reloadPosts()" class="tab">
     <mat-card>
-        <mat-card-content>My Posts</mat-card-content>
+        <mat-card-content>
+            <h2 *ngIf="MyUser; else elseBlock">My Posts</h2>
+            <ng-template #elseBlock>
+                <h2> {{username}} Posts</h2>
+            </ng-template>
+        </mat-card-content>
     </mat-card>
 </div>
-<p>{{username}}</p>
+<div *ngFor="let possit of posts" class="post_card">
+    <app-post-card [id]="possit.id" [username]="possit.username" [profile_picture]="profile_picture"
+        [post]="possit.post" [file_name]="possit.file_name" [created_at]="possit.created_at"></app-post-card>
+</div>
 <div class="user_card">
-    <app-user-card></app-user-card>
+    <app-user-card [MyUser]="MyUser" [username]="username" [profile_picture]="profile_picture" [firstName]="user.firstName" [lastName]="user.lastName" [followers]="user.followers" [followings]="user.followings"></app-user-card>
 </div>

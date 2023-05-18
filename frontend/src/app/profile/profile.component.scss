@@ -2,9 +2,21 @@
 @import '../../fonts.scss';
 
 .tab {
-    @include contentFont(25px);
-
     mat-card-content {
         background-color: $secondaryColor;
+        h2{
+            @include contentFont(25px);
+        }
     }
+}
+
+.post_card {
+    padding-top: 15px;
+}
+
+.user_card {
+    width: 23%;
+    position: fixed;
+    left: 76%;
+    top: 12%;
 }

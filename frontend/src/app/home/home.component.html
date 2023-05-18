@@ -1,4 +1,4 @@
-<div [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" infinite-scroll (scrolled)="reloadPosts()" class="tab">
+<div [alwaysCallback]="true" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" infinite-scroll (scrolled)="reloadPosts()" class="tab">
     <mat-card>
         <mat-card-content>New Stuff</mat-card-content>
     </mat-card>

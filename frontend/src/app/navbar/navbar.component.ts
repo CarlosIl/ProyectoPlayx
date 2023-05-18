@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PostService } from '../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ export class NavbarComponent {
   username!: any;
   profile!: any;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private router: Router) { }
 
   ngOnInit() {
     this.postService.getMyUser().subscribe((datos: any) => {
@@ -25,5 +26,10 @@ export class NavbarComponent {
         })
       }
     })
+  }
+
+  goProfile() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/profile/' + this.username]));
   }
 }

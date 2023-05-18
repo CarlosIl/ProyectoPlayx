@@ -18,25 +18,43 @@ class PostController extends Controller
      */
     public function index()
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 7");
-        return $posts = json_decode(json_encode($postsStd), true);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 7");
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+            $profile_picture = $posts[$i]["profile_picture"];
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }
+        }
+        return $posts;
     }
 
     public function reload(string $id)
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$id]);
-        return $posts = json_decode(json_encode($postsStd), true);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 2",[$id]);
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+            $profile_picture = $posts[$i]["profile_picture"];
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }
+        }
+        return $posts;
     }
 
     public function getPostsX(string $username)
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? ORDER BY posts.created_at DESC LIMIT 7",[$username]);
+        $postsStd = DB::select("SELECT posts.id, users.username, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? ORDER BY posts.created_at DESC LIMIT 7",[$username]);
         return $posts = json_decode(json_encode($postsStd), true);
     }
 
     public function reloadPostsX(string $username, string $id)
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$username,$id]);
+        $postsStd = DB::select("SELECT posts.id, users.username, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$username,$id]);
         return $posts = json_decode(json_encode($postsStd), true);
     }
 

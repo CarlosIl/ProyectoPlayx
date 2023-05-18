@@ -21,10 +21,6 @@ export class PostCardComponent {
   ngOnInit() {
     if (this.profile_picture == null) {
       this.profile_picture = "../../assets/imgs/profile.jpg"
-    } else {
-      this.postService.getProfilePicture(this.username).subscribe((baseImage: any) => {
-        this.profile_picture = baseImage.url;
-      })
     }
 
     if (this.file_name != null) {
