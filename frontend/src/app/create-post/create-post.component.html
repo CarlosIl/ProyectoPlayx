@@ -7,9 +7,11 @@
             <form (ngSubmit)="submit()" [formGroup]="formPost">
                 <textarea placeholder="Write something here" class="form-control" formControlName="post" required></textarea>
                 <br><br>
-                <label role="button" type="button" for="file" class="label_file">Choose files</label>
+                <div class="div_label_file">
+                    <label role="button" type="button" for="file" class="label_file">Choose files</label>
+                </div>
                 <input id="file" type="file" (change)="fileEvent($event)" class="form-control" formControlName="post_file">
-                <br><br>
+                <br>
                 <div class="send_button">
                     <button type="submit">Send</button>
                 </div>

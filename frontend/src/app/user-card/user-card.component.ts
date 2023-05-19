@@ -19,7 +19,7 @@ export class UserCardComponent {
 
   goEditProfile() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    this.router.navigate(['/profile/edit']));
+    this.router.navigate(['/edit_profile']));
   }
 
   follow() {

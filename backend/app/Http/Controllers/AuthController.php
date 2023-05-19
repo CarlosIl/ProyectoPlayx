@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UserProfileRequest;
 use Illuminate\Http\JsonResponse;
 use App\Models\User;
 use App\Models\UserVerify;
@@ -182,5 +183,33 @@ class AuthController extends Controller
         ], 200);
         // return asset("$user->email/$user->profile_picture");
         // return Storage::disk('sftp')->download("$user->email/$user->profile_picture");
+    }
+
+    public function changeUser(UserProfileRequest $request)
+    {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+        if($request->username!=null){
+            $user->username = $request->username;
+        }
+        if($request->email!=null){
+            Storage::disk("public")->move($user->email, $request->email);
+            $user->email = $request->email;
+        }
+        if($request->firstName!=null){
+            $user->firstName = $request->firstName;
+        }
+        if($request->lastName!=null){
+            $user->lastName = $request->lastName;
+        }
+        if($request->password!=null && $request->c_password!=null){
+            $user->password = $request->password;
+        }
+        $user->save();
+        
+        return response()->json([
+            "success" => true,
+            "user" => $user,
+        ], 200);
     }
 }

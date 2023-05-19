@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'frontend';
   inForm!:boolean;
+  // i:number = 1;
 
   // Para buscar a través de la ruta
   // constructor(private router: Router) {
@@ -33,5 +34,10 @@ export class AppComponent {
     }else{
       this.inForm = false;
     }
+
+    // if(component == "HomeComponent" && this.i){
+    //   this.i == 0;
+    //   window.location.reload();
+    // }
   }
 }

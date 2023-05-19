@@ -34,12 +34,13 @@ export class AuthService {
     return this.http.post(this.url+`/api/login`, data, this.httpOptions1);
   }
 
+  //sessionStorage guarda el token automáticamente mientras que localStorage necesita recargar la página
   setToken(token:string){
-    localStorage.setItem('tokenAPI', token);
+    sessionStorage.setItem('tokenAPI', token);
   }
 
   getToken(): string | null{
-    let token = localStorage.getItem('tokenAPI');
+    let token = sessionStorage.getItem('tokenAPI');
     return token;
   }
 

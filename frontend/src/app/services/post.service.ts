@@ -45,7 +45,12 @@ export class PostService {
     return this.http.get(this.url + `/api/users/`, this.httpOptions);
   }
 
+  changeUser(data: any) {
+    return this.http.post(this.url + `/api/user`, data, this.httpOptions);
+  }
+
   logOut() {
+    sessionStorage.removeItem('tokenAPI');
     return this.http.get(this.url + `/api/logout`, this.httpOptions);
   }
 

@@ -9,36 +9,43 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  
+
   formLogin!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.formLogin = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
     })
   }
 
-  submit(){
-    if(this.formLogin.invalid){
+  submit() {
+    if (this.formLogin.invalid) {
       return;
     }
 
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
     this.authService.sendLogin(this.formLogin.value)
-    .subscribe((datos: any) => {
-      if (datos['success'] == true) {
-        this.authService.setToken(datos['token']);
-        this.router.navigate(['/home']);
-      } else {
-        return console.log(datos);
-      }
-    });
+      .subscribe((datos: any) => {
+        if (datos['success'] == true) {
+          this.authService.setToken(datos['token']);
+          this.router.navigate(['/home']);
+          //Hay que recargar para qe el backend pille correctamente el token y no nos de error de autentificación
+          //Hay que esperar para recargar la página para que no nos rediriga a login otra vez 
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+
+        } else {
+          return console.log(datos);
+          
+        }
+      });
   }
 
-  redirectRegister(){
+  redirectRegister() {
     this.router.navigate(['/register']);
   }
 }

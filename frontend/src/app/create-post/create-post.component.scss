@@ -23,10 +23,18 @@ mat-card{
             border-radius: 5px;
         }
 
-        .label_file{
-            @include contentFont(16px);
+        .div_label_file{
+            margin: auto;
+            text-align: center;
+            width: 30%;
+            // height: 25px;
+            // padding-top: 5px;
             background-color: $secondaryDarkColor;
-            cursor: pointer;
+            border-radius: 15px;
+            .label_file{
+                @include contentFont(16px);
+                cursor: pointer;
+            }
         }
 
         input[type="file"] {

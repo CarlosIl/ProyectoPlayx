@@ -1,0 +1,68 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+.tab {
+    @include contentFont(25px);
+
+    mat-card-content {
+        background-color: $secondaryColor;
+    }
+}
+
+.user_profile {
+    @include contentFont(16px);
+
+    padding-top: 15px;
+
+    mat-card{
+        background-color: $primaryColor;
+    }
+
+    .grid1 {
+        margin: auto;
+        width: 80%;
+        display: grid;
+        grid-template-columns: auto;
+    }
+
+    .grid2 {
+        margin: auto;
+        width: 80%;
+        display: grid;
+        grid-template-columns: auto auto;
+        div{
+            input{
+                width: 100%;
+            }
+            margin-right: 10px;
+        }
+    }
+
+    label{
+        padding-top: 10px;
+    }
+
+    input {
+        @include contentFont(16px);
+        border: 2px solid $primaryColor;
+        border-radius: 5px;
+        margin: 8px 0;
+    }
+
+    p{
+        text-align: center;
+    }
+
+    button{
+        margin: auto;
+        width: 60%;
+        background-color: $secondaryColor;
+        height: 40px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        @include titleFont(20px);
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+}

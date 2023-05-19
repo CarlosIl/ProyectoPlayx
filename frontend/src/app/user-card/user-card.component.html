@@ -27,8 +27,10 @@
         <div *ngIf="MyUser; else elseBlock" class="boton">
             <button (click)="goEditProfile()">Edit</button>
         </div>
-        <ng-template #elseBlock class="boton">
-            <button (click)="follow()">Follow</button>
+        <ng-template #elseBlock>
+            <div class="boton">
+                <button (click)="follow()">Follow</button>
+            </div>
         </ng-template>
     </mat-card-content>
 </mat-card>

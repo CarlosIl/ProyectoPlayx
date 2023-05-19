@@ -24,6 +24,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { SearchComponent } from './search/search.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SearchComponent } from './search/search.component';
     ProfileComponent,
     CreatePostComponent,
     UserCardComponent,
-    SearchComponent
+    SearchComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -72,6 +72,7 @@ Route::middleware('auth:api')->group( function(){
     Route::get('/user/{username}', [AuthController::class, 'getUserInfo']);
     Route::get('/users', [AuthController::class, 'getAllUsers']);
     Route::get('/profile/{username}', [AuthController::class, 'getProfilePicture']);
+    Route::post('/user', [AuthController::class, 'changeUser']);
 
     //FollowController
     Route::get('/follow/{id}', [FollowController::class, 'store']);
