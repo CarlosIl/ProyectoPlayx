@@ -26,10 +26,6 @@ export class AuthService {
     return this.http.post(this.url+`/api/register`, data, this.httpOptions1);
   }
 
-  sendProfilePicture(data: any){
-    return this.http.post(this.url+`/api/register`, data, this.httpOptions2);
-  }
-
   sendLogin(data: any){
     return this.http.post(this.url+`/api/login`, data, this.httpOptions1);
   }

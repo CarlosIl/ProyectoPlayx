@@ -36,7 +36,27 @@
                     </div>
                 </div>
                 <div class="grid1">
-                    <button type="submit">Change</button>
+                    <button class="buttonOk" type="submit">Change</button>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="tab">
+    <mat-card>
+        <mat-card-content>Edit profile picture</mat-card-content>
+    </mat-card>
+</div>
+<div class="profile_picture">
+    <mat-card class="example-card">
+        <mat-card-content>
+            <form (ngSubmit)="submitProfilePicture()" [formGroup]="formProfilePicture">
+                <div class="grid1">
+                    <div class="div_label_file">
+                        <label role="button" type="button" for="file" class="label_file">Choose files</label>
+                    </div>
+                    <input id="file" type="file" (change)="fileEvent($event)" class="form-control" formControlName="profile_picture">
+                    <button class="buttonOk" type="submit">Change</button>
                 </div>
             </form>
         </mat-card-content>

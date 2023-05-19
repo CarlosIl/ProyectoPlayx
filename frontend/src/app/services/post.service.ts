@@ -17,9 +17,7 @@ export class PostService {
 
   httpOptions2 = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + this.authService.getToken(),
-      'enctype': 'multipart/form-data',
     })
   }
 
@@ -48,6 +46,10 @@ export class PostService {
   changeUser(data: any) {
     return this.http.post(this.url + `/api/user`, data, this.httpOptions);
   }
+  
+  sendProfilePicture(data: any){
+    return this.http.post(this.url+`/api/profile_picture`, data, this.httpOptions2);
+  }
 
   logOut() {
     sessionStorage.removeItem('tokenAPI');
@@ -62,25 +64,6 @@ export class PostService {
     return this.http.get(this.url + `/api/post/descargar/` + post_id, this.httpOptions);
   }
 
-  // sendPost(data: any, filedata: any) {
-  //   let myFormData = new FormData();
-  //   myFormData.append("post", data.post);
-  //   myFormData.append("post_file", filedata);
-
-  //   var request = new XMLHttpRequest();
-  //   request.open("POST", this.url+`/api/posts`);
-  //   request.send(myFormData);
-
-  // let array = [
-  //   {
-  //     "post": post,
-  //   }
-  // ];
-  // console.log(array[0]);
-  // return this.http.post(this.url+`/api/posts`, array[0], this.httpOptions);
-  // let post_id = response;
-  // console.log(post_id);
-  // return this.http.post(this.url+`/api/posts/image/`+post_id, myFormData, this.httpOptions2);
   sendPost(data: any) {
     return this.http.post(this.url + `/api/posts`, data, this.httpOptions);
   }

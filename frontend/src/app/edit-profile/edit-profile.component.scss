@@ -9,20 +9,21 @@
     }
 }
 
+.grid1 {
+    margin: auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: auto;
+}
+
 .user_profile {
     @include contentFont(16px);
 
     padding-top: 15px;
+    padding-bottom: 15px;
 
     mat-card{
         background-color: $primaryColor;
-    }
-
-    .grid1 {
-        margin: auto;
-        width: 80%;
-        display: grid;
-        grid-template-columns: auto;
     }
 
     .grid2 {
@@ -53,16 +54,66 @@
         text-align: center;
     }
 
-    button{
+    .div_label_file{
         margin: auto;
-        width: 60%;
-        background-color: $secondaryColor;
-        height: 40px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        @include titleFont(20px);
-        border: none;
+        text-align: center;
+        width: 30%;
+        // height: 25px;
+        // padding-top: 5px;
+        background-color: $secondaryDarkColor;
         border-radius: 15px;
-        cursor: pointer;
+        .label_file{
+            @include contentFont(16px);
+            cursor: pointer;
+        }
     }
+
+    input[type="file"] {
+        display: none;
+    }
+}
+
+.profile_picture{
+    @include contentFont(16px);
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    mat-card{
+        background-color: $primaryColor;
+    }
+
+    .div_label_file{
+        margin: auto;
+        text-align: center;
+        width: 30%;
+        // height: 25px;
+        // padding-top: 5px;
+        background-color: $secondaryDarkColor;
+        border-radius: 15px;
+        .label_file{
+            @include contentFont(16px);
+            cursor: pointer;
+        }
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+}
+
+.buttonOk{
+    background-color: $secondaryColor;
+}
+
+button{
+    margin: auto;
+    width: 60%;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include titleFont(20px);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
 }

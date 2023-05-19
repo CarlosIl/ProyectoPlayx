@@ -16,6 +16,9 @@ export class EditProfileComponent {
   lastName!: string;
   email!: string;
 
+  formProfilePicture!: FormGroup;
+  filedata: any;
+
   constructor(private postService: PostService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -26,6 +29,10 @@ export class EditProfileComponent {
       email: ['', [Validators.nullValidator, Validators.email]],
       password: ['', [Validators.nullValidator, Validators.minLength(8)]],
       c_password: ['', [Validators.nullValidator, Validators.minLength(8)]]
+    })
+
+    this.formProfilePicture = this.fb.group({
+      profile_picture: ['', [Validators.required]]
     })
 
     this.postService.getMyUser().subscribe((datos: any) => {
@@ -59,6 +66,26 @@ export class EditProfileComponent {
 
     this.postService.changeUser(this.formUserProfile.value)
     .subscribe((datos: any) => {
+      if (datos['success'] == true) {
+        window.location.reload();
+      } else {
+        return console.log(datos);
+      }
+    });
+  }
+
+  fileEvent(e: any) {
+    this.filedata = e.target.files[0];
+  }
+
+  submitProfilePicture(){
+    if (this.formProfilePicture.invalid) {
+      return console.log(this.formProfilePicture.invalid);
+    }
+
+    let formData = new FormData();
+    formData.append("profile_picture", this.filedata, this.filedata.name);
+    this.postService.sendProfilePicture(formData).subscribe((datos:any) => {
       if (datos['success'] == true) {
         window.location.reload();
       } else {
