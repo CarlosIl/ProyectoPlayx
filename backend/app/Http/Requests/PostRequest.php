@@ -23,8 +23,8 @@ class PostRequest extends FormRequest
     {
         return [
             // 'user_id' => 'required',
-            'post' => 'required',
-            'post_file' => 'nullable|file'
+            'post' => 'nullable',
+            'post_file' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg'
         ];
     }
 }

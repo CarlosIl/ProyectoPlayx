@@ -18,6 +18,7 @@ export class EditProfileComponent {
 
   formProfilePicture!: FormGroup;
   filedata: any;
+  imagePreview!: string;
 
   constructor(private postService: PostService, private fb: FormBuilder) { }
 
@@ -76,6 +77,13 @@ export class EditProfileComponent {
 
   fileEvent(e: any) {
     this.filedata = e.target.files[0];
+    if (this.filedata.type.includes('image/')) {
+      let reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;
+      }
+      reader.readAsDataURL(this.filedata);
+    }
   }
 
   submitProfilePicture(){

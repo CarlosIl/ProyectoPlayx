@@ -55,7 +55,8 @@
                     <div class="div_label_file">
                         <label role="button" type="button" for="file" class="label_file">Choose files</label>
                     </div>
-                    <input id="file" type="file" (change)="fileEvent($event)" class="form-control" formControlName="profile_picture">
+                    <input id="file" accept="image/*" type="file" (change)="fileEvent($event)" class="form-control" formControlName="profile_picture">
+                    <img id="img" *ngIf="imagePreview && imagePreview !== ''" [src]="imagePreview">
                     <button class="buttonOk" type="submit">Change</button>
                 </div>
             </form>

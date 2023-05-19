@@ -14,12 +14,6 @@ export class AuthService {
     })
   }
 
-  httpOptions2 = {
-    headers : new HttpHeaders({
-      'Content-Type':'multipart/form-data'
-    })
-  }
-
   constructor(private http: HttpClient) { }
 
   sendRegister(data: any){

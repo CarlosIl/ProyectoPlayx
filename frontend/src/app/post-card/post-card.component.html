@@ -10,6 +10,8 @@
     <p>
       {{post}}
     </p>
-    <img mat-card-image id="post_image" *ngIf="file_name!=null" [src]="image">
+    <div class="div_post_image">
+      <img mat-card-image id="post_image" *ngIf="file_name!=null" [src]="image">
+    </div>
   </mat-card-content>
 </mat-card>

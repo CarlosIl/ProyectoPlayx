@@ -65,7 +65,7 @@ export class PostService {
   }
 
   sendPost(data: any) {
-    return this.http.post(this.url + `/api/posts`, data, this.httpOptions);
+    return this.http.post(this.url + `/api/posts`, data, this.httpOptions2);
   }
 
   getPostsX(username:any){

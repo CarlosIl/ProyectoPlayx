@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign("user_id")->references('id')->on('users');
-            $table->text('post');
+            $table->text('post')->nullable();
             $table->text('file_name')->nullable();
             $table->timestamps();
         });
