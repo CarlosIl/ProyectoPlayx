@@ -142,7 +142,7 @@ class AuthController extends Controller
     public function getUserInfo(string $username)
     {
         $MyId = Auth::user()->id;
-        $userStd = DB::select("SELECT users.profile_picture, users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings, (SELECT COUNT(*) FROM `follows` WHERE source_id = ?) AS user_follow FROM `users` WHERE username = ?", [$MyId, $username]);
+        $userStd = DB::select("SELECT users.profile_picture, users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings, (SELECT COUNT(*) FROM `follows` WHERE source_id = ? AND target_id = users.id) AS user_follow FROM `users` WHERE username = ?", [$MyId, $username]);
         return $user = json_decode(json_encode($userStd), true);
     }
 

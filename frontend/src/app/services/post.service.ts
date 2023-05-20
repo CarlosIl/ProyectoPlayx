@@ -87,4 +87,12 @@ export class PostService {
   unfollow(username:string) {
     return this.http.get(this.url + `/api/unfollow/` + username, this.httpOptions);
   }
+
+  getPostsFollows(){
+    return this.http.get(this.url + `/api/posts/follows/`, this.httpOptions);
+  }
+
+  reloadPostsFollows(last_post_id: any){
+    return this.http.get(this.url + `/api/posts/follows/` + last_post_id, this.httpOptions);
+  }
 }

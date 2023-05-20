@@ -96,8 +96,7 @@ export class EditProfileComponent {
     formData.append("profile_picture", this.filedata, this.filedata.name);
     this.postService.sendProfilePicture(formData).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-        this.router.navigate(['/edit_profile']));
+        window.location.reload();
       } else {
         return console.log(datos);
       }

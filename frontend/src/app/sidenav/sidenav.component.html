@@ -1,7 +1,11 @@
 <div class="enlaces">
     <a routerLink="home" routerLinkActive="active-link"><span class="material-symbols-outlined">home</span>   Home</a>
-    <a routerLink="notifications" routerLinkActive="active-link"><span class="material-symbols-outlined">notifications</span>  Notifications</a>
-    <a routerLink="profile" routerLinkActive="active-link"><span class="material-symbols-outlined">visibility</span>    See Profile</a>
-    <a routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">edit</span>    Edit Profile</a>
-    <a (click)="logOut()"><span class="material-symbols-outlined">logout</span>    Log out</a>
+    <a routerLink="follows" routerLinkActive="active-link"><span class="material-symbols-outlined">group</span>    Followings</a>
+    <a routerLinkActive="active-link" [matMenuTriggerFor]="menu"><span class="material-symbols-outlined">notifications</span>  Notifications</a>
+    <mat-menu #menu xPosition="after">
+        <button mat-menu-item>Item 1</button>
+        <button mat-menu-item>Item 2</button>
+    </mat-menu>
+    <a routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">edit_note</span>    Edit Profile</a>
+    <a routerLinkActive="active-link" (click)="logOut()"><span class="material-symbols-outlined">logout</span>    Log out</a>
 </div>

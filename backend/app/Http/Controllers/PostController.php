@@ -60,7 +60,24 @@ class PostController extends Controller
 
     public function getPostsFollows()
     {
-        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 7");
+        $user_id = Auth::user()->id;
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id JOIN follows on users.id = follows.target_id WHERE follows.source_id = ? ORDER BY posts.created_at DESC LIMIT 7",[$user_id]);
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+            $profile_picture = $posts[$i]["profile_picture"];
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }
+        }
+        return $posts;
+    }
+
+    public function reloadPostsFollows(string $id)
+    {
+        $user_id = Auth::user()->id;
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id JOIN follows on users.id = follows.target_id WHERE follows.source_id = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 7",[$user_id,$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
             $profile_picture = $posts[$i]["profile_picture"];

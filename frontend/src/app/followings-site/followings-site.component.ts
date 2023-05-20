@@ -14,7 +14,7 @@ export class FollowingsSiteComponent {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    this.postService.retrievePosts().subscribe((posts: any) => {
+    this.postService.getPostsFollows().subscribe((posts: any) => {
       if(posts.length<=1){
         console.log("no hay más posts");
       }
@@ -27,7 +27,7 @@ export class FollowingsSiteComponent {
     if(this.last_post_id == 1){
       return console.log("No se puede avanzar más");
     }else{
-      this.postService.reloadPosts(this.last_post_id).subscribe((posts: any) => {
+      this.postService.reloadPostsFollows(this.last_post_id).subscribe((posts: any) => {
         for (let index = 0; index < posts.length; index++) {
           this.posts.push(posts[index]);
         }

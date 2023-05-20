@@ -35,7 +35,6 @@ export class ProfileComponent {
 
     this.postService.getOtherUser(this.username).subscribe((datos:any) => {
       this.user = datos[0];
-      console.log(this.user);
       if(!this.user){
         console.log("El usuario no existe");
       }else{
