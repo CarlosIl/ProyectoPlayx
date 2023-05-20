@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class FollowController extends Controller
 {
-    public function store(int $id)
+    public function store(string $username)
     {
-        $new_follow = User::find($id);
+        $new_follow = User::where('username', $username)->get();
         $user = Auth::user();
 
-        if($id == $user->id){
+        if($username == $user->username){
             return response()->json([
                 "message" => "No puedes seguirte a ti mismo",
             ], 404);
@@ -24,7 +24,7 @@ class FollowController extends Controller
 
         $follow = new Follow();
         $follow->source_id = $user->id;
-        $follow->target_id = $id;
+        $follow->target_id = $new_follow[0]["id"];
         $follow->save();
 
         // $mailData = [
@@ -36,28 +36,30 @@ class FollowController extends Controller
         // ];
         // (new NotificationController)->sendMail($mailData);
 
-        $noti = new Notification();
-        $noti->user_id = $id;
-        $noti->message = "$user->username ha empezado ha seguirte";
-        $noti->save();
+        // $noti = new Notification();
+        // $noti->user_id = $id;
+        // $noti->message = "$user->username ha empezado ha seguirte";
+        // $noti->save();
 
         return response()->json([
-            "message" => "$user->username ha empezado ha seguir a $new_follow->username",
+            "success" => true,
+            "message" => "$user->username ha empezado ha seguir a $username]",
             "follow" => $follow,
         ], 200);
     }
 
-    public function destroy(int $id)
+    public function destroy(string $username)
     {
-        $old_follow = User::find($id);
+        $old_follow = User::where('username', $username)->get();
         $user = Auth::user();
 
         // $response = DB::statement('DELETE FROM follows WHERE source_id = ? AND target_id = ?',[$user->id, $id]);
 
-        Follow::where('source_id', $user->id)->where('target_id', $id)->delete();
+        Follow::where('source_id', $user->id)->where('target_id', $old_follow[0]["id"])->delete();
 
         return response()->json([
-            "message" => "$user->username ha dejado de seguir a $old_follow->username",
+            "success" => true,
+            "message" => "$user->username ha dejado de seguir a $username",
         ], 200);
     }
 

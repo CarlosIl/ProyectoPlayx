@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users_verify', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->foreign("user_id")->references('id')->on('users');
+            $table->foreign("user_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('token');
             $table->timestamp('created_at');
             $table->timestamp('expires_at')->nullable();

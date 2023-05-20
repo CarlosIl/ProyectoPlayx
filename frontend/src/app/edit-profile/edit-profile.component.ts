@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
 import { PostService } from '../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -20,7 +21,7 @@ export class EditProfileComponent {
   filedata: any;
   imagePreview!: string;
 
-  constructor(private postService: PostService, private fb: FormBuilder) { }
+  constructor(private postService: PostService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit() {
     this.formUserProfile = this.fb.group({
@@ -95,10 +96,22 @@ export class EditProfileComponent {
     formData.append("profile_picture", this.filedata, this.filedata.name);
     this.postService.sendProfilePicture(formData).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        window.location.reload();
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/edit_profile']));
       } else {
         return console.log(datos);
       }
     });
+  }
+
+  deleteUser(){
+    this.postService.deleteUser().subscribe((datos:any) => {
+      if (datos['success'] == true) {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/login']));
+      } else {
+        return console.log(datos);
+      }
+    })
   }
 }

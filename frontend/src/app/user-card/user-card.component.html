@@ -25,12 +25,17 @@
             </div>
         </div>
         <div *ngIf="MyUser; else elseBlock" class="boton">
-            <button (click)="goEditProfile()">Edit</button>
+            <button class="buttonOk" (click)="goEditProfile()">Edit</button>
         </div>
         <ng-template #elseBlock>
-            <div class="boton">
-                <button (click)="follow()">Follow</button>
+            <div *ngIf="Following == '0'; else elseBlock2" class="boton">
+                <button class="buttonOk" (click)="follow()">Follow</button>
             </div>
+            <ng-template #elseBlock2>
+                <div class="boton">
+                    <button class="buttonError" (click)="unfollow()">Unfollow</button>
+                </div>
+            </ng-template>
         </ng-template>
     </mat-card-content>
 </mat-card>

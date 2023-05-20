@@ -51,6 +51,10 @@ export class PostService {
     return this.http.post(this.url+`/api/profile_picture`, data, this.httpOptions2);
   }
 
+  deleteUser(){
+    return this.http.delete(this.url+`/api/user`, this.httpOptions);
+  }
+
   logOut() {
     sessionStorage.removeItem('tokenAPI');
     return this.http.get(this.url + `/api/logout`, this.httpOptions);
@@ -74,5 +78,13 @@ export class PostService {
 
   reloadPostsX(username:any, last_post_id: any){
     return this.http.get(this.url + `/api/posts/profile/` + username + `/` + last_post_id, this.httpOptions);
+  }
+
+  follow(username:string) {
+    return this.http.get(this.url + `/api/follow/` + username, this.httpOptions);
+  }
+
+  unfollow(username:string) {
+    return this.http.get(this.url + `/api/unfollow/` + username, this.httpOptions);
   }
 }

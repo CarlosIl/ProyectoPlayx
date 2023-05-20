@@ -141,7 +141,8 @@ class AuthController extends Controller
 
     public function getUserInfo(string $username)
     {
-        $userStd = DB::select("SELECT users.profile_picture, users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings FROM `users` WHERE username = ?", [$username]);
+        $MyId = Auth::user()->id;
+        $userStd = DB::select("SELECT users.profile_picture, users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings, (SELECT COUNT(*) FROM `follows` WHERE source_id = ?) AS user_follow FROM `users` WHERE username = ?", [$MyId, $username]);
         return $user = json_decode(json_encode($userStd), true);
     }
 
@@ -232,6 +233,24 @@ class AuthController extends Controller
         return response()->json([
             "success" => true,
             "user" => $user,
+        ], 200);
+    }
+
+    public function deleteUser() {
+        $user_id = Auth::user()->id;
+        $user = User::find($user_id);
+
+        Storage::disk("public")->deleteDirectory("$user->email");
+
+        Session::flush();
+
+        Auth::user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        $user->delete();
+        return response()->json([
+            "success" => true,
         ], 200);
     }
 }

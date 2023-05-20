@@ -1,0 +1,15 @@
+<div [alwaysCallback]="true" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" infinite-scroll (scrolled)="reloadPosts()" class="tab">
+    <mat-card>
+        <mat-card-content>Followings content</mat-card-content>
+    </mat-card>
+</div>
+<div *ngFor="let possit of posts" class="post_card">
+    <app-post-card [id]="possit.id" [username]="possit.username" [profile_picture]="possit.profile_picture"
+        [post]="possit.post" [file_name]="possit.file_name" [created_at]="possit.created_at"></app-post-card>
+</div>
+<!-- <div>
+    <button (click)="reloadPosts()">Show more</button>
+</div> -->
+<div class="create_post">
+    <app-create-post></app-create-post>
+</div>

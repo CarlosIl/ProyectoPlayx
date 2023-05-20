@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('follows', function (Blueprint $table) {
             $table->unsignedBigInteger('source_id');
-            $table->foreign("source_id")->references('id')->on('users');
+            $table->foreign("source_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('target_id');
-            $table->foreign("target_id")->references('id')->on('users');
+            $table->foreign("target_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamp('created_at');
         });
     }

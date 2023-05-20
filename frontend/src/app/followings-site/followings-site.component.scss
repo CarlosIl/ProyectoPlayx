@@ -1,0 +1,21 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+.tab {
+    @include contentFont(25px);
+
+    mat-card-content {
+        background-color: $secondaryColor;
+    }
+}
+
+.post_card {
+    padding-top: 15px;
+}
+
+.create_post {
+    width: 25%;
+    position: fixed;
+    left: 75%;
+    top: 45%;
+}

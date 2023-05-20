@@ -25,6 +25,7 @@ import { CreatePostComponent } from './create-post/create-post.component';
 import { UserCardComponent } from './user-card/user-card.component';
 import { SearchComponent } from './search/search.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FollowingsSiteComponent } from './followings-site/followings-site.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
     CreatePostComponent,
     UserCardComponent,
     SearchComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FollowingsSiteComponent
   ],
   imports: [
     BrowserModule,

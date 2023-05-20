@@ -106,6 +106,10 @@
     background-color: $secondaryColor;
 }
 
+.buttonDelete{
+    background-color: $errorColor;
+}
+
 button{
     margin: auto;
     width: 60%;

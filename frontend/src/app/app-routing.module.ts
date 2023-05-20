@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { FollowingsSiteComponent } from './followings-site/followings-site.component';
 
 const routes: Routes = [
   // {
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'follows', component:FollowingsSiteComponent},
   { path: 'profile/:username', component: ProfileComponent },
   { path: 'edit_profile', component:EditProfileComponent},
   { path: 'search', component: SearchComponent },

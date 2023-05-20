@@ -44,7 +44,7 @@ export class CreatePostComponent {
 
     let formData = new FormData();
     formData.append("post", this.formPost.value.post);
-    if(this.filedata == ""){
+    if(this.filedata != ""){
       formData.append("post_file", this.filedata, this.filedata.name);
     }
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
