@@ -36,11 +36,11 @@ class FollowController extends Controller
         // ];
         // (new NotificationController)->sendMail($mailData);
 
-        $noti = new Notification();
-        $noti->user_id = $new_follow[0]["id"];
-        $noti->message = "$user->username ha empezado ha seguirte";
-        $noti->status = 0;
-        $noti->save();
+        // $noti = new Notification();
+        // $noti->user_id = $new_follow[0]["id"];
+        // $noti->message = "$user->username ha empezado ha seguirte";
+        // $noti->status = 0;
+        // $noti->save();
 
         return response()->json([
             "success" => true,

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PostService } from '../services/post.service';
 
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -9,7 +11,7 @@ import { PostService } from '../services/post.service';
 })
 export class ProfileComponent {
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService) { }
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private _snackBar: MatSnackBar) { }
   // Parámetro recogido de la ruta
   username!:string;
   // Para user-card
@@ -19,6 +21,8 @@ export class ProfileComponent {
   posts!: any;
   last_post_id!: number;
   MyUser!:boolean;
+
+  final:boolean = false;
 
   ngOnInit(){
     this.activatedRoute.paramMap.subscribe((parametro: ParamMap) => {
@@ -36,7 +40,9 @@ export class ProfileComponent {
     this.postService.getOtherUser(this.username).subscribe((datos:any) => {
       this.user = datos[0];
       if(!this.user){
-        console.log("El usuario no existe");
+        this._snackBar.open("El usuario no existe", "OK", {
+          panelClass: ['red-snackbar']
+        });
       }else{
         if (this.user["profile_picture"] == null) {
           this.profile_picture = "../../assets/imgs/profile.jpg"
@@ -62,7 +68,12 @@ export class ProfileComponent {
         for (let index = 0; index < posts.length; index++) {
           this.posts.push(posts[index]);
         }
-        this.last_post_id = posts[posts.length-1]["id"];
+
+        if (posts.length == 0) {
+          this.final = true;
+        } else {
+          this.last_post_id = posts[posts.length - 1]["id"];
+        }
       })
     }
   }

@@ -11,6 +11,8 @@ export class FollowingsSiteComponent {
   last_post_id!: any;
   array_profile_pictures!:any ;
 
+  final:boolean = false;
+
   constructor(private postService: PostService) { }
 
   ngOnInit() {
@@ -31,10 +33,13 @@ export class FollowingsSiteComponent {
         for (let index = 0; index < posts.length; index++) {
           this.posts.push(posts[index]);
         }
-        if(posts.length<=1){
-          console.log("no hay más posts");
+        
+        if (posts.length == 0) {
+          this.final = true;
+          // console.log("No hay más posts")
+        } else {
+          this.last_post_id = posts[posts.length - 1]["id"];
         }
-        this.last_post_id = posts[posts.length-1]["id"];
       })
     }
   }
