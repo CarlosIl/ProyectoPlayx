@@ -53,7 +53,7 @@ export class CreatePostComponent {
         if (datos['message'] == "Post creado") {
           window.location.reload();
         } else {
-          return console.log(datos);
+          console.log(datos);
         }
       });
   }

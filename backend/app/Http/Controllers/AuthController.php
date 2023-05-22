@@ -206,6 +206,14 @@ class AuthController extends Controller
         if ($request->password != null && $request->c_password != null) {
             $user->password = $request->password;
         }
+        // if($user->profile_picture!=null){ 
+        //     $path = $user->email; 
+        //     $file_name = time() . '_' . request()->profile_picture->getClientOriginalName(); 
+        //     Storage::disk('public')->put("$path/$file_name", fopen($request->file('profile_picture'), 'r+')); 
+        //     Storage::disk("public")->delete("$path/$user->profile_picture"); 
+        //     $user->profile_picture = $file_name; 
+        // } 
+        
         $user->save();
 
         return response()->json([

@@ -12,16 +12,20 @@ export class FollowingsSiteComponent {
   array_profile_pictures!:any ;
 
   final:boolean = false;
+  nada:boolean = false;
+  message!:string;
 
   constructor(private postService: PostService) { }
 
   ngOnInit() {
     this.postService.getPostsFollows().subscribe((posts: any) => {
-      if(posts.length<=1){
-        console.log("no hay más posts");
+      if(posts.length==0){
+        this.nada = true;
+        this.message = "You didn´t follow any users yet";
+      }else{
+        this.last_post_id = posts[posts.length-1]["id"];
+        this.posts = posts;
       }
-      this.last_post_id = posts[posts.length-1]["id"];
-      this.posts = posts;
     })
   }
 

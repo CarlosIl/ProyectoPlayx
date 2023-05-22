@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 //Para buscador
 import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface User {
   profile_picture: string;
@@ -26,16 +27,8 @@ export class NavbarComponent {
   search_value!: string;
 
 
-  constructor(private postService: PostService, private router: Router) {
-    //Para buscador
-    this.postService.getAllUsers().subscribe((users: any) => {
-      for (let i = 0; i < users.length; i++) {
-        if (users[i]["profile_picture"] == null) {
-          users[i]["profile_picture"] = "../../assets/imgs/profile.jpg"
-        }
-        this.users.push(users[i]);
-      }
-    })
+  constructor(private postService: PostService, private router: Router, private snackBar: MatSnackBar) {
+
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -51,7 +44,7 @@ export class NavbarComponent {
   //Para buscador
   goToProfile() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    this.router.navigate(['/profile/' + this.search_value]));
+      this.router.navigate(['/profile/' + this.search_value]));
   }
 
   ngOnInit() {
@@ -65,6 +58,29 @@ export class NavbarComponent {
         this.postService.getProfilePicture(this.username).subscribe((baseImage: any) => {
           this.profile = baseImage.url;
         })
+      }
+
+      //Para buscador
+      this.postService.getAllUsers().subscribe((users: any) => {
+        for (let i = 0; i < users.length; i++) {
+          if (users[i]["profile_picture"] == null) {
+            users[i]["profile_picture"] = "../../assets/imgs/profile.jpg"
+          }
+          this.users.push(users[i]);
+        }
+      })
+
+    }, (err) => {
+      if (err.statusText == "Unknown Error") {
+        this.snackBar.open("ERROR: No se puede conectar con el servidor", "OK", {
+          duration: 10000,
+          panelClass: 'app-notification-error'
+        });
+      } else if (err.statusText == "Internal Server Error") {
+        this.snackBar.open("ERROR: No se puede conectar con la base de datos", "OK", {
+          duration: 10000,
+          panelClass: 'app-notification-error'
+        });
       }
     })
   }

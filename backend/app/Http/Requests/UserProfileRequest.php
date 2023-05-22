@@ -28,6 +28,7 @@ class UserProfileRequest extends FormRequest
             'email' => 'nullable|unique:users,email',
             'password' => 'nullable|min:8',
             'c_password' => 'nullable|same:password',
+            // 'profile_picture' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg',
         ];
     }
 }

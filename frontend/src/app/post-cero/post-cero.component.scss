@@ -1,0 +1,18 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+mat-card {
+    @include contentFont(25px);
+
+    mat-card-content {
+        background-color: $primaryColor;
+    }
+
+    button{
+        @include titleFont(20px);
+        background-color: $secondaryColor;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+}
