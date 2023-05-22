@@ -14,17 +14,17 @@ export class SidenavComponent {
 
   final:boolean = false;
 
-  ngOnInit(){
+  getNotifications(){
     this.postService.getNotifications().subscribe((notifications: any) => {
       this.last_post_id = notifications[notifications.length - 1]["id"];
       this.notifications = notifications;
     });
-
   }
   
   reloadNotifications() {
-    if (this.last_post_id == 0) {
-      return console.log("No se puede avanzar más");
+    if (this.last_post_id == 1) {
+      this.final = true;
+      // return console.log("No se puede avanzar más");
     } else {
       this.postService.reloadNotifications(this.last_post_id).subscribe((posts: any) => {
         for (let index = 0; index < posts.length; index++) {
@@ -46,8 +46,14 @@ export class SidenavComponent {
     this.router.navigate(['/login']);
   }
 
-  redirect(username:string){
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-    this.router.navigate(['/profile/'+username]));
+  seeing_redirect(username:string, id:number){
+    this.postService.seeingNofitication(id).subscribe((datos:any) => {
+      if (datos['success'] == true) {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/profile/'+username]));
+      } else {
+        return console.log(datos);
+      }
+    })
   }
 }

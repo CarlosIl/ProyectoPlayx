@@ -1,6 +1,6 @@
 <!-- <button (click)="redirect()"> -->
   <mat-card class="example-card">
-    <mat-card-header>
+    <mat-card-header [ngClass]="{'notSaw':noti.status==0,'saw':noti.status==1}">
       <div mat-card-avatar>
         <img id="user_profile" [src]="noti.profile_picture">
       </div>
