@@ -28,6 +28,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FollowingsSiteComponent } from './followings-site/followings-site.component';
 import { PostFinalComponent } from './post-final/post-final.component';
 import { PostCeroComponent } from './post-cero/post-cero.component';
+import { NotificationCardComponent } from './notification-card/notification-card.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { PostCeroComponent } from './post-cero/post-cero.component';
     EditProfileComponent,
     FollowingsSiteComponent,
     PostFinalComponent,
-    PostCeroComponent
+    PostCeroComponent,
+    NotificationCardComponent
   ],
   imports: [
     BrowserModule,

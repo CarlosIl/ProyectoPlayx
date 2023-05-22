@@ -1,11 +1,15 @@
 <div class="enlaces">
-    <a routerLink="home" routerLinkActive="active-link"><span class="material-symbols-outlined">home</span>   Home</a>
-    <a routerLink="follows" routerLinkActive="active-link"><span class="material-symbols-outlined">group</span>    Followings</a>
-    <a routerLinkActive="active-link" [matMenuTriggerFor]="menu"><span class="material-symbols-outlined">notifications</span>  Notifications</a>
-    <mat-menu #menu xPosition="after">
-        <button mat-menu-item>Item 1</button>
-        <button mat-menu-item>Item 2</button>
+    <a routerLink="home" routerLinkActive="active-link"><span class="material-symbols-outlined">home</span> Home</a>
+    <a routerLink="follows" routerLinkActive="active-link"><span class="material-symbols-outlined">group</span> Followings</a>
+    <a routerLinkActive="active-link" [matMenuTriggerFor]="menu"><span class="material-symbols-outlined">notifications</span> Notifications</a>
+    <mat-menu class="x" #menu xPosition="after">
+        <div class="notifications" *ngFor="let noti of notifications">
+            <button (click)="redirect(noti.username)" mat-menu-item>
+                <app-notification-card [noti]="noti"></app-notification-card>
+            </button>
+        </div>
+        <button class="reload" *ngIf="final == false" (click)="reloadNotifications()">See more</button>
     </mat-menu>
-    <a routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">edit_note</span>    Edit Profile</a>
-    <a routerLinkActive="active-link" (click)="logOut()"><span class="material-symbols-outlined">logout</span>    Log out</a>
+    <a routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">edit_note</span> Edit Profile</a>
+    <a routerLinkActive="active-link" (click)="logOut()"><span class="material-symbols-outlined">logout</span> Log out</a>
 </div>

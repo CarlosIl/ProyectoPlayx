@@ -95,4 +95,12 @@ export class PostService {
   reloadPostsFollows(last_post_id: any){
     return this.http.get(this.url + `/api/posts/follows/` + last_post_id, this.httpOptions);
   }
+
+  getNotifications(){
+    return this.http.get(this.url + `/api/notifications/`, this.httpOptions);
+  }
+
+  reloadNotifications(last_post_id: any) {
+    return this.http.get(this.url + `/api/notifications/` + last_post_id, this.httpOptions);
+  }
 }

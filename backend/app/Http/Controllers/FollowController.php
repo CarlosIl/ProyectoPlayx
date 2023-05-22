@@ -36,11 +36,12 @@ class FollowController extends Controller
         // ];
         // (new NotificationController)->sendMail($mailData);
 
-        // $noti = new Notification();
-        // $noti->user_id = $new_follow[0]["id"];
-        // $noti->message = "$user->username ha empezado ha seguirte";
-        // $noti->status = 0;
-        // $noti->save();
+        $noti = new Notification();
+        $noti->source_id = $user->id;
+        $noti->target_id = $new_follow[0]["id"];
+        $noti->message = "$user->username ha empezado ha seguirte";
+        $noti->status = 0;
+        $noti->save();
 
         return response()->json([
             "success" => true,
@@ -57,6 +58,13 @@ class FollowController extends Controller
         // $response = DB::statement('DELETE FROM follows WHERE source_id = ? AND target_id = ?',[$user->id, $id]);
 
         Follow::where('source_id', $user->id)->where('target_id', $old_follow[0]["id"])->delete();
+
+        $noti = new Notification();
+        $noti->source_id = $user->id;
+        $noti->target_id = $old_follow[0]["id"];
+        $noti->message = "$user->username ha dejado de seguirte";
+        $noti->status = 0;
+        $noti->save();
 
         return response()->json([
             "success" => true,

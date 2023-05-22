@@ -9,7 +9,6 @@ import { PostService } from '../services/post.service';
 export class HomeComponent {
   posts!: any;
   last_post_id!: any;
-  array_profile_pictures!: any;
 
   final:boolean = false;
 

@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    //Para recoger todos los posts de cualquier usuario, incluido el propio.
     public function index()
     {
         $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 7");
@@ -46,6 +44,7 @@ class PostController extends Controller
         return $posts;
     }
 
+    //Para recoger los posts de un usuario en específico
     public function getPostsX(string $username)
     {
         $postsStd = DB::select("SELECT posts.id, users.username, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? ORDER BY posts.created_at DESC LIMIT 7",[$username]);
@@ -58,6 +57,7 @@ class PostController extends Controller
         return $posts = json_decode(json_encode($postsStd), true);
     }
 
+    //Para recoger los posts de los usuarios a los que siguen
     public function getPostsFollows()
     {
         $user_id = Auth::user()->id;

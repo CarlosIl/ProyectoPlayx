@@ -1,0 +1,30 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+mat-card{
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    mat-card-header{
+        border-radius: 5px;
+        background-color: $secondaryLigthColor;
+        mat-card-title{
+            @include contentFont(20px);
+        }
+        mat-card-subtitle{
+            color: black;
+            @include contentFont(16px);
+        }
+        button{
+            background-color: $errorColor;
+            color: #FFFFFF;
+            border-radius: 50%;
+        }
+    }
+}
+
+#user_profile{
+    width: 130%;
+    height: 130%;
+    border-radius: 50%;
+}

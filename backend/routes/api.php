@@ -80,11 +80,12 @@ Route::middleware('auth:api')->group( function(){
 
     //FollowController
     Route::get('/follow/{username}', [FollowController::class, 'store']);
-    Route::get('/unfollow/{id}', [FollowController::class, 'destroy']);
+    Route::get('/unfollow/{username}', [FollowController::class, 'destroy']);
     Route::get('/followings', [FollowController::class, 'show_followings']);
     Route::get('/followers', [FollowController::class, 'show_followers']);
 
     //NotificationController
     Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notifications/{id}', [NotificationController::class, 'reload']);
     Route::get('/notify/{id}', [NotificationController::class, 'saw']);
 });
