@@ -59,6 +59,7 @@ Route::middleware('auth:api')->group( function(){
     Route::get('/posts/profile/{username}/{id}', [PostController::class, 'reloadPostsX']);
     Route::get('/posts/follows', [PostController::class, 'getPostsFollows']);
     Route::get('/posts/follows/{id}', [PostController::class, 'reloadPostsFollows']);
+    Route::get('/comments/{id}', [PostController::class, 'getComments']);
 
     Route::post('/posts', [PostController::class, 'store']);
     Route::post('/posts/image/{id}', [PostController::class, 'storeImage']);

@@ -115,4 +115,8 @@ export class PostService {
   getPost(id: any){
     return this.http.get(this.url + `/api/post/` + id, this.httpOptions);
   }
+
+  getComments(id: any){
+    return this.http.get(this.url + `/api/comments/` + id, this.httpOptions);
+  }
 }

@@ -168,6 +168,31 @@ class PostController extends Controller
         return $posts;
     }
 
+    public function getComments(string $id)
+    {
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.comment_id=? ORDER BY posts.created_at DESC LIMIT 7",[$id]);
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
+            }
+        }
+        return $posts;
+    }
+
     /**
      * Show the form for creating a new resource.
      */

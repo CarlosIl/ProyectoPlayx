@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
 import { PostService } from '../services/post.service';
 
@@ -9,6 +9,7 @@ import { PostService } from '../services/post.service';
 })
 export class CreatePostComponent {
 
+  @Input() comment_id!:string;
   formPost!: FormGroup;
   filedata: any;
   imagePreview!: string;
@@ -43,6 +44,9 @@ export class CreatePostComponent {
     }
 
     let formData = new FormData();
+    if(this.comment_id!=undefined){
+      formData.append("comment_id", this.comment_id);
+    }
     formData.append("post", this.formPost.value.post);
     if(this.filedata != undefined){
       formData.append("post_file", this.filedata, this.filedata.name);

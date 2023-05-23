@@ -1,26 +1,19 @@
 <app-post-card [post]="this.post_content"></app-post-card>
 
-<div class="post">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <h2>Reply to this post</h2>
-        </mat-card-header>
-        <mat-card-content>
-            <form (ngSubmit)="submit()" [formGroup]="formPostComment">
-                <textarea placeholder="Write something here" class="form-control" formControlName="post"
-                    required></textarea>
-                <br><br>
-                <div class="div_label_file">
-                    <label role="button" type="button" for="file" class="label_file">Choose files</label>
-                </div>
-                <input id="file" accept="image/*" type="file" (change)="fileEvent($event)" class="form-control"
-                    formControlName="post_file">
-                <img id="post_file" *ngIf="imagePreview && imagePreview !== ''" [src]="imagePreview">
-                <br>
-                <div class="send_button">
-                    <button type="submit">Send</button>
-                </div>
-            </form>
-        </mat-card-content>
+<div class="tab">
+    <mat-card>
+        <mat-card-content>Comments</mat-card-content>
     </mat-card>
+</div>
+
+<div *ngFor="let comment of comments" class="post_card">
+    <app-post-card [post]="comment" [isComment]="true"></app-post-card>
+</div>
+
+<div *ngIf="nada" class="final">
+    <app-post-cero [message]="message"></app-post-cero>
+</div>
+
+<div class="create_post">
+    <app-create-post [comment_id]="this.id"></app-create-post>
 </div>
