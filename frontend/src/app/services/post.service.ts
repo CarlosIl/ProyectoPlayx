@@ -101,10 +101,18 @@ export class PostService {
   }
 
   reloadNotifications(last_post_id: any) {
-    return this.http.get(this.url + `/api/notifications/` + last_post_id, this.httpOptions);
+    return this.http.get(this.url + `/api/notifications/id/` + last_post_id, this.httpOptions);
   }
 
   seeingNofitication(id: any){
     return this.http.get(this.url + `/api/notify/` + id, this.httpOptions);
+  }
+
+  notSeenNotifications(){
+    return this.http.get(this.url + `/api/notifications/not_seen`, this.httpOptions);
+  }
+
+  getPost(id: any){
+    return this.http.get(this.url + `/api/post/` + id, this.httpOptions);
   }
 }

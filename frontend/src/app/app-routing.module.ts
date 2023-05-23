@@ -10,6 +10,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SearchComponent } from './search/search.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FollowingsSiteComponent } from './followings-site/followings-site.component';
+import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   // {
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'follows', component:FollowingsSiteComponent},
   { path: 'profile/:username', component: ProfileComponent },
   { path: 'edit_profile', component:EditProfileComponent},
+  { path: 'post/:id', component:PostComponent},
   { path: 'search', component: SearchComponent },
 ];
 

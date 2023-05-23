@@ -9,10 +9,19 @@ import { PostService } from '../services/post.service';
 })
 export class SidenavComponent {
   constructor(private postService: PostService, private router: Router) { }
+  not_seen!:number;
   notifications!: any;
   last_post_id!: any;
 
   final:boolean = false;
+
+  ngOnInit(){
+    this.postService.notSeenNotifications().subscribe((not_seen: any) => {
+      if(not_seen!=0){
+        this.not_seen = not_seen;
+      }
+    })
+  }
 
   getNotifications(){
     this.postService.getNotifications().subscribe((notifications: any) => {

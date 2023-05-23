@@ -43,8 +43,10 @@ export class NavbarComponent {
 
   //Para buscador
   goToProfile() {
+    let search = this.search_value;
+    this.search_value = "";
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/profile/' + this.search_value]));
+      this.router.navigate(['/profile/' + search]));
   }
 
   ngOnInit() {

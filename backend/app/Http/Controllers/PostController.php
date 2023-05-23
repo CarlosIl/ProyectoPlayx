@@ -19,11 +19,21 @@ class PostController extends Controller
         $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id ORDER BY posts.created_at DESC LIMIT 7");
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
-            $profile_picture = $posts[$i]["profile_picture"];
+
             $email = $posts[$i]["email"];
             unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
             if($profile_picture!=null){
                 $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
             }
         }
         return $posts;
@@ -34,11 +44,21 @@ class PostController extends Controller
         $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 2",[$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
-            $profile_picture = $posts[$i]["profile_picture"];
+
             $email = $posts[$i]["email"];
             unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
             if($profile_picture!=null){
                 $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
             }
         }
         return $posts;
@@ -47,14 +67,52 @@ class PostController extends Controller
     //Para recoger los posts de un usuario en específico
     public function getPostsX(string $username)
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? ORDER BY posts.created_at DESC LIMIT 7",[$username]);
-        return $posts = json_decode(json_encode($postsStd), true);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? ORDER BY posts.created_at DESC LIMIT 7",[$username]);
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
+            }
+        }
+        return $posts;
     }
 
     public function reloadPostsX(string $username, string $id)
     {
-        $postsStd = DB::select("SELECT posts.id, users.username, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$username,$id]);
-        return $posts = json_decode(json_encode($postsStd), true);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$username,$id]);
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
+            }
+        }
+        return $posts;
     }
 
     //Para recoger los posts de los usuarios a los que siguen
@@ -64,11 +122,21 @@ class PostController extends Controller
         $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id JOIN follows on users.id = follows.target_id WHERE follows.source_id = ? ORDER BY posts.created_at DESC LIMIT 7",[$user_id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
-            $profile_picture = $posts[$i]["profile_picture"];
+
             $email = $posts[$i]["email"];
             unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
             if($profile_picture!=null){
                 $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
             }
         }
         return $posts;
@@ -80,11 +148,21 @@ class PostController extends Controller
         $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id JOIN follows on users.id = follows.target_id WHERE follows.source_id = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 7",[$user_id,$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
-            $profile_picture = $posts[$i]["profile_picture"];
+
             $email = $posts[$i]["email"];
             unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
             if($profile_picture!=null){
                 $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
             }
         }
         return $posts;
@@ -154,16 +232,37 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        if ($post = Post::find($id)) {
-            return response()->json([
-                "message" => "El post se ha encontrado",
-                "post" => $post,
-            ], 202);
-        } else {
-            return response()->json([
-                "message" => "El post no ha sido encontrado"
-            ], 404);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id=?",[$id]);
+        $posts = json_decode(json_encode($postsStd), true);
+        for ($i=0; $i < count($posts); $i++) { 
+
+            $email = $posts[$i]["email"];
+            unset($posts[$i]["email"]);
+
+            $profile_picture = $posts[$i]["profile_picture"];
+            $file_name = $posts[$i]["file_name"];
+
+            if($profile_picture!=null){
+                $posts[$i]["profile_picture"] = asset("$email/$profile_picture");
+            }else{
+                $posts[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+            }
+
+            if($file_name != null){
+                $posts[$i]["file_name"] = asset("$email/$file_name");
+            }
         }
+        return $posts;
+        // if ($post = Post::find($id)) {
+        //     return response()->json([
+        //         "message" => "El post se ha encontrado",
+        //         "post" => $post,
+        //     ], 202);
+        // } else {
+        //     return response()->json([
+        //         "message" => "El post no ha sido encontrado"
+        //     ], 404);
+        // }
     }
 
     public function downloadFile(string $id)

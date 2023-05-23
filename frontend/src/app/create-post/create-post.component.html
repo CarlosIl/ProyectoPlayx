@@ -5,7 +5,7 @@
         </mat-card-header>
         <mat-card-content>
             <form (ngSubmit)="submit()" [formGroup]="formPost">
-                <textarea placeholder="Write something here" class="form-control" formControlName="post" required></textarea>
+                <textarea placeholder="Write something here" rows="4" class="form-control" formControlName="post" required></textarea>
                 <br><br>
                 <div class="div_label_file">
                     <label role="button" type="button" for="file" class="label_file">Choose files</label>

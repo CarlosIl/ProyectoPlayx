@@ -56,6 +56,12 @@ class NotificationController extends Controller
         ], 200);
     }
 
+    public function not_seen(){
+        $user_id = Auth::user()->id;
+        $notificationsStd = DB::select("SELECT COUNT(*) AS not_seen FROM `notifications` WHERE status=0 AND target_id=?",[$user_id]);
+        return $notifications = intval($notificationsStd[0]->not_seen);
+    }
+
     public function sendMail(array $mailData)
     {
         Mail::to($mailData["receiver"])->send(new DemoMail($mailData));

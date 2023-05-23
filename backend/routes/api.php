@@ -86,6 +86,7 @@ Route::middleware('auth:api')->group( function(){
 
     //NotificationController
     Route::get('/notifications', [NotificationController::class, 'index']);
-    Route::get('/notifications/{id}', [NotificationController::class, 'reload']);
+    Route::get('/notifications/id/{id}', [NotificationController::class, 'reload']);
     Route::get('/notify/{id}', [NotificationController::class, 'saw']);
+    Route::get('/notifications/not_seen', [NotificationController::class, 'not_seen']);
 });

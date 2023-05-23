@@ -10,8 +10,7 @@
 </div>
 <div *ngIf="final == false" [alwaysCallback]="true" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" infinite-scroll (scrolled)="reloadPosts()"></div>
 <div *ngFor="let possit of posts" class="post_card">
-    <app-post-card [id]="possit.id" [username]="possit.username" [profile_picture]="profile_picture"
-        [post]="possit.post" [file_name]="possit.file_name" [created_at]="possit.created_at"></app-post-card>
+    <app-post-card [post]="possit"></app-post-card>
 </div>
 <div *ngIf="final" class="final">
     <app-post-final></app-post-final>

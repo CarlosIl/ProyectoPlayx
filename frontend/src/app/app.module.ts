@@ -29,6 +29,7 @@ import { FollowingsSiteComponent } from './followings-site/followings-site.compo
 import { PostFinalComponent } from './post-final/post-final.component';
 import { PostCeroComponent } from './post-cero/post-cero.component';
 import { NotificationCardComponent } from './notification-card/notification-card.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { NotificationCardComponent } from './notification-card/notification-card
     FollowingsSiteComponent,
     PostFinalComponent,
     PostCeroComponent,
-    NotificationCardComponent
+    NotificationCardComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
