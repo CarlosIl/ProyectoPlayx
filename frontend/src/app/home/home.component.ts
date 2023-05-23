@@ -23,7 +23,7 @@ export class HomeComponent {
 
   reloadPosts() {
     if (this.last_post_id == 1) {
-      return console.log("No se puede avanzar más");
+      this.final = true;
     } else {
       this.postService.reloadPosts(this.last_post_id).subscribe((posts: any) => {
         for (let index = 0; index < posts.length; index++) {

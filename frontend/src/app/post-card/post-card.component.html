@@ -15,8 +15,8 @@
         <img mat-card-image id="post_image" [src]="post?.file_name">
       </div>
     </a>
-      <div *ngIf="post?.comment_id!=null" class="div_post_comment">
-        <app-post-card [post]="comment_post"></app-post-card>
+      <div *ngIf="post?.comment_id!=null && isComment==false" class="div_post_comment">
+        <app-post-card [post]="comment_post" [isComment]="true"></app-post-card>
         <div (click)="redirectCommented()" class="transparency"></div>
       </div>
   </mat-card-content>

@@ -9,6 +9,7 @@ import { PostService } from '../services/post.service';
 })
 export class PostCardComponent {
   @Input() post: any;
+  @Input() isComment: boolean = false;
   comment_post!:any;
   constructor(private router: Router, private postService: PostService) {}
 

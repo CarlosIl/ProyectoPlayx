@@ -31,7 +31,7 @@ export class FollowingsSiteComponent {
 
   reloadPosts() {
     if(this.last_post_id == 1){
-      return console.log("No se puede avanzar más");
+      this.final = true;
     }else{
       this.postService.reloadPostsFollows(this.last_post_id).subscribe((posts: any) => {
         for (let index = 0; index < posts.length; index++) {

@@ -34,3 +34,9 @@
     cursor: pointer;
     background-color: $secondaryColor;
 }
+
+p{
+    margin-left: 10px;
+    margin-right: 10px;
+    @include contentFont(20px);
+}
