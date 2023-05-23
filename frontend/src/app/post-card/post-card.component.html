@@ -1,19 +1,23 @@
 <mat-card class="example-card">
   <mat-card-header>
     <div (click)="goProfile()" mat-card-avatar>
-      <img id="user_profile" [src]="post.profile_picture">
+      <img id="user_profile" [src]="post?.profile_picture">
     </div>
-    <mat-card-title>{{post.username}}</mat-card-title>
-    <mat-card-subtitle>{{post.created_at}}</mat-card-subtitle>
+    <mat-card-title>{{post?.username}}</mat-card-title>
+    <mat-card-subtitle>{{post?.created_at}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <a href='post/{{post.id}}'>
+    <a href='post/{{post?.id}}'>
       <p>
-        {{post.post}}
+        {{post?.post}}
       </p>
-      <div *ngIf="post.file_name!=null" class="div_post_image">
-        <img mat-card-image id="post_image" [src]="post.file_name">
+      <div *ngIf="post?.file_name!=null" class="div_post_image">
+        <img mat-card-image id="post_image" [src]="post?.file_name">
       </div>
     </a>
+      <div *ngIf="post?.comment_id!=null" class="div_post_comment">
+        <app-post-card [post]="comment_post"></app-post-card>
+        <div (click)="redirectCommented()" class="transparency"></div>
+      </div>
   </mat-card-content>
 </mat-card>

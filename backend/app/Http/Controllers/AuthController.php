@@ -133,6 +133,13 @@ class AuthController extends Controller
     public function getMyUser()
     {
         $user = Auth::user();
+
+        if ($user->profile_picture != null) {
+            $user->profile_picture = asset("$user->email/$user->profile_picture");
+        } else {
+            $user->profile_picture = env('DEFAULT_PROFILE_PICTURE_PATH');
+        }
+
         return response()->json([
             "success" => true,
             "user" => $user,
@@ -151,11 +158,14 @@ class AuthController extends Controller
         $usersStd = DB::select("SELECT users.username, users.email, users.profile_picture FROM `users`");
         $users = json_decode(json_encode($usersStd), true);
         for ($i = 0; $i < count($users); $i++) {
-            $profile_picture = $users[$i]["profile_picture"];
             $email = $users[$i]["email"];
             unset($users[$i]["email"]);
+
+            $profile_picture = $users[$i]["profile_picture"];
             if ($profile_picture != null) {
                 $users[$i]["profile_picture"] = asset("$email/$profile_picture");
+            } else {
+                $users[$i]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
             }
         }
         return $users;
@@ -213,7 +223,7 @@ class AuthController extends Controller
         //     Storage::disk("public")->delete("$path/$user->profile_picture"); 
         //     $user->profile_picture = $file_name; 
         // } 
-        
+
         $user->save();
 
         return response()->json([
@@ -231,7 +241,7 @@ class AuthController extends Controller
         $file_name = time() . '_' . request()->profile_picture->getClientOriginalName();
         Storage::disk('public')->put("$path/$file_name", fopen($request->file('profile_picture'), 'r+'));
 
-        if($user->profile_picture!=null){
+        if ($user->profile_picture != null) {
             Storage::disk("public")->delete("$path/$user->profile_picture");
         }
 
@@ -244,7 +254,8 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function deleteUser() {
+    public function deleteUser()
+    {
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
 

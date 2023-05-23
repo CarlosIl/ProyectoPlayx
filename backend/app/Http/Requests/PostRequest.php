@@ -22,7 +22,7 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'user_id' => 'required',
+            'comment_id' => 'nullable',
             'post' => 'nullable',
             'post_file' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg'
         ];

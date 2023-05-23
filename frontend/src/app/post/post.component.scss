@@ -1,0 +1,64 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+.post{
+    padding-top: 10px;
+    mat-card{
+        background-color: $primaryColor;
+        mat-card-header{
+            h2{
+                @include titleFont(20px);
+            }
+        }
+        mat-card-content{
+            textarea{
+                @include contentFont(16px);
+                width: 100%;
+                resize: vertical;
+                border: 2px solid;
+                border-color: $primaryLigthColor;
+                border-radius: 5px;
+            }
+    
+            .div_label_file{
+                margin: auto;
+                text-align: center;
+                width: 30%;
+                // height: 25px;
+                // padding-top: 5px;
+                background-color: $secondaryColor;
+                border-radius: 15px;
+                .label_file{
+                    @include contentFont(16px);
+                    cursor: pointer;
+                }
+            }
+    
+            input[type="file"] {
+                display: none;
+            }
+    
+            .send_button{
+                margin: auto;
+                width: 30%;
+                button{
+                    @include titleFont(20px);
+                    background-color: $secondaryDarkColor;
+                    width: 100%;
+                    border: none;
+                    border-radius: 15px;
+                    cursor: pointer;
+                }
+            }
+    
+            #post_file{
+                padding-top: 10px;
+                padding-bottom: 5px;
+                margin-left: 25%;
+                margin-right: 25%;
+                width: 50%;
+                height: 200px;
+            }
+        }
+    }
+}

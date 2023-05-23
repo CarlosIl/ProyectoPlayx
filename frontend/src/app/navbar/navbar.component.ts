@@ -18,7 +18,7 @@ export interface User {
 })
 export class NavbarComponent {
   username!: any;
-  profile!: any;
+  profile_picture!: any;
 
   //Para buscador
   users: User[] = [];
@@ -53,21 +53,11 @@ export class NavbarComponent {
     this.postService.getMyUser().subscribe((datos: any) => {
       var user = datos['user']
       this.username = user['username'];
-      if (user['profile_picture'] == null) {
-        this.profile = "../../assets/imgs/profile.jpg"
-      } else {
-        // this.profile = user['profile_picture'];
-        this.postService.getProfilePicture(this.username).subscribe((baseImage: any) => {
-          this.profile = baseImage.url;
-        })
-      }
+      this.profile_picture = user['profile_picture'];
 
       //Para buscador
       this.postService.getAllUsers().subscribe((users: any) => {
         for (let i = 0; i < users.length; i++) {
-          if (users[i]["profile_picture"] == null) {
-            users[i]["profile_picture"] = "../../assets/imgs/profile.jpg"
-          }
           this.users.push(users[i]);
         }
       })

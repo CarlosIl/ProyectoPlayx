@@ -30,6 +30,7 @@ import { PostFinalComponent } from './post-final/post-final.component';
 import { PostCeroComponent } from './post-cero/post-cero.component';
 import { NotificationCardComponent } from './notification-card/notification-card.component';
 import { PostComponent } from './post/post.component';
+import { PostCommentComponent } from './post-comment/post-comment.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { PostComponent } from './post/post.component';
     PostFinalComponent,
     PostCeroComponent,
     NotificationCardComponent,
-    PostComponent
+    PostComponent,
+    PostCommentComponent
   ],
   imports: [
     BrowserModule,

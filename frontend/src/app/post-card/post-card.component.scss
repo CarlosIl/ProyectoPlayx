@@ -46,3 +46,22 @@ mat-card{
     width: 100%;
     height: 500px;
 }
+
+.div_post_comment{
+    margin: auto;
+    width: 80%;
+    position: relative;
+}
+
+.transparency{
+    position: absolute; 
+    background: white;
+    opacity: 0.3;
+    
+    /* center overlay text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inset: 0;
+    cursor: pointer;
+}
