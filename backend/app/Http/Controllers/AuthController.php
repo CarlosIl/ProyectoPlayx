@@ -148,9 +148,22 @@ class AuthController extends Controller
 
     public function getUserInfo(string $username)
     {
-        $MyId = Auth::user()->id;
-        $userStd = DB::select("SELECT users.profile_picture, users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings, (SELECT COUNT(*) FROM `follows` WHERE source_id = ? AND target_id = users.id) AS user_follow FROM `users` WHERE username = ?", [$MyId, $username]);
-        return $user = json_decode(json_encode($userStd), true);
+        $MyUser = Auth::user();
+        $userStd = DB::select("SELECT users.email, users.profile_picture, users.firstName, users.lastName, (SELECT COUNT(*) FROM `follows` WHERE target_id = users.id) AS followers, (SELECT COUNT(*) FROM `follows` WHERE source_id = users.id) AS followings, (SELECT COUNT(*) FROM `follows` WHERE source_id = ? AND target_id = users.id) AS user_follow FROM `users` WHERE username = ?", [$MyUser->id, $username]);
+        $user = json_decode(json_encode($userStd), true);
+
+        $email = $user[0]["email"];
+        unset($user[0]["email"]);
+
+        $profile_picture = $user[0]["profile_picture"];
+        if($profile_picture!=null){
+            $user[0]["profile_picture"] = asset("$email/$profile_picture");
+        }else{
+            $user[0]["profile_picture"] = env('DEFAULT_PROFILE_PICTURE_PATH');
+        }
+
+        $user[0] += [ "myUsername" => $MyUser->username];
+        return $user;
     }
 
     public function getAllUsers()

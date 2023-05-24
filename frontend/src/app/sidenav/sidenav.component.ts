@@ -11,7 +11,7 @@ export class SidenavComponent {
   constructor(private postService: PostService, private router: Router) { }
   not_seen!:number;
   notifications!: any;
-  last_post_id!: any;
+  last_noti_id!: any;
 
   final:boolean = false;
 
@@ -25,26 +25,31 @@ export class SidenavComponent {
 
   getNotifications(){
     this.postService.getNotifications().subscribe((notifications: any) => {
-      this.last_post_id = notifications[notifications.length - 1]["id"];
-      this.notifications = notifications;
+      if (notifications.length == 0) {
+        this.final = true;
+        console.log("No hay más notifications")
+      } else {
+        this.last_noti_id = notifications[notifications.length - 1]["id"];
+        this.notifications = notifications;
+      }
     });
   }
   
   reloadNotifications() {
-    if (this.last_post_id == 1) {
+    if (this.last_noti_id == 1) {
       this.final = true;
       return console.log("No se puede avanzar más");
     } else {
-      this.postService.reloadNotifications(this.last_post_id).subscribe((posts: any) => {
-        for (let index = 0; index < posts.length; index++) {
-          this.notifications.push(posts[index]);
+      this.postService.reloadNotifications(this.last_noti_id).subscribe((notifications: any) => {
+        for (let index = 0; index < notifications.length; index++) {
+          this.notifications.push(notifications[index]);
         }
 
-        if (posts.length == 0) {
+        if (notifications.length == 0) {
           this.final = true;
-          console.log("No hay más posts")
+          console.log("No hay más notifications")
         } else {
-          this.last_post_id = posts[posts.length - 1]["id"];
+          this.last_noti_id = notifications[notifications.length - 1]["id"];
         }
       })
     }

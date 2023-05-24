@@ -21,13 +21,15 @@ class LikeController extends Controller
 
         $post = Post::find($id);
 
-        $noti = new Notification();
-        $noti->source_id = $user->id;
-        $noti->target_id = $post->user_id;
-        $noti->post_id = $id;
-        $noti->type = "like";
-        $noti->status = 0;
-        $noti->save();
+        if($user->id != $post->user_id){
+            $noti = new Notification();
+            $noti->source_id = $user->id;
+            $noti->target_id = $post->user_id;
+            $noti->post_id = $id;
+            $noti->type = "like";
+            $noti->status = 0;
+            $noti->save();
+        }
 
         return response()->json([
             "success" => true,

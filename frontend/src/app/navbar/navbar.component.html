@@ -19,8 +19,8 @@
                 </mat-autocomplete>
             </form>
         </span>
-        <span (click)="goMyProfile()">
-            <img id="my_user_profile" [src]="profile_picture">
+        <span>
+            <img tabindex="0" (keypress)="goMyProfile()" (click)="goMyProfile()" id="my_user_profile" [src]="profile_picture" matTooltip="Your profile" alt="{{username}} profile picture. Click to go to your profile.">
         </span>
         <span>
             <p>{{username}}</p>

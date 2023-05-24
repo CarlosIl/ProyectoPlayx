@@ -45,7 +45,6 @@ export class PostCardComponent {
       if (datos['success'] == true) {
         this.post.likes = this.post.likes+1;
         this.like = true;
-        return console.log("Se ha dado like");
       } else {
         return console.log(datos);
       }
@@ -57,7 +56,6 @@ export class PostCardComponent {
       if (datos['success'] == true) {
         this.post.likes = this.post.likes-1;
         this.like = false;
-        return console.log("Se ha removido el like");
       } else {
         return console.log(datos);
       }

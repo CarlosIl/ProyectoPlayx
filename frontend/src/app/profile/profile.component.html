@@ -21,5 +21,5 @@
 </div>
 
 <div *ngIf="user?.user_follow!=null" class="user_card">
-    <app-user-card [MyUser]="MyUser" [Following]="user?.user_follow" [username]="username" [profile_picture]="profile_picture" [firstName]="user?.firstName" [lastName]="user?.lastName" [followers]="user?.followers" [followings]="user?.followings"></app-user-card>
+    <app-user-card [user]="user" [MyUser]="MyUser" [username]="username"></app-user-card>
 </div>

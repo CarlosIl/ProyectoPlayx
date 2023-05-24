@@ -33,6 +33,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -77,6 +78,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatDatepickerModule,
     MatTooltipModule,
     InfiniteScrollModule,
+    MatDialogModule,
   ]
 })
 export class MaterialModuleModule { }

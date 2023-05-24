@@ -9,35 +9,35 @@ import { PostService } from '../services/post.service';
 })
 export class UserCardComponent {
   @Input() username: string = ""
-  @Input() profile_picture: string = ""
-  @Input() firstName: string = ""
-  @Input() lastName: string = ""
-  @Input() followers: string = ""
-  @Input() followings: string = ""
+  //Array with all user data
+  @Input() user: any;
+  //Boolean specify if is the current user or not
   @Input() MyUser: boolean = false;
-  @Input() Following: any;
 
   constructor(private postService: PostService, private router: Router) { }
 
+  //Redirect to edit-profile component with reload
   goEditProfile() {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
     this.router.navigate(['/edit_profile']));
   }
 
+  //Method to follow a user and automatically change the button to unfollow
   follow() {
     this.postService.follow(this.username).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        this.Following = 1;
+        this.user.user_follow = 1;
       } else {
         return console.log(datos);
       }
     })
   }
 
+  //Method to unfollow a user and automatically change the button to follow
   unfollow() {
     this.postService.unfollow(this.username).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        this.Following = 0;
+        this.user.user_follow = 0;
       } else {
         return console.log(datos);
       }
