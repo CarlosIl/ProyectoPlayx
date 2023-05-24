@@ -33,7 +33,7 @@ export class SidenavComponent {
   reloadNotifications() {
     if (this.last_post_id == 1) {
       this.final = true;
-      // return console.log("No se puede avanzar más");
+      return console.log("No se puede avanzar más");
     } else {
       this.postService.reloadNotifications(this.last_post_id).subscribe((posts: any) => {
         for (let index = 0; index < posts.length; index++) {
@@ -42,7 +42,7 @@ export class SidenavComponent {
 
         if (posts.length == 0) {
           this.final = true;
-          // console.log("No hay más posts")
+          console.log("No hay más posts")
         } else {
           this.last_post_id = posts[posts.length - 1]["id"];
         }

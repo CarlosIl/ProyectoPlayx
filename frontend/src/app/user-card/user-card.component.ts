@@ -27,7 +27,7 @@ export class UserCardComponent {
   follow() {
     this.postService.follow(this.username).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        window.location.reload();
+        this.Following = 1;
       } else {
         return console.log(datos);
       }
@@ -37,7 +37,7 @@ export class UserCardComponent {
   unfollow() {
     this.postService.unfollow(this.username).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        window.location.reload();
+        this.Following = 0;
       } else {
         return console.log(datos);
       }

@@ -11,7 +11,15 @@ export class PostCardComponent {
   @Input() post: any;
   @Input() isComment: boolean = false;
   comment_post!:any;
+
+  like: boolean = false;
   constructor(private router: Router, private postService: PostService) {}
+
+  ngOnInit(){
+    if(this.post?.user_like == 1){
+      this.like = true;
+    }
+  }
 
   ngAfterViewInit(){
     setTimeout(() => {
@@ -30,5 +38,29 @@ export class PostCardComponent {
   redirectCommented(){
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
     this.router.navigate(['/post/' + this.post.comment_id]));
+  }
+
+  giveLike(){
+    this.postService.giveLike(this.post.id).subscribe((datos:any) => {
+      if (datos['success'] == true) {
+        this.post.likes = this.post.likes+1;
+        this.like = true;
+        return console.log("Se ha dado like");
+      } else {
+        return console.log(datos);
+      }
+    })
+  }
+
+  removeLike(){
+    this.postService.removeLike(this.post.id).subscribe((datos:any) => {
+      if (datos['success'] == true) {
+        this.post.likes = this.post.likes-1;
+        this.like = false;
+        return console.log("Se ha removido el like");
+      } else {
+        return console.log(datos);
+      }
+    })
   }
 }

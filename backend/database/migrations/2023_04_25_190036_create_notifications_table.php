@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreign("source_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('target_id');
             $table->foreign("target_id")->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->text('message');
+            $table->unsignedBigInteger('post_id')->nullable();
+            $table->foreign("post_id")->references('id')->on('posts')->onDelete('cascade')->onUpdate('cascade');
+            $table->enum('type', ['follow', 'like']);
             $table->boolean('status')->default(0); 
             $table->timestamps();
         });

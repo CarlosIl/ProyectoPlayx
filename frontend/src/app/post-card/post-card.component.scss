@@ -17,8 +17,7 @@ mat-card{
     }
     mat-card-content{
         padding-top: 10px;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
+        padding-bottom: 10px;
         background-color: $secondaryLigthColor;
         @include contentFont(16px);
         //Para que el tento se mantega dentro del recuadro
@@ -26,6 +25,20 @@ mat-card{
         a{
             text-decoration: none;
             color: black;
+        }
+    }
+    mat-card-actions{
+        height: 20px;
+        background-color: $primaryColor;
+        .likes{
+            @include contentFont(16px);
+        }
+        button{
+            margin-left: 5px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            height: 100%;
         }
     }
 }
@@ -44,7 +57,8 @@ mat-card{
 
 #post_image{
     width: 100%;
-    height: 500px;
+    height: 350px;
+    padding-bottom: 10px;
 }
 
 .div_post_comment{
@@ -64,4 +78,16 @@ mat-card{
     justify-content: center;
     inset: 0;
     cursor: pointer;
+}
+
+.buttonOk{
+    background-color: $secondaryColor;
+}
+.buttonError{
+    background-color: $errorColor;
+}
+
+.comment{
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }

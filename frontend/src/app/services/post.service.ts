@@ -119,4 +119,16 @@ export class PostService {
   getComments(id: any){
     return this.http.get(this.url + `/api/comments/` + id, this.httpOptions);
   }
+
+  reloadComments(id:any, post_id: any){
+    return this.http.get(this.url + `/api/comments/` + id + `/` + post_id, this.httpOptions);
+  }
+
+  giveLike(id:any){
+    return this.http.get(this.url + `/api/like/` + id, this.httpOptions);
+  }
+
+  removeLike(id:any){
+    return this.http.get(this.url + `/api/unlike/` + id, this.httpOptions);
+  }
 }

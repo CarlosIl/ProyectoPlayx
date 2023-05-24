@@ -24,7 +24,7 @@ class PostRequest extends FormRequest
         return [
             'comment_id' => 'nullable',
             'post' => 'nullable',
-            'post_file' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg'
+            'post_file' => 'nullable|image'
         ];
     }
 }

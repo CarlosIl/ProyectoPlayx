@@ -15,7 +15,7 @@ class NotificationController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $notificationsStd = DB::select("SELECT notifications.id, users.username, users.email, users.profile_picture, notifications.message, notifications.status, DATE_FORMAT(notifications.created_at, '%d/%m/%Y %H:%i') as created_at FROM `notifications` JOIN users on users.id = notifications.source_id WHERE notifications.target_id = ? ORDER BY notifications.created_at DESC LIMIT 3",[$user_id]);
+        $notificationsStd = DB::select("SELECT notifications.id, users.username, users.email, users.profile_picture, notifications.type, notifications.status, DATE_FORMAT(notifications.created_at, '%d/%m/%Y %H:%i') as created_at FROM `notifications` JOIN users on users.id = notifications.source_id WHERE notifications.target_id = ? ORDER BY notifications.updated_at DESC LIMIT 3",[$user_id]);
         $notifications = json_decode(json_encode($notificationsStd), true);
         for ($i=0; $i < count($notifications); $i++) { 
             $profile_picture = $notifications[$i]["profile_picture"];
@@ -24,6 +24,15 @@ class NotificationController extends Controller
             if($profile_picture!=null){
                 $notifications[$i]["profile_picture"] = asset("$email/$profile_picture");
             }
+
+            $username = $notifications[$i]["username"];
+            $type = $notifications[$i]["type"];
+            if($type == "follow"){
+                $message = "$username ha empezado ha seguirte";
+            }else if($type == "like"){
+                $message = "$username le ha gustado tu post";
+            }
+            $notifications[$i] += [ "message" => $message];
         }
         return $notifications;
     }
@@ -31,7 +40,7 @@ class NotificationController extends Controller
     public function reload(string $id)
     {
         $user_id = Auth::user()->id;
-        $notificationsStd = DB::select("SELECT notifications.id, users.username, users.email, users.profile_picture, notifications.message, notifications.status, DATE_FORMAT(notifications.created_at, '%d/%m/%Y %H:%i') as created_at FROM `notifications` JOIN users on users.id = notifications.source_id WHERE notifications.target_id = ? AND notifications.id<? ORDER BY notifications.created_at DESC LIMIT 1",[$user_id, $id]);
+        $notificationsStd = DB::select("SELECT notifications.id, users.username, users.email, users.profile_picture, notifications.message, notifications.status, DATE_FORMAT(notifications.created_at, '%d/%m/%Y %H:%i') as created_at FROM `notifications` JOIN users on users.id = notifications.source_id WHERE notifications.target_id = ? AND notifications.id<? ORDER BY notifications.updated_at DESC LIMIT 1",[$user_id, $id]);
         $notifications = json_decode(json_encode($notificationsStd), true);
         for ($i=0; $i < count($notifications); $i++) { 
             $profile_picture = $notifications[$i]["profile_picture"];

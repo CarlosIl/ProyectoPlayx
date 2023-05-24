@@ -6,7 +6,7 @@
     <mat-card-title>{{post?.username}}</mat-card-title>
     <mat-card-subtitle>{{post?.created_at}}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
+  <mat-card-content [ngClass]="{'comment':isComment==true}">
     <a href='post/{{post?.id}}'>
       <p>
         {{post?.post}}
@@ -15,9 +15,20 @@
         <img mat-card-image id="post_image" [src]="post?.file_name">
       </div>
     </a>
-      <div *ngIf="post?.comment_id!=null && isComment==false" class="div_post_comment">
-        <app-post-card [post]="comment_post" [isComment]="true"></app-post-card>
-        <div (click)="redirectCommented()" class="transparency"></div>
-      </div>
+    <div *ngIf="post?.comment_id!=null && isComment==false" class="div_post_comment">
+      <app-post-card [post]="comment_post" [isComment]="true"></app-post-card>
+      <div (click)="redirectCommented()" class="transparency"></div>
+    </div>
   </mat-card-content>
+  <mat-card-actions *ngIf="isComment==false">
+    <span class="likes">Likes {{post?.likes}}</span>
+    <button *ngIf="like==false; else elseBlock" class="buttonOk" (click)="giveLike()" matTooltip="Like">
+      <span class="material-symbols-outlined">thumb_up</span>
+    </button>
+    <ng-template #elseBlock>
+      <button class="buttonError" (click)="removeLike()" matTooltip="Remove like">
+        <span class="material-symbols-outlined">thumb_down</span>
+      </button>
+    </ng-template>
+  </mat-card-actions>
 </mat-card>

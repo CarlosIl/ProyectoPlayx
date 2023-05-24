@@ -2,7 +2,7 @@
     <a routerLink="home" routerLinkActive="active-link"><span class="material-symbols-outlined">home</span> Home</a>
     <a routerLink="follows" routerLinkActive="active-link"><span class="material-symbols-outlined">group</span> Followings</a>
     <a routerLinkActive="active-link" (click)="getNotifications()" [matMenuTriggerFor]="menu"><span  class="badge" matBadge="{{not_seen}}" matBadgeSize="medium" class="material-symbols-outlined">notifications</span> Notifications</a>
-    <mat-menu class="x" #menu xPosition="after">
+    <mat-menu #menu xPosition="after">
         <div *ngIf="notifications!=null; else elseBlock">
             <div class="notifications" *ngFor="let noti of notifications">
                 <button (click)="seeing_redirect(noti.username, noti.id)" mat-menu-item>

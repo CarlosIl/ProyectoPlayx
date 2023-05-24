@@ -20,6 +20,7 @@ export class PostComponent {
 
     nada:boolean = false;
     message!:string;
+    final:boolean = false;
 
   ngOnInit(){
     this.activatedRoute.paramMap.subscribe((parametro: ParamMap) => {
@@ -40,4 +41,23 @@ export class PostComponent {
       }
     })
   }
+
+  reloadComments() {
+    if (this.last_comment_id == 1) {
+      this.final = true;
+    } else {
+      this.postService.reloadComments(this.id,this.last_comment_id).subscribe((comments: any) => {
+        for (let index = 0; index < comments.length; index++) {
+          this.comments.push(comments[index]);
+        }
+
+        if (comments.length == 0) {
+          this.final = true;
+        } else {
+          this.last_comment_id = comments[comments.length - 1]["id"];
+        }
+      })
+    }
+  }
+
 }

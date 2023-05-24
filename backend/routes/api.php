@@ -11,6 +11,7 @@ use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\NotificationController;
 
 /*
@@ -60,6 +61,7 @@ Route::middleware('auth:api')->group( function(){
     Route::get('/posts/follows', [PostController::class, 'getPostsFollows']);
     Route::get('/posts/follows/{id}', [PostController::class, 'reloadPostsFollows']);
     Route::get('/comments/{id}', [PostController::class, 'getComments']);
+    Route::get('/comments/{id}/{post_id}', [PostController::class, 'reloadComments']);
 
     Route::post('/posts', [PostController::class, 'store']);
     Route::post('/posts/image/{id}', [PostController::class, 'storeImage']);
@@ -90,4 +92,8 @@ Route::middleware('auth:api')->group( function(){
     Route::get('/notifications/id/{id}', [NotificationController::class, 'reload']);
     Route::get('/notify/{id}', [NotificationController::class, 'saw']);
     Route::get('/notifications/not_seen', [NotificationController::class, 'not_seen']);
+
+    //LikeController
+    Route::get('/like/{id}', [LikeController::class, 'store']);
+    Route::get('/unlike/{id}', [LikeController::class, 'destroy']);
 });

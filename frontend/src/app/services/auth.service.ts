@@ -8,7 +8,7 @@ export class AuthService {
 
   url:string = 'http://localhost:8000';
 
-  httpOptions1 = {
+  httpOptions = {
     headers : new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -17,11 +17,11 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   sendRegister(data: any){
-    return this.http.post(this.url+`/api/register`, data, this.httpOptions1);
+    return this.http.post(this.url+`/api/register`, data, this.httpOptions);
   }
 
   sendLogin(data: any){
-    return this.http.post(this.url+`/api/login`, data, this.httpOptions1);
+    return this.http.post(this.url+`/api/login`, data, this.httpOptions);
   }
 
   //sessionStorage guarda el token automáticamente mientras que localStorage necesita recargar la página
