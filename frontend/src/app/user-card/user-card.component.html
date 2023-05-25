@@ -29,11 +29,11 @@
         </div>
         <ng-template #elseBlock>
             <div *ngIf="this.user.user_follow == '0'; else elseBlock2" class="boton">
-                <button class="buttonOk" (click)="follow()">Follow</button>
+                <button mat-button class="buttonOk" (click)="follow()">Follow</button>
             </div>
             <ng-template #elseBlock2>
                 <div class="boton">
-                    <button class="buttonError" (click)="unfollow()">Unfollow</button>
+                    <button mat-button class="buttonError" (click)="unfollow()">Unfollow</button>
                 </div>
             </ng-template>
         </ng-template>

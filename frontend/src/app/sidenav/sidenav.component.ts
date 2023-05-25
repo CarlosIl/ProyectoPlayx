@@ -9,7 +9,7 @@ import { PostService } from '../services/post.service';
 })
 export class SidenavComponent {
   constructor(private postService: PostService, private router: Router) { }
-  not_seen!:number;
+  not_seen!:any;
   notifications!: any;
   last_noti_id!: any;
 
@@ -63,6 +63,13 @@ export class SidenavComponent {
   seeing_redirect(username:string, id:number){
     this.postService.seeingNofitication(id).subscribe((datos:any) => {
       if (datos['success'] == true) {
+
+        if(this.not_seen == 1){
+          delete(this.not_seen);
+        }else{
+          this.not_seen -= 1;
+        }    
+
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
         this.router.navigate(['/profile/'+username]));
       } else {

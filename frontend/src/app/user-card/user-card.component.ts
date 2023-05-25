@@ -26,7 +26,11 @@ export class UserCardComponent {
   follow() {
     this.postService.follow(this.username).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        this.user.user_follow = 1;
+        //One second to wait so that there are no problems with the counter.
+        setTimeout(() => {
+          this.user.followers += 1;
+          this.user.user_follow = 1;
+        }, 1000);
       } else {
         return console.log(datos);
       }
@@ -37,7 +41,10 @@ export class UserCardComponent {
   unfollow() {
     this.postService.unfollow(this.username).subscribe((datos:any) => {
       if (datos['success'] == true) {
-        this.user.user_follow = 0;
+        setTimeout(() => {
+          this.user.followers -= 1;
+          this.user.user_follow = 0;
+        });
       } else {
         return console.log(datos);
       }

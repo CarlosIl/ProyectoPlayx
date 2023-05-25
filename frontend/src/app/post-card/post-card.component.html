@@ -22,11 +22,11 @@
   </mat-card-content>
   <mat-card-actions *ngIf="isComment==false">
     <span class="likes">Likes {{post?.likes}}</span>
-    <button *ngIf="like==false; else elseBlock" class="buttonOk" (click)="giveLike()" matTooltip="Like">
+    <button mat-mini-fab *ngIf="like==false; else elseBlock" class="buttonOk" (click)="giveLike()" matTooltip="Like">
       <span class="material-symbols-outlined">thumb_up</span>
     </button>
     <ng-template #elseBlock>
-      <button class="buttonError" (click)="removeLike()" matTooltip="Remove like">
+      <button mat-mini-fab class="buttonError" (click)="removeLike()" matTooltip="Remove like">
         <span class="material-symbols-outlined">thumb_down</span>
       </button>
     </ng-template>
