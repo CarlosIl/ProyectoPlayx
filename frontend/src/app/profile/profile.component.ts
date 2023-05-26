@@ -42,24 +42,9 @@ export class ProfileComponent {
     this.activatedRoute.paramMap.subscribe((parametro: ParamMap) => {
       this.username = parametro.get("username")!;
     })
-
     
     this.postService.getOtherUser(this.username).subscribe((datos: any) => {
       this.user = datos[0];
-      if (!this.user) {
-        const dialogRef = this.dialog.open(ModalComponent, {
-          width: '400px',
-          data: {
-            title: 'Mi modal',
-            message: 'Este es un ejemplo de modal utilizando Angular y Material Design.'
-          }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-          console.log('Modal cerrado');
-        });
-      } else {
-
         if (this.username == this.user['myUsername']) {
           this.MyUser = true;
         } else {
@@ -75,7 +60,26 @@ export class ProfileComponent {
             this.posts = posts;
           }
         });
+    }, (err: any) => {
+      console.log(err);
+      let error_message;
+      if(err.error.message = "Undefined array key 0"){
+        error_message = "This user doesn't exists";
+      }else{
+        error_message = err.error.message;
       }
+
+      const dialogRef = this.dialog.open(ModalComponent, {
+        width: '400px',
+        data: {
+          message: error_message,
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('Modal cerrado');
+        history.back();
+      });
     })
   }
 

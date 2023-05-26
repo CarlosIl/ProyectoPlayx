@@ -10,14 +10,24 @@ export class HomeComponent {
   posts!: any;
   last_post_id!: any;
 
-  final:boolean = false;
+  //Boolean says if is the last post or not 
+  final: boolean = false;
+  //Boolean says if there aren't any posts from this profile
+  nada: boolean = false;
+  //Message for post-final component in case nada is true
+  message!: string;
 
   constructor(private postService: PostService) { }
 
   ngOnInit() {
     this.postService.retrievePosts().subscribe((posts: any) => {
+      if (posts.length == 0) {
+        this.nada = true;
+        this.message = "There aren't any posts yet";
+      } else {
       this.last_post_id = posts[posts.length - 1]["id"];
       this.posts = posts;
+      }
     })
   }
 

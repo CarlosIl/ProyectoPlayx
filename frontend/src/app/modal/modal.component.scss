@@ -1,0 +1,59 @@
+@import '../../styles.scss';
+@import '../../fonts.scss';
+
+.modal{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: auto;
+    width: 90%;
+    // height: 200px;
+}
+
+h2{
+    text-align: center;
+    @include titleFont(25px);
+    span{
+        color: $errorColor;
+    }
+}
+
+p{
+    text-align: center;
+    @include contentFont(18px);
+    padding-bottom: 10px;
+}
+
+button{
+
+    height: 40px;
+    @include titleFont(20px);
+    // border: 2px solid;
+    // border-color: $primaryLigthColor;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.grid1{
+    display: grid;
+    grid-template-columns: auto;
+    button{
+        width: 100%;
+    }
+}
+
+.grid2{
+    display: grid;
+    grid-template-columns: auto auto;
+    button{
+        width: 80%;
+    }
+}
+
+.buttonClose{
+    background-color: $errorColor;
+}
+
+.buttonAction{
+    background-color: $secondaryColor;
+}

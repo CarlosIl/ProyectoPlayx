@@ -25,11 +25,13 @@
     // -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     width: 30%;
+
     h2 {
         @include titleFont(25px);
         text-align: center;
     }
 
+    //Form
     .grid1 {
         margin: auto;
         width: 80%;
@@ -37,7 +39,8 @@
         grid-template-columns: auto;
     }
 
-    label{
+    //Input
+    label {
         padding-top: 10px;
     }
 
@@ -47,12 +50,21 @@
         border-radius: 5px;
         margin: 8px 0;
     }
+        
+    .incorrect {
+        border: 2px solid $errorColor !important;
+    }
 
-    p{
+    span{
+        color: grey;
+    }
+
+    p {
         text-align: center;
     }
 
-    button{
+    //Buttons
+    button {
         height: 40px;
         margin-top: 10px;
         margin-bottom: 10px;
@@ -61,10 +73,12 @@
         border-radius: 15px;
         cursor: pointer;
     }
-    .button1{
+
+    .button1 {
         background-color: $secondaryColor;
     }
-    .button2{
+
+    .button2 {
         background-color: $primaryColor;
     }
 }

@@ -5,9 +5,17 @@
                 <div class="grid1">
                     <h2>Login</h2>
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" formControlName="email" required>
+                    <input type="text" class="form-control" formControlName="email" required 
+                    [ngClass]="{ 'incorrect': this.formLogin.get('email')?.errors?.['required']||this.formLogin.get('email')?.errors?.['email'] }">
+                    <span *ngIf="this.formLogin.get('email')?.errors?.['required']">(Email must be completed)</span>
+                    <span *ngIf="this.formLogin.get('email')?.errors?.['email']">(Email must have correct format)</span>
+
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" formControlName="password" required>
+                    <input type="password" class="form-control" formControlName="password" required 
+                    [ngClass]="{ 'incorrect': this.formLogin.get('password')?.errors?.['required']||this.formLogin.get('password')?.errors?.['minlength'] }">
+                    <span *ngIf="this.formLogin.get('password')?.errors?.['required']">(Password must be completed)</span>
+                    <span *ngIf="this.formLogin.get('password')?.errors?.['minlength']">(Password must be at least 8 characters long)</span>
+
                     <button class="button1" type="submit">Sign in</button>
                     <p>Don't have an account?</p>
                     <button class="button2" (click)="redirectRegister()">Sign up</button>

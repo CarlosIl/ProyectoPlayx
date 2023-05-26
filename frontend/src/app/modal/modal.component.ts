@@ -7,9 +7,20 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
+  action!:string;
   constructor(public dialogRef: MatDialogRef<ModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
+  ngOnInit(){
+    this.action = this.data.action;
+  }
+
+  //buttonClose
   close() {
     this.dialogRef.close();
+  }
+
+  //buttonAction
+  pressAction() {
+    this.dialogRef.close(true);
   }
 }
