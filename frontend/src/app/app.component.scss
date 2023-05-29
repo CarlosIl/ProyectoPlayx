@@ -2,32 +2,60 @@
 @import '../fonts.scss';
 
 //Desktop format
-@media screen and (min-width: 900px) {}
+@media screen and (min-width: 900px) {
+    .space_navbar {
+        height: 12%;
+    }
 
-//Mobile format
-@media screen and (max-width: 900px) {
-    app-sidenav{
-        width: 100%;
-        position: fixed;
+    .grid {
+        display: grid;
+        grid-template-columns: auto 50% auto;
+    }
+
+    app-sidenav-mobile {
+        display: none;
+    }
+
+    .space_sidenav{
+        display: none;
     }
 }
 
-app-navbar{
+//Mobile format
+@media screen and (max-width: 900px) {
+    .space_navbar {
+        height: 9%;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: auto 90% auto;
+    }
+
+    app-sidenav{
+        display: none;
+    }
+
+    app-sidenav-mobile {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        z-index: 2;
+    }
+
+    .space_sidenav{
+        height: 60px;
+    }
+}
+
+app-navbar {
     width: 100%;
     position: fixed;
     top: 0;
     z-index: 2;
 }
 
-.space{
-    height: 12%;
-}
 
-.grid{
-    display: grid;
-    grid-template-columns: auto 50% auto;
-}
-
-roulet-outlet{
+roulet-outlet {
     z-index: 1;
 }

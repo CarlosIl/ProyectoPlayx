@@ -1,6 +1,20 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {
+    .div_post_image{
+        width: 80%;
+    }
+    
+    .div_post_comment{
+        width: 80%;
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {}
+
 mat-card{
     border-radius: 5px;
     mat-card-header{
@@ -57,7 +71,6 @@ mat-card{
 
 .div_post_image{
     margin: auto;
-    width: 80%;
 }
 
 #post_image{
@@ -68,7 +81,6 @@ mat-card{
 
 .div_post_comment{
     margin: auto;
-    width: 80%;
     position: relative;
 }
 

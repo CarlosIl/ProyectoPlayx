@@ -1,12 +1,12 @@
 <div class="enlaces">
     <a class="home" routerLink="home" routerLinkActive="active-link">
-        <span class="material-symbols-outlined">home</span> Home
+        <span class="material-symbols-outlined">home</span>
     </a>
     <a class="follows" routerLink="follows" routerLinkActive="active-link">
-        <span class="material-symbols-outlined">group</span> Followings
+        <span class="material-symbols-outlined">group</span>
     </a>
     <a class="notis" tabindex="0" (keypress)="getNotifications()" (click)="getNotifications()" [matMenuTriggerFor]="menu">
-        <span class="badge" matBadge="{{not_seen}}" matBadgeSize="medium" class="material-symbols-outlined">notifications</span> Notifications
+        <span class="badge" matBadge="{{not_seen}}" matBadgeSize="medium" class="material-symbols-outlined">notifications</span>
     </a>
     <mat-menu #menu xPosition="after">
         <div *ngIf="notifications!=null; else elseBlock">
@@ -21,13 +21,7 @@
             <p>You don´t have notifications</p>
         </ng-template>
     </mat-menu>
-    <a class="edit_profile" routerLink="edit_profile" routerLinkActive="active-link">
-        <span class="material-symbols-outlined">edit_note</span> Edit Profile
-    </a>
-    <a class="logout" tabindex="0" (keypress)="logOut()" (click)="logOut()">
-        <span class="material-symbols-outlined">logout</span> Log out
-    </a>
-    <a class="search" routerLink="edit_profile" routerLinkActive="active-link">
+    <a class="search" routerLink="search" routerLinkActive="active-link">
         <span class="material-symbols-outlined">search</span>
     </a>
 </div>

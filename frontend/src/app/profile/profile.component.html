@@ -1,3 +1,7 @@
+<div *ngIf="user?.user_follow!=null" class="user_card">
+    <app-user-card [user]="user" [MyUser]="MyUser" [username]="username"></app-user-card>
+</div>
+
 <div *ngIf="user?.user_follow!=null" class="tab">
     <mat-card>
         <mat-card-content>
@@ -18,8 +22,4 @@
 
 <div *ngIf="nada" class="final">
     <app-post-cero [message]="message"></app-post-cero>
-</div>
-
-<div *ngIf="user?.user_follow!=null" class="user_card">
-    <app-user-card [user]="user" [MyUser]="MyUser" [username]="username"></app-user-card>
 </div>

@@ -1,6 +1,23 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {
+    .create_post {
+        width: 25%;
+        position: fixed;
+        left: 75%;
+        top: 40%;
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    .create_post {
+        display: none
+    }
+}
+
 .tab {
     @include contentFont(25px);
 
@@ -13,14 +30,8 @@
     padding-top: 15px;
 }
 
-.create_post {
-    width: 25%;
-    position: fixed;
-    left: 75%;
-    top: 40%;
-}
 
-.final{
+.final {
     padding-top: 15px;
     padding-bottom: 15px;
 }

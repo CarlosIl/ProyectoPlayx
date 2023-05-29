@@ -2,23 +2,23 @@
 @import '../../fonts.scss';
 
 .enlaces {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
     background-color: $primaryColor;
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 8%;
-    left: 0;
+    height: 50px;
+    width: 100%;
     overflow-x: hidden;
     padding-top: 2%;
-
     a {
-        padding: 8px 8px 8px 32px;
+        padding: 0px 8px 0px 32px;
         text-decoration: none;
-        font-size: 27px;
         color: black;
         display: block;
         transition: 0.3s;
         cursor: pointer;
+        span{
+            font-size: 40px;
+        }
     }
 
 }
@@ -33,10 +33,4 @@
     border-radius: 15px;
     cursor: pointer;
     background-color: $secondaryColor;
-}
-
-p{
-    margin-left: 10px;
-    margin-right: 10px;
-    @include contentFont(20px);
 }

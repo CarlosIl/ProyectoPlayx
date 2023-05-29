@@ -1,18 +1,37 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
-mat-card {
-    @include contentFont(25px);
+//Desktop format
+@media screen and (min-width: 900px) {
+    mat-card {
+        @include contentFont(25px);
+        mat-card-content {
+            background-color: $primaryColor;
+        }
+    }
+    
+    .button_mobile{
+        display: none;
+    }
+}
 
-    mat-card-content {
-        background-color: $primaryColor;
+//Mobile format
+@media screen and (max-width: 900px) {
+    mat-card{
+        display: none;
     }
 
-    button{
-        @include titleFont(20px);
-        background-color: $secondaryColor;
-        border: none;
-        border-radius: 15px;
-        cursor: pointer;
+    .button_mobile{
+        button{
+            width: 100%
+        }
     }
+}
+
+button{
+    @include titleFont(20px);
+    background-color: $secondaryColor;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
 }

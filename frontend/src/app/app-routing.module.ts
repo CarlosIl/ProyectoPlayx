@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'profile/:username', component: ProfileComponent },
   { path: 'edit_profile', component:EditProfileComponent},
   { path: 'post/:id', component:PostComponent},
+  //Mobile
   { path: 'search', component: SearchComponent },
 ];
 

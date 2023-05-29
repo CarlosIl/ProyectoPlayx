@@ -1,6 +1,23 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {
+    .user_card {
+        width: 23%;
+        position: fixed;
+        left: 76%;
+        top: 12%;
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    .user_card{
+        padding-bottom: 15px;
+    }
+}
+
 .tab {
     mat-card-content {
         background-color: $secondaryColor;
@@ -14,19 +31,7 @@
     padding-top: 15px;
 }
 
-.user_card {
-    width: 23%;
-    position: fixed;
-    left: 76%;
-    top: 12%;
-}
-
 .final{
     padding-top: 15px;
     padding-bottom: 15px;
-}
-
-.red-snackbar {
-    --mdc-snackbar-container-color: #FF5449 !important;
-    color: white !important;
 }
