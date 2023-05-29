@@ -1,4 +1,5 @@
-<div class="post">
+<!-- Desktop -->
+<div class="post_desktop">
     <mat-card class="example-card">
         <mat-card-header>
             <h2 *ngIf="comment_id==undefined; else elseBlock">Create new post</h2>
@@ -22,4 +23,31 @@
             </form>
         </mat-card-content>
     </mat-card>
+</div>
+<!-- Mobile -->
+<div class="post_mobile">
+    <div class="tab">
+        <mat-card>
+            <mat-card-content *ngIf="comment_id==undefined; else elseBlock">Create new post</mat-card-content>
+            <ng-template #elseBlock>
+                <mat-card-content>Create new comment</mat-card-content>
+            </ng-template>
+        </mat-card>
+    </div>
+    <form (ngSubmit)="submit()" [formGroup]="formPost">
+        <textarea placeholder="Write something here" rows="20" class="form-control" formControlName="post" required></textarea>
+        <br>
+        <div class="div_label_file">
+            <label tabindex="0" role="button" type="button" for="file" class="label_file">
+                <span class="material-symbols-outlined">touch_app</span>
+                Choose files
+            </label>
+        </div>
+        <input id="file" accept="image/*" type="file" (change)="fileEvent($event)" class="form-control" formControlName="post_file">
+        <img id="post_file" *ngIf="imagePreview && imagePreview !== ''" [src]="imagePreview">
+        <br>
+        <div class="send_button">
+            <button type="submit">Send</button>
+        </div>
+    </form>
 </div>

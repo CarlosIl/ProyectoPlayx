@@ -1,6 +1,28 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {
+    .grid2{
+        display: grid;
+        grid-template-columns: auto auto;
+        button{
+            width: 80%;
+        }
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    .grid2{
+        display: grid;
+        grid-template-columns: auto;
+        button{
+            width: 100%;
+        }
+    }
+}
+
 .modal{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -42,13 +64,6 @@ button{
     }
 }
 
-.grid2{
-    display: grid;
-    grid-template-columns: auto auto;
-    button{
-        width: 80%;
-    }
-}
 
 .buttonClose{
     background-color: $errorColor;

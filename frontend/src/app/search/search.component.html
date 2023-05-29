@@ -1,7 +1,12 @@
+<div class="tab">
+    <mat-card>
+        <mat-card-content>Search User</mat-card-content>
+    </mat-card>
+</div>
 <form class="example-form">
     <input aria-label="State" (keyup.enter)="goProfile()" [(ngModel)]="username" [matAutocomplete]="auto" [formControl]="myControl">
     <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let user of filteredOptions | async" [value]="user.username">
+        <mat-option (click)="goProfile()" *ngFor="let user of filteredOptions | async" [value]="user.username">
             <img id="user_profile" [src]="user.profile_picture">
             <span>{{user.username}}</span>
         </mat-option>

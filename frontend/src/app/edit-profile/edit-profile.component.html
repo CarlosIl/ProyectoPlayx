@@ -53,7 +53,9 @@
             <form (ngSubmit)="submitProfilePicture()" [formGroup]="formProfilePicture">
                 <div class="grid1">
                     <div class="div_label_file">
-                        <label role="button" type="button" for="file" class="label_file">Choose files</label>
+                        <label role="button" type="button" for="file" class="label_file">
+                            <span class="material-symbols-outlined">touch_app</span>
+                            Choose files</label>
                     </div>
                     <input id="file" accept="image/*" type="file" (change)="fileEvent($event)" class="form-control" formControlName="profile_picture">
                     <img id="img" *ngIf="imagePreview && imagePreview !== ''" [src]="imagePreview">

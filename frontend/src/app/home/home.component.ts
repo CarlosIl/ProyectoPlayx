@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PostService } from '../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,7 @@ export class HomeComponent {
   //Message for post-final component in case nada is true
   message!: string;
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService, private router: Router) { }
 
   ngOnInit() {
     this.postService.retrievePosts().subscribe((posts: any) => {
@@ -48,5 +49,10 @@ export class HomeComponent {
         }
       })
     }
+  }
+
+  redirectCreatePost() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/create']));
   }
 }

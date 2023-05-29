@@ -9,12 +9,27 @@
         left: 76%;
         top: 12%;
     }
+
+    .button_create{
+        display: none;
+    }
 }
 
 //Mobile format
 @media screen and (max-width: 900px) {
     .user_card{
         padding-bottom: 15px;
+    }
+
+    .button_create{
+        position: fixed;
+        left: 84%;
+        top: 86%;
+        background-color: $secondaryColor;
+        span{
+            font-size: 40px;
+            color: black;
+        }
     }
 }
 

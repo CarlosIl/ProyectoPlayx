@@ -25,7 +25,7 @@
             </div>
         </div>
         <div *ngIf="MyUser; else elseBlock" class="boton">
-            <button class="buttonOk" (click)="goEditProfile()">Edit</button>
+            <button mat-button class="buttonOk" (click)="goEditProfile()">Edit</button>
         </div>
         <ng-template #elseBlock>
             <div *ngIf="this.user.user_follow == '0'; else elseBlock2" class="boton">

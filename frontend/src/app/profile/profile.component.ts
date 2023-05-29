@@ -4,6 +4,7 @@ import { PostService } from '../services/post.service';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from "../modal/modal.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import { ModalComponent } from "../modal/modal.component";
 })
 export class ProfileComponent {
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private dialog: MatDialog) { }
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private dialog: MatDialog, private router: Router) { }
   /**
    * For user-card component
    */
@@ -99,6 +100,11 @@ export class ProfileComponent {
         }
       })
     }
+  }
+
+  redirectCreatePost() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/create']));
   }
 
 }

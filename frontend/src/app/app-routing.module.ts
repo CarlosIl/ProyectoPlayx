@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FollowingsSiteComponent } from './followings-site/followings-site.component';
 import { PostComponent } from './post/post.component';
+import { CreatePostComponent } from './create-post/create-post.component';
 
 const routes: Routes = [
   // {
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'post/:id', component:PostComponent},
   //Mobile
   { path: 'search', component: SearchComponent },
+  { path: 'create', component: CreatePostComponent},
 ];
 
 @NgModule({

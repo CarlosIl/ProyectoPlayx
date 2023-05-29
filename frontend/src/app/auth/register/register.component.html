@@ -46,9 +46,9 @@
                 <div class="grid1">
                     <!-- <label for="profile_picture">Profile picture</label>
             <input type="file" class="form-control" formControlName="profile_picture"> -->
-                    <button class="button1" type="submit">Create account</button>
+                    <button mat-button [disabled]="!this.formRegister.valid" class="button1" type="submit">Create account</button>
                     <p>Already have an account?</p>
-                    <button class="button2" (click)="redirectLogin()">Sign in</button>
+                    <button mat-button class="button2" (click)="redirectLogin()">Sign in</button>
                 </div>
             </form>
         </mat-card-content>
