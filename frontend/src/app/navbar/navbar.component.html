@@ -1,14 +1,14 @@
 <nav>
     <mat-toolbar>
-        <span>
+        <span class="logo">
             <img src="../../assets/imgs/PlayxLogo.png">
         </span>
-        <span>
+        <span class="company_name">
             <br>
             <h1>Playx</h1>
         </span>
         <span class="example-spacer"></span>
-        <span>
+        <span class="search_bar">
             <form class="example-form">
                 <input placeholder="Search" aria-label="State" (keyup.enter)="goToProfile()" [(ngModel)]="search_value" [matAutocomplete]="auto" [formControl]="myControl">
                 <mat-autocomplete #auto="matAutocomplete">
@@ -19,11 +19,14 @@
                 </mat-autocomplete>
             </form>
         </span>
-        <span>
+        <span class="profile_picture">
             <img tabindex="0" (keypress)="goMyProfile()" (click)="goMyProfile()" id="my_user_profile" [src]="profile_picture" matTooltip="Your profile" alt="{{username}} profile picture. Click to go to your profile.">
         </span>
-        <span>
+        <span class="username">
             <p>{{username}}</p>
+        </span>
+        <span class="logout">
+            <a tabindex="0" (click)="logOut()"><span class="material-symbols-outlined">logout</span></a>
         </span>
     </mat-toolbar>
 </nav>

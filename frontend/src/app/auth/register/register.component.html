@@ -5,7 +5,9 @@
                 <h2>Register</h2>
                 <div class="grid1">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" formControlName="username" required>
+                    <input type="text" class="form-control" formControlName="username" 
+                    required [ngClass]="{ 'incorrect': this.formRegister.get('username')?.errors?.['required'] }">
+                    <span *ngIf="this.formRegister.get('username')?.errors?.['required']">(Username must be completed)</span>
                 </div>
                 <div class="grid2">
                     <div>
@@ -19,16 +21,26 @@
                 </div>
                 <div class="grid1">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" formControlName="email" required>
+                    <input type="text" class="form-control" formControlName="email" required
+                    [ngClass]="{ 'incorrect': this.formRegister.get('email')?.errors?.['required']||this.formRegister.get('email')?.errors?.['email'] }">
+                    <span *ngIf="this.formRegister.get('email')?.errors?.['required']">(Email must be completed)</span>
+                    <span *ngIf="this.formRegister.get('email')?.errors?.['email']">(Email must have correct format)</span>
                 </div>
                 <div class="grid2">
                     <div>
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" formControlName="password" required>
+                        <input type="password" class="form-control" formControlName="password" required
+                        [ngClass]="{ 'incorrect': this.formRegister.get('password')?.errors?.['required']||this.formRegister.get('password')?.errors?.['minlength'] }">
+                        <span *ngIf="this.formRegister.get('password')?.errors?.['required']">(Password must be completed)</span>
+                        <span *ngIf="this.formRegister.get('password')?.errors?.['minlength']">(Password must be at least 8 characters long)</span>
                     </div>
                     <div>
                         <label for="c_password">Repeat password</label>
-                        <input type="password" class="form-control" formControlName="c_password" required>
+                        <input type="password" class="form-control" formControlName="c_password" required
+                        [ngClass]="{ 'incorrect': this.formRegister.get('c_password')?.errors?.['required'] || this.formRegister.errors?.['samePassword']}">
+                        <span *ngIf="this.formRegister.get('c_password')?.errors?.['required']">(Password must be completed)</span>
+                        <br *ngIf="this.formRegister.errors?.['samePassword']">
+                        <span *ngIf="this.formRegister.errors?.['samePassword']">(Passwords must math)</span>
                     </div>
                 </div>
                 <div class="grid1">

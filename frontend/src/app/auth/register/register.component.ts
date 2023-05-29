@@ -1,20 +1,24 @@
 import { Component } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
-import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
+import { CreatedValidations } from "../created-validations";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  providers: [CreatedValidations]
 })
 export class RegisterComponent {
 
   formRegister!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, public smPass: CreatedValidations) {
 
-  ngOnInit(){
+  }
+
+  ngOnInit() {
     this.formRegister = this.fb.group({
       username: ['', [Validators.required]],
       firstName: ['', [Validators.nullValidator]],
@@ -23,26 +27,28 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       c_password: ['', [Validators.required]]
-    })
+    }, {
+      validator: this.smPass.samePassword('password', 'c_password')
+    });
   }
 
-  submit(){
-    if(this.formRegister.invalid){
-      return;
+  submit() {
+    if (this.formRegister.invalid) {
+      return console.log(this.formRegister);
     }
 
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
     this.authService.sendRegister(this.formRegister.value)
-    .subscribe((datos: any) => {
-      if (datos['success'] == true) {
-        this.router.navigate(['/login']);
-      } else {
-        return console.log(datos);
-      }
-    });
+      .subscribe((datos: any) => {
+        if (datos['success'] == true) {
+          this.router.navigate(['/login']);
+        } else {
+          return console.log(datos);
+        }
+      });
   }
 
-  redirectLogin(){
+  redirectLogin() {
     this.router.navigate(['/login']);
   }
 }

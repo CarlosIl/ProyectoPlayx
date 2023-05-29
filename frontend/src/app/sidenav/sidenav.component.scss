@@ -1,16 +1,29 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {
+    .enlaces{
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 8%;
+        left: 0;
+        overflow-x: hidden;
+        padding-top: 2%;
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    .enlaces{
+        height: 100px;
+    }
+}
+
 .enlaces {
     background-color: $primaryColor;
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    top: 8%;
-    left: 0;
-    overflow-x: hidden;
-    padding-top: 2%;
-    cursor: pointer;
+
 
     a {
         padding: 8px 8px 8px 32px;
@@ -19,6 +32,7 @@
         color: black;
         display: block;
         transition: 0.3s;
+        cursor: pointer;
     }
 
 }

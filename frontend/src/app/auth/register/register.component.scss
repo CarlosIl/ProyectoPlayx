@@ -1,6 +1,18 @@
 @import '../../../styles.scss';
 @import '../../../fonts.scss';
 
+@media screen and (min-width: 900px) {
+    .register{
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .register{
+        width: 90%;
+    }
+}
+
 .register {
     @include contentFont(16px);
     position: absolute;
@@ -8,7 +20,7 @@
     left: 50%;
     // -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    width: 30%;
+    
     h2 {
         @include titleFont(25px);
         text-align: center;
@@ -43,6 +55,14 @@
         border: 2px solid $primaryColor;
         border-radius: 5px;
         margin: 8px 0;
+    }
+
+    .incorrect {
+        border: 2px solid $errorColor !important;
+    }
+
+    span{
+        color: grey;
     }
 
     p{

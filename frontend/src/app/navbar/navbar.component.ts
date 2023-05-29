@@ -111,4 +111,9 @@ export class NavbarComponent {
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate(['/profile/' + this.username]));
   }
+
+  logOut() {
+    this.postService.logOut().subscribe();
+    this.router.navigate(['/login']);
+  }
 }

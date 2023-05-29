@@ -1,53 +1,128 @@
 @import '../../styles.scss';
 @import '../../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {
+    .mat-toolbar {
+        height: 90px;
+
+        .logo {
+            img {
+                width: 80px;
+            }
+        }
+
+        .company_name {
+            h1 {
+                @include logoFont();
+                padding-right: 80px;
+            }
+        }
+
+        .example-spacer {
+            flex: 1 1 auto;
+        }
+
+        .search_bar {
+            input {
+                @include contentFont(20px);
+                border: 2px solid $primaryColor;
+                border-radius: 5px;
+                margin: 8px 0;
+                width: 200px;
+            }
+        }
+
+        .profile_picture {
+            #my_user_profile {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        .username {
+            p {
+                @include titleFont(20px);
+            }
+        }
+
+        .logout {
+            display: none;
+        }
+    }
+
+    mat-option {
+        padding-bottom: 10px;
+    }
+
+    #user_profile {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    .mat-toolbar {
+        height: 70px;
+        padding-top: 10px;
+
+        .logo {
+            position: relative;
+            left: 40%;
+
+            img {
+                width: 60px;
+            }
+        }
+
+        .company_name {
+            display: none;
+        }
+
+        .search_bar {
+            display: none;
+        }
+
+        .profile_picture {
+            position: absolute;
+            right: 75%;
+
+            #my_user_profile {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .username {
+            display: none;
+        }
+
+        .logout {
+            position: absolute;
+            left: 80%;
+
+            span {
+                font-size: 60px;
+            }
+        }
+    }
+}
+
+//Common
 .mat-toolbar {
     background-color: $primaryDarkColor;
-    height: 90px;
 
     img {
         padding-left: 10px;
-        width: 80px;
         height: 100%;
         padding-right: 10px;
     }
 
-    h1 {
-        @include logoFont();
-        padding-right: 80px;
-    }
-
-    .example-spacer {
-        flex: 1 1 auto;
-    }
-
     #my_user_profile {
-        width: 80px;
-        height: 80px;
         border-radius: 50%;
         cursor: pointer;
     }
-
-    p{
-        @include titleFont(20px);
-    }
-
-    input {
-        @include contentFont(20px);
-        border: 2px solid $primaryColor;
-        border-radius: 5px;
-        margin: 8px 0;
-        width: 200px;
-    }
-}
-
-mat-option{
-    padding-bottom: 10px;
-}
-
-#user_profile {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
 }

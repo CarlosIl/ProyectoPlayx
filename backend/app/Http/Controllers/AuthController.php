@@ -21,52 +21,52 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    public function register(RegisterRequest $request){
-        DB::transaction(function () use ($request): JsonResponse {
-            $user = User::create($request->validated());
+    public function register(RegisterRequest $request)
+    {
+        $user = User::create($request->validated());
 
-            //PARA VERIFICACIÓN DE EMAIL
-            // $token = Str::random(64);
-            // Con PHP
-            // $time = now();
-            // $expired = Date("Y-m-d H:i:s", strtotime("30 minutes", strtotime($time)));
+        //PARA VERIFICACIÓN DE EMAIL
+        // $token = Str::random(64);
+        // Con PHP
+        // $time = now();
+        // $expired = Date("Y-m-d H:i:s", strtotime("30 minutes", strtotime($time)));
 
-            // UserVerify::create([
-            //     'user_id' => $user->id,
-            //     'token' => $token,
-            //     'expires_at' => Carbon::now()->addMinutes(30),
-            // ]);
+        // UserVerify::create([
+        //     'user_id' => $user->id,
+        //     'token' => $token,
+        //     'expires_at' => Carbon::now()->addMinutes(30),
+        // ]);
 
-            // $mailData = [
-            //     'receiver' => $user->email,
-            //     'subject' => 'Email Verification Mail',
-            //     'title' => 'Email Verification Mail',
-            //     'body' => "Please verify your email with bellow link",
-            //     'token' => $token,
-            // ];
-            // (new NotificationController)->sendVerificationMail($mailData);
+        // $mailData = [
+        //     'receiver' => $user->email,
+        //     'subject' => 'Email Verification Mail',
+        //     'title' => 'Email Verification Mail',
+        //     'body' => "Please verify your email with bellow link",
+        //     'token' => $token,
+        // ];
+        // (new NotificationController)->sendVerificationMail($mailData);
 
-            // return response()->json([
-            //     "message" => "Se ha enviado un correo de verificación",
-            // ], 200);
+        // return response()->json([
+        //     "message" => "Se ha enviado un correo de verificación",
+        // ], 200);
 
-            $user->is_email_verified = 1;
-            $user->save();
+        $user->is_email_verified = 1;
+        $user->save();
 
-            $path = $user->email;
-            Storage::disk('public')->makeDirectory($path);
+        $path = $user->email;
+        Storage::disk('public')->makeDirectory($path);
 
-            $success['username'] =  $user->username;
+        $success['username'] =  $user->username;
 
-            return response()->json([
-                "success" => true,
-                "message" => "El usuario ha sido registrado",
-                "username" => $user,
-            ], 200);
-        });
+        return response()->json([
+            "success" => true,
+            "message" => "El usuario ha sido registrado",
+            "username" => $user,
+        ], 200);
     }
 
-    public function login(LoginRequest $request){
+    public function login(LoginRequest $request)
+    {
         $user = Auth::getProvider()->retrieveByCredentials($request->validated());
         //Comprobar que se pueda loguear antes de crear token
         Auth::login($user);
@@ -78,10 +78,6 @@ class AuthController extends Controller
         } else if ($user->is_email_verified == 0) {
             return response()->json([
                 "message" => "Debe activar la cuenta antes de poder loguearse",
-            ], 500);
-        } else if(!Auth::login($user)){
-            return response()->json([
-                "message" => "Password is incorrect",
             ], 500);
         }
 

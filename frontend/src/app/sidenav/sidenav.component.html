@@ -1,7 +1,7 @@
 <div class="enlaces">
-    <a routerLink="home" routerLinkActive="active-link"><span class="material-symbols-outlined">home</span> Home</a>
-    <a routerLink="follows" routerLinkActive="active-link"><span class="material-symbols-outlined">group</span> Followings</a>
-    <a tabindex="0" (keypress)="getNotifications()" (click)="getNotifications()" [matMenuTriggerFor]="menu"><span  class="badge" matBadge="{{not_seen}}" matBadgeSize="medium" class="material-symbols-outlined">notifications</span> Notifications</a>
+    <a class="home" routerLink="home" routerLinkActive="active-link"><span class="material-symbols-outlined">home</span> Home</a>
+    <a class="follows" routerLink="follows" routerLinkActive="active-link"><span class="material-symbols-outlined">group</span> Followings</a>
+    <a class="notis" tabindex="0" (keypress)="getNotifications()" (click)="getNotifications()" [matMenuTriggerFor]="menu"><span  class="badge" matBadge="{{not_seen}}" matBadgeSize="medium" class="material-symbols-outlined">notifications</span> Notifications</a>
     <mat-menu #menu xPosition="after">
         <div *ngIf="notifications!=null; else elseBlock">
             <div class="notifications" *ngFor="let noti of notifications">
@@ -15,6 +15,7 @@
             <p>You don´t have notifications</p>
         </ng-template>
     </mat-menu>
-    <a routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">edit_note</span> Edit Profile</a>
-    <a tabindex="0" (keypress)="logOut()" (click)="logOut()"><span class="material-symbols-outlined">logout</span> Log out</a>
+    <a class="edit_profile" routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">edit_note</span> Edit Profile</a>
+    <a class="logout" tabindex="0" (keypress)="logOut()" (click)="logOut()"><span class="material-symbols-outlined">logout</span> Log out</a>
+    <a class="search" routerLink="edit_profile" routerLinkActive="active-link"><span class="material-symbols-outlined">search</span></a>
 </div>

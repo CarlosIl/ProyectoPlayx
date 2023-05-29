@@ -1,6 +1,17 @@
 @import '../styles.scss';
 @import '../fonts.scss';
 
+//Desktop format
+@media screen and (min-width: 900px) {}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    app-sidenav{
+        width: 100%;
+        position: fixed;
+    }
+}
+
 app-navbar{
     width: 100%;
     position: fixed;
