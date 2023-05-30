@@ -18,11 +18,13 @@ use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
+        // DB::transaction(function () use ($request) {
         $user = User::create($request->validated());
 
         //PARA VERIFICACIÓN DE EMAIL
@@ -39,14 +41,13 @@ class AuthController extends Controller
 
         // $mailData = [
         //     'receiver' => $user->email,
-        //     'subject' => 'Email Verification Mail',
-        //     'title' => 'Email Verification Mail',
-        //     'body' => "Please verify your email with bellow link",
+        //     'subject' => 'Verify your email address',
         //     'token' => $token,
         // ];
         // (new NotificationController)->sendVerificationMail($mailData);
 
         // return response()->json([
+        //     "success" => true,
         //     "message" => "Se ha enviado un correo de verificación",
         // ], 200);
 
@@ -61,8 +62,8 @@ class AuthController extends Controller
         return response()->json([
             "success" => true,
             "message" => "El usuario ha sido registrado",
-            "username" => $user,
         ], 200);
+        // });
     }
 
     public function login(LoginRequest $request)
@@ -75,15 +76,15 @@ class AuthController extends Controller
         }
 
         $user = Auth::getProvider()->retrieveByCredentials($request->validated());
-        //Comprobar que se pueda loguear antes de crear token
-        Auth::login($user);
 
         if ($user->is_email_verified == 0) {
             return response()->json([
-                "message" => "Debe activar la cuenta antes de poder loguearse",
+                "message" => "Account must be verified before log in. Please check your email.",
             ], 500);
         }
 
+        //Comprobar que se pueda loguear antes de crear token
+        Auth::login($user);
         $success['token'] =  $user->createToken('tokenLogin')->accessToken;
         // $success['username'] =  $user->username;
 
@@ -132,9 +133,10 @@ class AuthController extends Controller
             $status = 200;
         }
 
-        return response()->json([
-            "message" => $message,
-        ], $status);
+        // return response()->json([
+        //     "message" => $message,
+        // ], $status);
+        return Redirect::to(env('FRONTEND_URL'));
     }
 
     public function getMyUser()

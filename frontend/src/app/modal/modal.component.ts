@@ -8,10 +8,14 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ModalComponent {
   action!:string;
+  good:boolean = false;
   constructor(public dialogRef: MatDialogRef<ModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(){
     this.action = this.data.action;
+    if(this.data.good!=null){
+      this.good = this.data.good;
+    }
   }
 
   //buttonClose

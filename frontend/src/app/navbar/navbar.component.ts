@@ -81,6 +81,9 @@ export class NavbarComponent {
         error_message = "Can't connect to server";
         action = "Try again";
       //No connection with database
+      }else if (err.statusText == "Unauthorized"){
+        error_message = "You are not logged, please go back to login page";
+        action = "Go to login";
       } else{
         error_message = err.error.message;
       }
@@ -95,9 +98,10 @@ export class NavbarComponent {
 
       dialogRef.afterClosed().subscribe(result => {
         //If the user click the action button executes these lines
-        if (result == true) {
-          console.log("Ejecutar acción")
+        if (result == true && err.statusText == "Unknown Error") {
           window.location.reload();
+        }else if(result == true && err.statusText == "Unauthorized"){
+          this.router.navigate(['/login']);
         }
         console.log('Modal cerrado');
         // history.back();

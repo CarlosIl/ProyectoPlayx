@@ -43,7 +43,14 @@ export class RegisterComponent {
     this.authService.sendRegister(this.formRegister.value)
       .subscribe((datos: any) => {
         if (datos['success'] == true) {
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/login']);
+          const dialogRef = this.dialog.open(ModalComponent, {
+            width: '400px',
+            data: {
+              message: "We have send you a mail to the email you give us. Open the link to verify your account.",
+              good: true,
+            }
+          });
         } else {
           return console.log(datos);
         }

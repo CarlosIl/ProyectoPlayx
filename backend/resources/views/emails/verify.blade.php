@@ -5,20 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style type="text/css">
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        a{
+            -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+            text-decoration: none;
+            background-color: #68A2FF;
+            color: black;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ $mailData['title'] }}</h1>
-    <p>{{ $mailData['body'] }}</p>
-  
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-     
+    <img src="{{ asset('imgs/PlayxLogo.png') }}">
+    <h1>Verification Mail</h1>
+    <p>Please verify your email with link bellow to continue setting up your Playx account</p>
+
     <p>Thank you</p>
 
-    <a href="{{ route('user.verify', $mailData['token']) }}">See it yourself</p>
+    <a href="{{ route('user.verify', $mailData['token']) }}">
+        See it yourself
+    </a>
 </body>
 </html>

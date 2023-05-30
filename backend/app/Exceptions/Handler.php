@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Mailer\Exception\TransportException;
 use Throwable;
 use TypeError;
 
@@ -55,8 +56,14 @@ class Handler extends ExceptionHandler
             return response()->json([
                 "message" => "Can't connect to database",
             ], 500);
+        //Mail connection fails
+        }else if ($exception instanceof TransportException) {
+            return response()->json([
+                "message" => "Can't send verify mail. Please wait a bit and try again",
+            ], 500);
         }
 
         return parent::render($request, $exception);
     }
+
 }

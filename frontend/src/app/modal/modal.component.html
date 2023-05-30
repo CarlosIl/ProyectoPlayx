@@ -1,7 +1,12 @@
 <div class="modal">
-    <h2>
+    <h2 *ngIf="good==false; else elseBlock">
         <span class="material-symbols-outlined">error</span>Error
     </h2>
+    <ng-template #elseBlock>
+        <h2>
+            <span class="good material-symbols-outlined">check_circle</span>Success
+        </h2>
+    </ng-template>
     <div>
         <p>{{ data.message }}</p>
     </div>
