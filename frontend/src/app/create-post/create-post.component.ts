@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
 import { PostService } from '../services/post.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-create-post',
@@ -15,9 +16,16 @@ export class CreatePostComponent {
   imagePreview!: string;
   isImage:boolean = false;
 
-  constructor(private fb: FormBuilder, private postService: PostService) { }
+  constructor(private fb: FormBuilder, private postService: PostService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.activatedRoute.paramMap.subscribe((parametro: ParamMap) => {
+      if(parametro!=null){
+        this.comment_id = parametro.get("id")!;
+      }
+    })
+
     this.formPost = this.fb.group({
       post: ['', [Validators.nullValidator]],
       post_file: ['', [Validators.nullValidator]]

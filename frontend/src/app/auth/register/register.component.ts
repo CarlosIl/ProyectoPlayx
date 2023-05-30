@@ -3,6 +3,8 @@ import { AuthService } from "../../services/auth.service";
 import { FormBuilder, FormGroup, Validators, ValidationErrors, ValidatorFn, AbstractControl } from "@angular/forms";
 import { Router } from '@angular/router';
 import { CreatedValidations } from "../created-validations";
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from "../../modal/modal.component";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +16,7 @@ export class RegisterComponent {
 
   formRegister!: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, public smPass: CreatedValidations) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, public smPass: CreatedValidations, private dialog: MatDialog) {
 
   }
 
@@ -45,6 +47,33 @@ export class RegisterComponent {
         } else {
           return console.log(datos);
         }
+      }, (err: any) => {
+        console.log(err)
+        let error_message;
+        let action;
+        
+        //No connection to backend server
+        if (err.statusText == "Unknown Error") {
+          error_message = "Can't connect to server";
+          action = "Try again";
+        //No connection with database
+        } else{
+          error_message = err.error.message;
+        }
+
+        const dialogRef = this.dialog.open(ModalComponent, {
+          width: '400px',
+          data: {
+            message: error_message,
+            action: action,
+          }
+        });
+  
+        dialogRef.afterClosed().subscribe(result => {
+          if (result == true) {
+            this.submit();
+          }
+        });
       });
   }
 

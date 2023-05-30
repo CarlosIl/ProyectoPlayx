@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="grid1">
-                    <button class="buttonOk" type="submit">Change</button>
+                    <button mat-button class="buttonOk" type="submit">Change</button>
                 </div>
             </form>
         </mat-card-content>
@@ -59,12 +59,12 @@
                     </div>
                     <input id="file" accept="image/*" type="file" (change)="fileEvent($event)" class="form-control" formControlName="profile_picture">
                     <img id="img" *ngIf="imagePreview && imagePreview !== ''" [src]="imagePreview">
-                    <button class="buttonOk" type="submit">Change</button>
+                    <button mat-button class="buttonOk" type="submit">Change</button>
                 </div>
             </form>
         </mat-card-content>
     </mat-card>
 </div>
 <div class="grid1">
-    <button (click)="deleteUser()" class="buttonDelete" type="submit">Delete account</button>
+    <button mat-button (click)="deleteUser()" class="buttonDelete" type="submit">Delete account</button>
 </div>

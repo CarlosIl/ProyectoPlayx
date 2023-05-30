@@ -46,17 +46,29 @@ export class LoginComponent {
         }
       }, (err: any) => {
         console.log(err)
+        let error_message;
+        let action;
+        
+        //No connection to backend server
+        if (err.statusText == "Unknown Error") {
+          error_message = "Can't connect to server";
+          action = "Try again";
+        } else{
+          error_message = err.error.message;
+        }
 
-        let error_message = err.error.message;
         const dialogRef = this.dialog.open(ModalComponent, {
           width: '400px',
           data: {
             message: error_message,
+            action: action,
           }
         });
   
         dialogRef.afterClosed().subscribe(result => {
-          console.log('Modal cerrado');
+          if (result == true) {
+            this.submit();
+          }
         });
       });
   }

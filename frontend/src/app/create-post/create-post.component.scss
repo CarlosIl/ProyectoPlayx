@@ -35,8 +35,10 @@
     }
 
     .tab {
-        @include contentFont(25px);
-        mat-card-content {
+        h2{
+            @include contentFont(25px);
+        }
+        mat-card-header {
             background-color: $secondaryColor;
         }
         padding-bottom: 10px;

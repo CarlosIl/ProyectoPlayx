@@ -11,11 +11,11 @@
     <mat-menu #menu xPosition="after">
         <div *ngIf="notifications!=null; else elseBlock">
             <div class="notifications" *ngFor="let noti of notifications">
-                <button (click)="seeing_redirect(noti.username, noti.id)" mat-menu-item>
+                <button (click)="seeing_redirect(noti.username, noti.id, noti.status)" mat-menu-item>
                     <app-notification-card [noti]="noti"></app-notification-card>
                 </button>
             </div>
-            <button class="reload" *ngIf="final == false" (click)="reloadNotifications()">See more</button>
+            <button mat-button class="reload" *ngIf="final == false" (click)="reloadNotifications()">See more</button>
         </div>
         <ng-template #elseBlock>
             <p>You don´t have notifications</p>

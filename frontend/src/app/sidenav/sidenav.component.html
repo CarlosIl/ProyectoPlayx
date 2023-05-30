@@ -15,7 +15,7 @@
                     <app-notification-card [noti]="noti"></app-notification-card>
                 </button>
             </div>
-            <button class="reload" *ngIf="final == false" (click)="reloadNotifications()">See more</button>
+            <button mat-button class="reload" *ngIf="final == false" (click)="reloadNotifications()">See more</button>
         </div>
         <ng-template #elseBlock>
             <p>You don´t have notifications</p>

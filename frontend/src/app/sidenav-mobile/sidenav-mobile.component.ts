@@ -55,13 +55,13 @@ export class SidenavMobileComponent {
     }
   }
 
-  seeing_redirect(username:string, id:number){
+  seeing_redirect(username:string, id:number, status:number){
     this.postService.seeingNofitication(id).subscribe((datos:any) => {
       if (datos['success'] == true) {
 
         if(this.not_seen == 1){
           delete(this.not_seen);
-        }else{
+        }else if(status == 0){
           this.not_seen -= 1;
         }    
 

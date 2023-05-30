@@ -35,6 +35,7 @@ const routes: Routes = [
   //Mobile
   { path: 'search', component: SearchComponent },
   { path: 'create', component: CreatePostComponent},
+  { path: 'create/:id', component: CreatePostComponent},
 ];
 
 @NgModule({

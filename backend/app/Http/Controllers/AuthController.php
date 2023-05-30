@@ -67,15 +67,18 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
+        //To validated password
+        if(!Auth::validate($request->toArray())){
+            return response()->json([
+                "message" => "Email or/and password are not correct, please try again",
+            ], 500);
+        }
+
         $user = Auth::getProvider()->retrieveByCredentials($request->validated());
         //Comprobar que se pueda loguear antes de crear token
         Auth::login($user);
 
-        if (!$user) {
-            return response()->json([
-                "message" => "We couldn't find the user email in our database",
-            ], 500);
-        } else if ($user->is_email_verified == 0) {
+        if ($user->is_email_verified == 0) {
             return response()->json([
                 "message" => "Debe activar la cuenta antes de poder loguearse",
             ], 500);

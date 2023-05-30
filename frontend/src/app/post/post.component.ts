@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { PostService } from '../services/post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -10,7 +10,7 @@ import { PostService } from '../services/post.service';
 })
 export class PostComponent {
 
-  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private fb: FormBuilder) { }
+  constructor(private activatedRoute: ActivatedRoute, private postService: PostService, private router: Router) { }
     // Parámetro recogido de la ruta
     id!:string;
     post_content:any;
@@ -58,6 +58,11 @@ export class PostComponent {
         }
       })
     }
+  }
+
+  redirectCreatePost() {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/create/'+this.id]));
   }
 
 }
