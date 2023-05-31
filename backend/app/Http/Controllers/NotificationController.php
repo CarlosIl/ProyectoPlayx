@@ -28,9 +28,9 @@ class NotificationController extends Controller
             $username = $notifications[$i]["username"];
             $type = $notifications[$i]["type"];
             if($type == "follow"){
-                $message = "$username ha empezado ha seguirte";
+                $message = "$username start following you";
             }else if($type == "like"){
-                $message = "$username le ha gustado tu post";
+                $message = "$username like your post";
             }
             $notifications[$i] += [ "message" => $message];
         }
