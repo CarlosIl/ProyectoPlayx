@@ -29,21 +29,6 @@ use App\Http\Controllers\NotificationController;
 //     return $request->user();
 // });
 
-
-// Route::get('/article/{id}', function ($id) {
-//     return new ArticleResource(Article::findOrFail($id));
-// });
-
-// Route::get('/articles', function () {
-//     return ArticleResource::collection(Article::all());
-// });
-
-// Route::put('/article/{id}', [ArticleController::class, 'update']);
-
-// Route::delete('/article/{id}', [ArticleController::class, 'destroy']);
-
-// Route::post('/articles', [ArticleController::class, 'store']);
-
 //Posts
 
 Route::post('register', [AuthController::class, 'register']);
