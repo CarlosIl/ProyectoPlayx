@@ -23,16 +23,22 @@
                 </div>
                 <div class="grid1">
                     <label for="email">Email</label>
-                    <input type="text" placeholder="{{email}}" class="form-control" formControlName="email">
+                    <input type="text" placeholder="{{email}}" class="form-control" formControlName="email"
+                    [ngClass]="{ 'incorrect': this.formUserProfile.get('email')?.errors?.['email'] }">
+                    <span *ngIf="this.formUserProfile.get('email')?.errors?.['email']">(Email must have correct format)</span>
                 </div>
                 <div class="grid2">
                     <div>
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" formControlName="password">
+                        <input type="password" class="form-control" formControlName="password"
+                        [ngClass]="{ 'incorrect': this.formUserProfile.get('password')?.errors?.['minlength'] }">
+                        <span *ngIf="this.formUserProfile.get('password')?.errors?.['minlength']">(Password must be at least 8 characters long)</span>
                     </div>
                     <div>
                         <label for="c_password">Repeat password</label>
-                        <input type="password" class="form-control" formControlName="c_password">
+                        <input type="password" class="form-control" formControlName="c_password"
+                        [ngClass]="{ 'incorrect': this.formUserProfile.errors?.['samePassword'] }">
+                        <span *ngIf="this.formUserProfile.errors?.['samePassword']">(Passwords must math)</span>
                     </div>
                 </div>
                 <div class="grid1">
@@ -54,7 +60,7 @@
                 <div class="grid1">
                     <div class="div_label_file">
                         <label role="button" type="button" for="file" class="label_file">
-                            <span class="material-symbols-outlined">touch_app</span>
+                            <span class="touch material-symbols-outlined">touch_app</span>
                             Choose files</label>
                     </div>
                     <input id="file" accept="image/*" type="file" (change)="fileEvent($event)" class="form-control" formControlName="profile_picture">

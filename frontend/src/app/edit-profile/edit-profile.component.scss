@@ -19,7 +19,7 @@
         width: 60%;
     }
 
-    span{
+    .touch{
         display: none;
     }
 }
@@ -93,6 +93,10 @@
 
     p{
         text-align: center;
+    }
+
+    .incorrect {
+        border: 2px solid $errorColor !important;
     }
 }
 

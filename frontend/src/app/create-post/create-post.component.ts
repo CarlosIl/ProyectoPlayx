@@ -2,11 +2,15 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
 import { PostService } from '../services/post.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CreatedValidations } from "../auth/created-validations";
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss']
+  styleUrls: ['./create-post.component.scss'],
+  providers: [CreatedValidations]
 })
 export class CreatePostComponent {
 
@@ -16,7 +20,7 @@ export class CreatePostComponent {
   imagePreview!: string;
   isImage:boolean = false;
 
-  constructor(private fb: FormBuilder, private postService: PostService, private activatedRoute: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private postService: PostService, private activatedRoute: ActivatedRoute, public ownVald: CreatedValidations, private dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -29,7 +33,9 @@ export class CreatePostComponent {
     this.formPost = this.fb.group({
       post: ['', [Validators.nullValidator]],
       post_file: ['', [Validators.nullValidator]]
-    })
+    }, {
+      validator: this.ownVald.atLeastOne('post','post_file')
+    });
   }
 
   fileEvent(e: any) {
@@ -45,9 +51,20 @@ export class CreatePostComponent {
   }
 
   submit() {
-    if(this.formPost.value.post != "" || this.isImage == true){
+    if(this.formPost.value.post == "" && this.formPost.value.post_file != ""){
+    }else{
       if (this.formPost.invalid) {
-        return console.log(this.formPost);
+        let error_message;
+        if(this.formPost.errors?["atLeastOne"]:Boolean){
+          error_message = "You must filled at least a text or a image to post it";
+        }
+        const dialogRef = this.dialog.open(ModalComponent, {
+          width: '400px',
+          data: {
+            message: error_message,
+          }
+        });
+        return console.log(this.formPost.errors);
       }
     }
 
@@ -67,6 +84,34 @@ export class CreatePostComponent {
         } else {
           console.log(datos);
         }
+      }, (err: any) => {
+        console.log(err)
+        let error_message;
+        let action
+
+        //No connection to backend server
+        if (err.statusText == "Unknown Error") {
+          error_message = "Can't connect to server. Please wait some minutes and try again";
+          action = "Try again";
+        //No connection with database
+        //Post_file must be a image
+        } else{
+          error_message = err.error.message;
+        }
+
+        const dialogRef = this.dialog.open(ModalComponent, {
+          width: '400px',
+          data: {
+            message: error_message,
+            action: action,
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          if (result == true) {
+            this.submit();
+          }
+        });
       });
   }
 

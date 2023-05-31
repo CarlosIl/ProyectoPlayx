@@ -2,11 +2,15 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from "@angular/forms";
 import { PostService } from '../services/post.service';
 import { Router } from '@angular/router';
+import { CreatedValidations } from "../auth/created-validations";
+import { MatDialog } from '@angular/material/dialog';
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
+  providers: [CreatedValidations]
 })
 export class EditProfileComponent {
 
@@ -21,7 +25,7 @@ export class EditProfileComponent {
   filedata: any;
   imagePreview!: string;
 
-  constructor(private postService: PostService, private fb: FormBuilder, private router: Router) { }
+  constructor(private postService: PostService, private fb: FormBuilder, private router: Router, public smPass: CreatedValidations, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.formUserProfile = this.fb.group({
@@ -30,7 +34,9 @@ export class EditProfileComponent {
       lastName: ['', [Validators.nullValidator]],
       email: ['', [Validators.nullValidator, Validators.email]],
       password: ['', [Validators.nullValidator, Validators.minLength(8)]],
-      c_password: ['', [Validators.nullValidator, Validators.minLength(8)]]
+      c_password: ['', [Validators.nullValidator]]
+    }, {
+      validator: this.smPass.samePassword('password', 'c_password')
     })
 
     this.formProfilePicture = this.fb.group({
@@ -73,6 +79,33 @@ export class EditProfileComponent {
       } else {
         return console.log(datos);
       }
+    }, (err: any) => {
+      console.log(err)
+        let error_message;
+        let action;
+        
+        //No connection to backend server
+        if (err.statusText == "Unknown Error") {
+          error_message = "Can't connect to server";
+          action = "Try again";
+        //No connection with database
+        } else{
+          error_message = err.error.message;
+        }
+
+        const dialogRef = this.dialog.open(ModalComponent, {
+          width: '400px',
+          data: {
+            message: error_message,
+            action: action,
+          }
+        });
+  
+        dialogRef.afterClosed().subscribe(result => {
+          if (result == true) {
+            this.submitUserProfile();
+          }
+        });
     });
   }
 
@@ -100,6 +133,34 @@ export class EditProfileComponent {
       } else {
         return console.log(datos);
       }
+    }, (err: any) => {
+      console.log(err)
+      let error_message;
+      let action
+
+      //No connection to backend server
+      if (err.statusText == "Unknown Error") {
+        error_message = "Can't connect to server. Please wait some minutes and try again";
+        action = "Try again";
+      //No connection with database
+      //Post_file must be a image
+      } else{
+        error_message = err.error.message;
+      }
+
+      const dialogRef = this.dialog.open(ModalComponent, {
+        width: '400px',
+        data: {
+          message: error_message,
+          action: action,
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result == true) {
+          this.submitProfilePicture();
+        }
+      });
     });
   }
 
