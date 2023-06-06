@@ -28,6 +28,7 @@ import { PostCeroComponent } from './post-cero/post-cero.component';
 import { NotificationCardComponent } from './notification-card/notification-card.component';
 import { PostComponent } from './post/post.component';
 import { SidenavMobileComponent } from './sidenav-mobile/sidenav-mobile.component';
+import { UsersComponent } from './admin/users/users.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SidenavMobileComponent } from './sidenav-mobile/sidenav-mobile.componen
     PostCeroComponent,
     NotificationCardComponent,
     PostComponent,
-    SidenavMobileComponent
+    SidenavMobileComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FollowingsSiteComponent } from './followings-site/followings-site.component';
 import { PostComponent } from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
+import { UsersComponent } from './admin/users/users.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'create', component: CreatePostComponent},
   { path: 'create/:id', component: CreatePostComponent},
+  //Admin
+  { path: 'users', component: UsersComponent},
 ];
 
 @NgModule({

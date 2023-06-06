@@ -13,7 +13,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatDialogModule} from '@angular/material/dialog';
-
+//Admin
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
 
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -37,6 +40,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatTooltipModule,
     InfiniteScrollModule,
     MatDialogModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
   ]
 })
 export class MaterialModuleModule { }

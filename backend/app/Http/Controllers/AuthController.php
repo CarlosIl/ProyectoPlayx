@@ -91,7 +91,7 @@ class AuthController extends Controller
         return response()->json([
             "success" => true,
             "message" => "El usuario ha iniciado sesión",
-            // "username" => $success['username'],
+            "type" => $user->type,
             "token" => $success['token'],
         ], 200);
     }
@@ -177,12 +177,10 @@ class AuthController extends Controller
 
     public function getAllUsers()
     {
-        $usersStd = DB::select("SELECT users.username, users.email, users.profile_picture FROM `users`");
+        $usersStd = DB::select("SELECT users.id, users.profile_picture, users.username, users.email, users.is_email_verified, users.type FROM `users`");
         $users = json_decode(json_encode($usersStd), true);
         for ($i = 0; $i < count($users); $i++) {
             $email = $users[$i]["email"];
-            unset($users[$i]["email"]);
-
             $profile_picture = $users[$i]["profile_picture"];
             if ($profile_picture != null) {
                 $users[$i]["profile_picture"] = asset("$email/$profile_picture");

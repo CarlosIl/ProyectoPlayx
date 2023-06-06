@@ -32,7 +32,7 @@ export class LoginComponent {
     // Si la validación funciona pasará el mensaje que nos de al componente modal para que los saque por pantalla.
     this.authService.sendLogin(this.formLogin.value)
       .subscribe((datos: any) => {
-        if (datos['success'] == true) {
+        if (datos['success'] == true && datos['type'] == 0) {
           this.authService.setToken(datos['token']);
           this.router.navigate(['/home']);
           //Hay que recargar para qe el backend pille correctamente el token y no nos de error de autentificación
@@ -40,7 +40,14 @@ export class LoginComponent {
           setTimeout(() => {
             window.location.reload();
           }, 500);
-
+        } else if (datos['success'] == true && datos['type'] == 1) {
+          this.authService.setToken(datos['token']);
+          this.router.navigate(['/users']);
+          //Hay que recargar para qe el backend pille correctamente el token y no nos de error de autentificación
+          //Hay que esperar para recargar la página para que no nos rediriga a login otra vez 
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
         } else {
           return console.log(datos);
         }
