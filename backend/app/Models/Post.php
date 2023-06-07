@@ -9,7 +9,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id', 'user_id', 'post', 'file_name', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'user_id', 'post', 'file_name', 'comment_id', 'created_at', 'updated_at'];
 
     // protected function asDateTime($value)
     // {
