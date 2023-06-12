@@ -27,6 +27,7 @@ export class HomeComponent {
         this.message = "There aren't any posts yet";
       } else {
       this.last_post_id = posts[posts.length - 1]["id"];
+      console.log(this.last_post_id);
       this.posts = posts;
       }
     })
@@ -47,6 +48,7 @@ export class HomeComponent {
         } else {
           this.last_post_id = posts[posts.length - 1]["id"];
         }
+        console.log(this.last_post_id);
       })
     }
   }

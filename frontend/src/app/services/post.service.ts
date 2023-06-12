@@ -73,7 +73,7 @@ export class PostService {
 
   //Retrieve data from a specific user
   getOtherUser(username: any) {
-    return this.http.get(this.url + `/api/user/` + username, this.httpOptions);
+    return this.http.get(this.url + `/api/userbox/` + username, this.httpOptions);
   }
 
   //Retrieve username and profile picture from all existing users
@@ -92,8 +92,23 @@ export class PostService {
   }
 
   //Deletes current user account and images
-  deleteUser() {
+  deleteMyUser() {
     return this.http.delete(this.url + `/api/user`, this.httpOptions);
+  }
+
+  //Retrieve data from a specific user
+  getSpecificUser(id: any) {
+    return this.http.get(this.url + `/api/user/` + id, this.httpOptions);
+  }
+
+  //Send data to change  parameters of the specific user
+  changeSpecificUser(id: any, data: any) {
+    return this.http.post(this.url + `/api/user/` + id, data, this.httpOptions);
+  }
+
+  //Deletes specific user account and images
+  deleteUser(id: any) {
+    return this.http.delete(this.url + `/api/user/` + id, this.httpOptions);
   }
 
   //Deletes current token session and deletes token from database

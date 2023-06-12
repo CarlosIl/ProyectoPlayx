@@ -216,7 +216,7 @@ class AuthController extends Controller
         // return Storage::disk('sftp')->download("$user->email/$user->profile_picture");
     }
 
-    public function changeUser(UserProfileRequest $request)
+    public function modifyMyUser(UserProfileRequest $request)
     {
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
@@ -274,14 +274,12 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function deleteUser()
+    public function deleteMyUser()
     {
         $user_id = Auth::user()->id;
         $user = User::find($user_id);
 
         Storage::disk("public")->deleteDirectory("$user->email");
-
-        Session::flush();
 
         Auth::user()->tokens->each(function ($token, $key) {
             $token->delete();
@@ -290,6 +288,72 @@ class AuthController extends Controller
         $user->delete();
         return response()->json([
             "success" => true,
+        ], 200);
+    }
+
+    public function deleteUser(string $id)
+    {
+        $user = User::find($id);
+        Storage::disk("public")->deleteDirectory("$user->email");
+
+        $user->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        $user->delete();
+        return response()->json([
+            "success" => true,
+        ], 200);
+    }
+
+    public function getUser(string $id)
+    {
+        $user = User::find($id);
+
+        if ($user->profile_picture != null) {
+            $user->profile_picture = asset("$user->email/$user->profile_picture");
+        } else {
+            $user->profile_picture = env('DEFAULT_PROFILE_PICTURE_PATH');
+        }
+
+        return response()->json([
+            "success" => true,
+            "user" => $user,
+        ], 200);
+    }
+
+    public function modifyUser(string $id, UserProfileRequest $request)
+    {
+        $user = User::find($id);
+        if ($request->username != null) {
+            $user->username = $request->username;
+        }
+        if ($request->email != null) {
+            Storage::disk("public")->move($user->email, $request->email);
+            $user->email = $request->email;
+        }
+        if ($request->firstName != null) {
+            $user->firstName = $request->firstName;
+        }
+        if ($request->lastName != null) {
+            $user->lastName = $request->lastName;
+        }
+        if ($request->password != null && $request->c_password != null) {
+            $user->password = $request->password;
+        }
+        // if($user->profile_picture!=null){ 
+        //     $path = $user->email; 
+        //     $file_name = time() . '_' . request()->profile_picture->getClientOriginalName(); 
+        //     Storage::disk('public')->put("$path/$file_name", fopen($request->file('profile_picture'), 'r+')); 
+        //     Storage::disk("public")->delete("$path/$user->profile_picture"); 
+        //     $user->profile_picture = $file_name; 
+        // } 
+
+        $user->save();
+
+        return response()->json([
+            "success" => true,
+            "user" => $user,
         ], 200);
     }
 }

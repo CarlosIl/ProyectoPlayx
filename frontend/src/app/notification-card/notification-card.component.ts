@@ -13,7 +13,7 @@ export class NotificationCardComponent {
 
   ngOnInit(){
     if(this.noti.profile_picture == null){
-      this.noti.profile_picture = "../../assets/imgs/profile.jpg"
+      this.noti.profile_picture = "../../assets/imgs/profile.png"
     }
   }
 

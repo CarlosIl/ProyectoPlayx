@@ -165,7 +165,7 @@ export class EditProfileComponent {
   }
 
   deleteUser(){
-    this.postService.deleteUser().subscribe((datos:any) => {
+    this.postService.deleteMyUser().subscribe((datos:any) => {
       if (datos['success'] == true) {
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
         this.router.navigate(['/login']));

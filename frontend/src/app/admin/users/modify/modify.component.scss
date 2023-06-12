@@ -1,0 +1,116 @@
+@import '../../../../styles.scss';
+@import '../../../../fonts.scss';
+
+//Desktop format
+@media screen and (min-width: 900px) {
+    .grid1{
+        width: 80%;
+    }
+
+    .grid2{
+        width: 80%;
+    }
+
+    .div_label_file{
+        width: 30%;
+    }
+
+    button{
+        width: 60%;
+    }
+
+    .touch{
+        display: none;
+    }
+}
+
+//Mobile format
+@media screen and (max-width: 900px) {
+    .grid1{
+        width: 90%;
+    }
+
+    .grid2{
+        width: 90%;
+    }
+
+    .div_label_file{
+        width: 50%;
+    }
+
+    button{
+        width: 80%;
+    }
+}
+
+//Common
+.tab {
+    @include contentFont(25px);
+
+    mat-card-content {
+        background-color: $secondaryColor;
+    }
+}
+
+.grid1 {
+    margin: auto;
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.user_profile {
+    @include contentFont(16px);
+
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    mat-card{
+        background-color: $primaryColor;
+    }
+
+    .grid2 {
+        margin: auto;
+        display: grid;
+        grid-template-columns: auto auto;
+        div{
+            input{
+                width: 100%;
+            }
+            margin-right: 10px;
+        }
+    }
+
+    label{
+        padding-top: 10px;
+    }
+
+    input {
+        @include contentFont(16px);
+        border: 2px solid $primaryColor;
+        border-radius: 5px;
+        margin: 8px 0;
+    }
+
+    p{
+        text-align: center;
+    }
+
+    .incorrect {
+        border: 2px solid $errorColor !important;
+    }
+}
+
+.buttonOk{
+    background-color: $secondaryColor;
+}
+
+button{
+    margin: auto;
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include titleFont(20px);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}

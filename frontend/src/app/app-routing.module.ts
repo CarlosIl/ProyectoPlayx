@@ -11,6 +11,7 @@ import { FollowingsSiteComponent } from './followings-site/followings-site.compo
 import { PostComponent } from './post/post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { UsersComponent } from './admin/users/users.component';
+import { ModifyComponent } from './admin/users/modify/modify.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'create/:id', component: CreatePostComponent},
   //Admin
   { path: 'users', component: UsersComponent},
+  { path: 'edit/:id', component:ModifyComponent},
 ];
 
 @NgModule({

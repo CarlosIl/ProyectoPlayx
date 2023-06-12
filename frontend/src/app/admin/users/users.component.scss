@@ -1,6 +1,14 @@
 @import '../../../styles.scss';
 @import '../../../fonts.scss';
 
+.tab {
+  @include contentFont(25px);
+
+  mat-card-content {
+      background-color: $secondaryColor;
+  }
+}
+
 #user_profile {
   width: 50px;
   height: 50px;
@@ -22,4 +30,21 @@ table {
   min-height: 200px;
   max-height: 400px;
   overflow: auto;
+}
+
+.buttonModify{
+  background-color: $secondaryColor;
+  color: black;
+}
+
+.buttonDelete{
+  background-color: $errorColor;
+  color: black;
+}
+
+input {
+  @include contentFont(16px);
+  border: 2px solid $primaryColor;
+  border-radius: 5px;
+  margin: 8px 0;
 }

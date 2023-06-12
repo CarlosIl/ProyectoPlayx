@@ -67,7 +67,7 @@ export class UsersComponent {
         this.postService.getAllUsers().subscribe((users: any) => {
           for (let i = 0; i < users.length; i++) {
             if (users[i]["profile_picture"] == null) {
-              users[i]["profile_picture"] = "../../assets/imgs/profile.jpg"
+              users[i]["profile_picture"] = "../../assets/imgs/profile.png"
             }
           }
           this.dataSource = new MatTableDataSource(users);
@@ -109,5 +109,32 @@ export class UsersComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  deleteUser(id: any){
+    this.postService.deleteUser(id).subscribe((datos:any) => {
+      if (datos['success'] == true) {
+        
+        const dialogRef = this.dialog.open(ModalComponent, {
+          width: '400px',
+          data: {
+            message: "User has been deleted succesfully",
+            good: true,
+          }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          window.location.reload();
+        });
+
+      } else {
+        return console.log(datos);
+      }
+    })
+  }
+
+  modifyUser(id: any) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+    this.router.navigate(['/edit/'+id]));
   }
 }

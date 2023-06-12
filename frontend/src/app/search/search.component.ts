@@ -26,7 +26,7 @@ export class SearchComponent {
     this.postService.getAllUsers().subscribe((users: any) => {
       for (let i = 0; i < users.length; i++) {
         if (users[i]["profile_picture"] == null) {
-          users[i]["profile_picture"] = "../../assets/imgs/profile.jpg"
+          users[i]["profile_picture"] = "../../assets/imgs/profile.png"
         }
         this.users.push(users[i]);
       }

@@ -59,12 +59,15 @@ Route::middleware('auth:api')->group( function(){
     //AuthController
     Route::get('logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'getMyUser']);
-    Route::get('/user/{username}', [AuthController::class, 'getUserInfo']);
+    Route::get('/userbox/{username}', [AuthController::class, 'getUserInfo']);
     Route::get('/users', [AuthController::class, 'getAllUsers']);
     Route::get('/profile/{username}', [AuthController::class, 'getProfilePicture']);
-    Route::post('/user', [AuthController::class, 'changeUser']);
+    Route::post('/user', [AuthController::class, 'modifyMyUser']);
     Route::post('/profile_picture', [AuthController::class, 'changeProfilePicture']);
-    Route::delete('/user', [AuthController::class, 'deleteUser']);
+    Route::delete('/user', [AuthController::class, 'deleteMyUser']);
+    Route::get('/user/{id}', [AuthController::class, 'getUser']);
+    Route::post('/user/{id}', [AuthController::class, 'modifyUser']);
+    Route::delete('/user/{id}', [AuthController::class, 'deleteUser']);
 
     //FollowController
     Route::get('/follow/{username}', [FollowController::class, 'store']);
