@@ -43,7 +43,7 @@ class PostController extends Controller
     public function reload(string $id)
     {
         $user_id = Auth::user()->id;
-        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id) AS likes, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id AND user_id = ?) AS user_like, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 2",[$user_id,$id]);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id) AS likes, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id AND user_id = ?) AS user_like, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.id<? ORDER BY posts.created_at DESC LIMIT 3",[$user_id,$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
 
@@ -96,7 +96,7 @@ class PostController extends Controller
     public function reloadPostsX(string $username, string $id)
     {
         $user_id = Auth::user()->id;
-        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id) AS likes, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id AND user_id = ?) AS user_like, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 5",[$user_id,$username,$id]);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id) AS likes, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id AND user_id = ?) AS user_like, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE users.username = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 3",[$user_id,$username,$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
 
@@ -149,7 +149,7 @@ class PostController extends Controller
     public function reloadPostsFollows(string $id)
     {
         $user_id = Auth::user()->id;
-        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id) AS likes, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id AND user_id = ?) AS user_like, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id JOIN follows on users.id = follows.target_id WHERE follows.source_id = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 7",[$user_id,$user_id,$id]);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id) AS likes, (SELECT COUNT(*) FROM likes WHERE post_id = posts.id AND user_id = ?) AS user_like, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id JOIN follows on users.id = follows.target_id WHERE follows.source_id = ? AND posts.id<? ORDER BY posts.created_at DESC LIMIT 3",[$user_id,$user_id,$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
 
@@ -174,7 +174,7 @@ class PostController extends Controller
 
     public function getComments(string $id)
     {
-        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.comment_id=? ORDER BY posts.created_at DESC LIMIT 3",[$id]);
+        $postsStd = DB::select("SELECT posts.id, users.email, users.username, users.profile_picture, posts.post, posts.file_name, posts.comment_id, DATE_FORMAT(posts.created_at, '%d/%m/%Y %H:%i') AS created_at FROM `posts` JOIN users on posts.user_id = users.id WHERE posts.comment_id=? ORDER BY posts.created_at DESC LIMIT 10",[$id]);
         $posts = json_decode(json_encode($postsStd), true);
         for ($i=0; $i < count($posts); $i++) { 
 

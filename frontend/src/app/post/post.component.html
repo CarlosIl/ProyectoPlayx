@@ -5,7 +5,7 @@
         <mat-card-content>Comments</mat-card-content>
     </mat-card>
 </div>
-
+<div *ngIf="final == false" [alwaysCallback]="true" [infiniteScrollDistance]="2" [infiniteScrollThrottle]="1000" infinite-scroll (scrolled)="reloadComments()"></div>
 <div *ngFor="let comment of comments" class="post_card">
     <app-post-card [post]="comment" [isComment]="true"></app-post-card>
 </div>

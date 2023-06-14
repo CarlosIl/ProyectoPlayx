@@ -19,17 +19,19 @@ class PostFactory extends Factory
     public function definition(): array
     {
 
-        $usersStd = DB::select("SELECT id FROM users");
-        $users = json_decode(json_encode($usersStd), true);
+        $users = DB::select('SELECT MIN(id) as min, MAX(id) as max FROM users');
+        $min_users = intval($users[0]->min);
+        $max_users = intval($users[0]->max);
 
-        $sql = DB::select('SELECT MIN(id) as min, MAX(id) as max FROM posts');
-        $min_posts = intval($sql[0]->min);
-        $max_posts = intval($sql[0]->max);
+        $posts = DB::select('SELECT MIN(id) as min, MAX(id) as max FROM posts');
+        $min_posts = intval($posts[0]->min);
+        $max_posts = intval($posts[0]->max);
+        $comment_id = intval(fake()->numberBetween($min_posts, $max_posts));
 
         return [
-            "user_id" =>intval(fake()->randomNumber($users)),
+            "user_id" =>intval(fake()->numberBetween($min_users, $max_users)),
             "post" => fake()->text(),
-            "comment_id" =>intval(fake()->numberBetween($min_posts, $max_posts)),
+            "comment_id" => 7,
         ];
     }
 }

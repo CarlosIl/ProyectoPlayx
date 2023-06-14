@@ -35,7 +35,11 @@ export class PostComponent {
       if(comments.length==0){
         this.nada = true;
         this.message = "There aren't any comments yet";
-      }else{
+      }else if(comments.length<10){
+        this.last_comment_id == 0
+        this.comments = comments;
+      }
+      else{
         this.last_comment_id = comments[comments.length-1]["id"];
         this.comments = comments;
       }
@@ -53,6 +57,8 @@ export class PostComponent {
 
         if (comments.length == 0) {
           this.final = true;
+        }else if(comments.length<3){
+          this.last_comment_id == 1;
         } else {
           this.last_comment_id = comments[comments.length - 1]["id"];
         }

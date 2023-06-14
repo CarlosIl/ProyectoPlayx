@@ -25,7 +25,7 @@
     </style>
 </head>
 <body>
-    <img src="{{ asset('imgs/PlayxLogo.png') }}">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Video_game_controller_icon_designed_by_Maico_Amorim.svg">
     <h1>Verification Mail</h1>
     <p>Please verify your email with link bellow to continue setting up your Playx account</p>
 

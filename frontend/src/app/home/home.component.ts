@@ -25,16 +25,18 @@ export class HomeComponent {
       if (posts.length == 0) {
         this.nada = true;
         this.message = "There aren't any posts yet";
+      }else if(posts.length<7){
+        this.last_post_id == 0
+        this.posts = posts;
       } else {
       this.last_post_id = posts[posts.length - 1]["id"];
-      console.log(this.last_post_id);
       this.posts = posts;
       }
     })
   }
 
   reloadPosts() {
-    if (this.last_post_id == 1) {
+    if (this.last_post_id <= 1) {
       this.final = true;
     } else {
       this.postService.reloadPosts(this.last_post_id).subscribe((posts: any) => {
@@ -44,11 +46,9 @@ export class HomeComponent {
 
         if (posts.length == 0) {
           this.final = true;
-          // console.log("No hay más posts")
-        } else {
+        }else {
           this.last_post_id = posts[posts.length - 1]["id"];
         }
-        console.log(this.last_post_id);
       })
     }
   }
