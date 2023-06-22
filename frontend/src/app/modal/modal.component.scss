@@ -4,10 +4,13 @@
 //Desktop format
 @media screen and (min-width: 900px) {
     .grid2{
+        margin: auto;
+        width: 10%;
         display: grid;
         grid-template-columns: auto auto;
         button{
-            width: 80%;
+            margin-left: 10px;
+            margin-right: 10px;
         }
     }
 }
@@ -15,6 +18,8 @@
 //Mobile format
 @media screen and (max-width: 900px) {
     .grid2{
+        margin: auto;
+        width: 10%;
         display: grid;
         grid-template-columns: auto;
         button{
@@ -50,7 +55,7 @@ p{
 }
 
 button{
-
+    color: black;
     height: 40px;
     @include titleFont(20px);
     // border: 2px solid;
@@ -61,6 +66,8 @@ button{
 }
 
 .grid1{
+    margin: auto;
+    width: 10%;
     display: grid;
     grid-template-columns: auto;
     button{

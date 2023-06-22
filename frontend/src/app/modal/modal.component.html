@@ -11,7 +11,7 @@
         <p>{{ data.message }}</p>
     </div>
     <div [ngClass]="{'grid1':action==null,'grid2':action!=null}">
-        <button class="buttonAction" *ngIf="action!=null" mat-button (click)="pressAction()">{{action}}</button>
-        <button class="buttonClose" mat-button (click)="close()">Close</button>
+        <button class="buttonAction" *ngIf="action!=null" mat-mini-fab (click)="pressAction()"><span class="material-symbols-outlined">repeat</span></button>
+        <button class="buttonClose" mat-mini-fab (click)="close()"><span class="material-symbols-outlined">close</span></button>
     </div>
 </div>
