@@ -31,7 +31,7 @@ class PostFactory extends Factory
         return [
             "user_id" =>intval(fake()->numberBetween($min_users, $max_users)),
             "post" => fake()->text(),
-            "comment_id" => 7,
+            // "comment_id" => 7,
         ];
     }
 }

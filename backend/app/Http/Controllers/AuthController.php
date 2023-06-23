@@ -28,41 +28,41 @@ class AuthController extends Controller
         $user = User::create($request->validated());
 
         //PARA VERIFICACIÓN DE EMAIL
-        // $token = Str::random(64);
+        $token = Str::random(64);
         // Con PHP
         // $time = now();
         // $expired = Date("Y-m-d H:i:s", strtotime("30 minutes", strtotime($time)));
 
-        // UserVerify::create([
-        //     'user_id' => $user->id,
-        //     'token' => $token,
-        //     'expires_at' => Carbon::now()->addMinutes(30),
-        // ]);
+        UserVerify::create([
+            'user_id' => $user->id,
+            'token' => $token,
+            'expires_at' => Carbon::now()->addMinutes(30),
+        ]);
 
-        // $mailData = [
-        //     'receiver' => $user->email,
-        //     'subject' => 'Verify your email address',
-        //     'token' => $token,
-        // ];
-        // (new NotificationController)->sendVerificationMail($mailData);
-
-        // return response()->json([
-        //     "success" => true,
-        //     "message" => "Se ha enviado un correo de verificación",
-        // ], 200);
-
-        $user->is_email_verified = 1;
-        $user->save();
-
-        $path = $user->email;
-        Storage::disk('public')->makeDirectory($path);
-
-        $success['username'] =  $user->username;
+        $mailData = [
+            'receiver' => $user->email,
+            'subject' => 'Verify your email address',
+            'token' => $token,
+        ];
+        (new NotificationController)->sendVerificationMail($mailData);
 
         return response()->json([
             "success" => true,
-            "message" => "El usuario ha sido registrado",
+            "message" => "Se ha enviado un correo de verificación",
         ], 200);
+
+        // $user->is_email_verified = 1;
+        // $user->save();
+
+        // $path = $user->email;
+        // Storage::disk('public')->makeDirectory($path);
+
+        // $success['username'] =  $user->username;
+
+        // return response()->json([
+        //     "success" => true,
+        //     "message" => "El usuario ha sido registrado",
+        // ], 200);
         // });
     }
 
